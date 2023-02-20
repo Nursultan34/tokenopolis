@@ -1,0 +1,7 @@
+{
+  "kty": "oct",
+  "k": "pQUvHryvkHaiInS1DP3-S8bJqv05Trgu7pQF6-TQfCvP6Fkr0rXlJklK2MBXJXj5MDCbMXvJPb6dSqG1kUIuO6iUPSc2qG9YH1n0AzZZxQeDeZX8IRlWtRkosOz4sROHws_dm9kMuktPla2tlcGMa-aIJjDVUbZWLFe_bkBrLls",
+  "alg": "HS512",
+  "key_ops": ["sign", "verify"],
+  "ext": true
+}
