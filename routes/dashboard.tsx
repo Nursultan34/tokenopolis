@@ -56,7 +56,7 @@ function selectBalances(balances: stellar.Balance[]): { xlm: number; pcn: number
 export default function Dashboard({ data }: PageProps<DashboardData>) {
 	return (
 		<main class="pr-8 pl-28 dark:bg-[rgba(0,0,0,0)] bg-[#E6E6E6]">
-			<div class="col items-center fixed left-0 py-5 w-20 h-full bg-dark-800">
+			<div class="fixed left-0 items-center py-5 w-20 h-full col bg-dark-800">
 				<img src={asset("/lk-logo.svg")} />
 			</div>
 			<header class="h-24 row children:(items-center row h-full gap-x-3) font-light justify-between">
@@ -81,7 +81,7 @@ export default function Dashboard({ data }: PageProps<DashboardData>) {
 					{/* Left Top part */}
 					<div class="row children:(w-full h-full rounded-sm) gap-x-5">
 						<DashboardEntry basis="31%" classes="bg-dark-700 p-6! relative">
-							<div class="row justify-between items-center p-6 m-1 mx-3 mb-6 rounded-sm bg-yellow">
+							<div class="justify-between items-center p-6 m-1 mx-3 mb-6 rounded-sm row bg-yellow">
 								<div>
 									<div class="mb-5 font-bold text-dark-750">POLISCOIN</div>
 									<span class="text-2xl font-light">221 746</span>
@@ -93,7 +93,7 @@ export default function Dashboard({ data }: PageProps<DashboardData>) {
 								<span class="text-5xl font-light">3.4330</span>
 								<span class="relative right-2 bottom-8 font-bold text-yellow">EUR</span>
 							</div>
-							<span class="mt-8 text-xs font-bold absolute bottom-6">
+							<span class="absolute bottom-6 mt-8 text-xs font-bold">
 								Годовой доход <span class="text-yellow">+12%</span>
 							</span>
 						</DashboardEntry>
@@ -104,12 +104,12 @@ export default function Dashboard({ data }: PageProps<DashboardData>) {
 							</select>
 							<h3 class="text-xs font-bold">АДРЕС ПОЛУЧАТЕЛЯ</h3>
 							<input class="p-2 lk-input" name="dest" type="text" placeholder="1Cs4wu6pu5qCZ35bSLNVzG.." />
-							<span class="row gap-x-2">
+							<span class="gap-x-2 row">
 								<h3 class="text-xs font-bold leading-10">КОЛИЧЕСТВО</h3>
 								<input class="p-2 w-1/2 appearance-textfield lk-input" name="amount" type="number" step="0.000001" value="0.233455" />
 							</span>
-							<div class="flex justify-center w-full mt-6">
-								<button class="py-1 px-8 rounded-2xl border-2 border-yellow mx-auto">ОТПРАВИТЬ</button>
+							<div class="flex justify-center mt-6 w-full">
+								<button class="py-1 px-8 mx-auto rounded-2xl border-2 border-yellow">ОТПРАВИТЬ</button>
 							</div>
 						</DashboardEntry>
 						<DashboardEntry name="АКТУАЛЬНЫЕ ОБЪЕКТЫ" basis="45%">
@@ -128,7 +128,7 @@ export default function Dashboard({ data }: PageProps<DashboardData>) {
 					</div>
 				</div>
 				{/* Right Top/Bottom part */}
-				<div class="col w-full h-full" style="flex-basis: 30%">
+				<div class="w-full h-full col" style="flex-basis: 30%">
 					{/* Right Top part */}
 					<DashboardEntry name="ТРАНЗАКЦИИ" basis="65%">
 						<Transactions transactions={data.transactions} />
@@ -145,7 +145,7 @@ export default function Dashboard({ data }: PageProps<DashboardData>) {
 function DashboardEntry({ children, name, classes, basis }: { children: ComponentChildren; name?: string; classes?: string; basis?: string }) {
 	return (
 		<div class={`bg-dark-750 pt-5 px-7 ${classes ?? ""}`} style={`flex-basis: ${basis}`}>
-			{name == undefined ? <></> : <h1 class="text-xl font-light relative right-2 mb-4">{name}</h1>}
+			{name == undefined ? <></> : <h1 class="relative right-2 mb-4 text-xl font-light">{name}</h1>}
 			{children}
 		</div>
 	);
@@ -155,15 +155,15 @@ function Transactions({ transactions }: { transactions: Transaction[] }) {
 	return (
 		<>
 			{transactions.map((transaction) => (
-				<div class="bg-dark-700 p-3 w-full h-20 text-xs col justify-between mb-5">
-					<div class="row justify-between">
+				<div class="justify-between p-3 mb-5 w-full h-20 text-xs bg-dark-700 col">
+					<div class="justify-between row">
 						<span>16:23, 12 дек 2018</span>
-						<span class="row gap-x-2">
+						<span class="gap-x-2 row">
 							<img src={asset(transaction ? "/incoming-arrow.svg" : "/outcoming-arrow.svg")} />
 							0,009 БТД
 						</span>
 					</div>
-					<span class="text-gray-600 mx-2">
+					<span class="mx-2 text-gray-600">
 						1PRj85hu9RXPZTzxtko9stfs6nRo1vyrQB
 					</span>
 				</div>
@@ -176,24 +176,24 @@ function EventCalendar() {
 	return (
 		<>
 			<div>
-				<div class="row justify-between font-light">
+				<div class="justify-between font-light row">
 					<span>
 						<span class="text-4xl">14</span> ФЕВРАЛЯ
 					</span>
 					<span class="text-3xl">11:45</span>
 				</div>
-				<div class="text-sm text-gray-450 my-3">ОКОНЧАНИЕ СТРОИТЕЛЬСТВА ВИЛЛЫ</div>
-				<hr class="text-gray-500 mx-1 mb-4" />
+				<div class="my-3 text-sm text-gray-450">ОКОНЧАНИЕ СТРОИТЕЛЬСТВА ВИЛЛЫ</div>
+				<hr class="mx-1 mb-4 text-gray-500" />
 			</div>
 			<div>
-				<div class="row justify-between font-light">
+				<div class="justify-between font-light row">
 					<span>
 						<span class="text-4xl">14</span> ФЕВРАЛЯ
 					</span>
 					<span class="text-3xl">11:45</span>
 				</div>
-				<div class="text-sm text-gray-450 my-3">ОКОНЧАНИЕ СТРОИТЕЛЬСТВА ВИЛЛЫ</div>
-				<hr class="text-gray-500 mx-1 mb-4" />
+				<div class="my-3 text-sm text-gray-450">ОКОНЧАНИЕ СТРОИТЕЛЬСТВА ВИЛЛЫ</div>
+				<hr class="mx-1 mb-4 text-gray-500" />
 			</div>
 		</>
 	);
@@ -203,20 +203,20 @@ function RelevantObjects() {
 	return (
 		<>
 			<div class="w-full scroll overflow-y-scroll h-[calc(100%-4.5rem)] children:mb-3">
-				<div class="row gap-x-4 items-center">
-					<img class="rounded-full w-10 h-10" src={asset("/96.png")} />
-					<span class="font-light text-base">81%</span>
-					<span class="text-gray-650 font-medium">Вилла в Добра Вода</span>
+				<div class="gap-x-4 items-center row">
+					<img class="w-10 h-10 rounded-full" src={asset("/96.png")} />
+					<span class="text-base font-light">81%</span>
+					<span class="font-medium text-gray-650">Вилла в Добра Вода</span>
 				</div>
-				<div class="row gap-x-4 items-center">
-					<img class="rounded-full w-10 h-10" src={asset("/96.png")} />
-					<span class="font-light text-base">12%</span>
-					<span class="text-gray-650 font-medium">Гостиница в Печурице</span>
+				<div class="gap-x-4 items-center row">
+					<img class="w-10 h-10 rounded-full" src={asset("/96.png")} />
+					<span class="text-base font-light">12%</span>
+					<span class="font-medium text-gray-650">Гостиница в Печурице</span>
 				</div>
-				<div class="row gap-x-4 items-center">
-					<img class="rounded-full w-10 h-10" src={asset("/96.png")} />
-					<span class="font-light text-base">7%</span>
-					<span class="text-gray-650 font-medium">Ремонт квартиры в Баре</span>
+				<div class="gap-x-4 items-center row">
+					<img class="w-10 h-10 rounded-full" src={asset("/96.png")} />
+					<span class="text-base font-light">7%</span>
+					<span class="font-medium text-gray-650">Ремонт квартиры в Баре</span>
 				</div>
 			</div>
 		</>

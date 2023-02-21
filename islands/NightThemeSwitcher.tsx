@@ -5,7 +5,7 @@ export default function NightThemeSwitcher() {
 	useEffect(() => setHtmlDark(theme == "dark"));
 	return (
 		<div
-			class="font-light text-xs w-24"
+			class="w-24 text-xs font-light"
 			onClick={(_) => {
 				const newTheme = ifDark(theme, "light", "dark");
 				setTheme(newTheme);
@@ -14,7 +14,7 @@ export default function NightThemeSwitcher() {
 			}}
 		>
 			{ifDark(theme, "НОЧНАЯ", "ДНЕВНАЯ") + " ТЕМА"}
-			<div class="w-16 h-6 bg-gray-300 rounded-full mt-1 ml-2">
+			<div class="mt-1 ml-2 w-16 h-6 bg-gray-300 rounded-full">
 				<div class={"w-10 h-6 bg-yellow rounded-full relative" + (ifDark(theme, " left-6", ""))}>
 				</div>
 			</div>

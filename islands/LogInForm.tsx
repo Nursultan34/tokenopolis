@@ -10,8 +10,8 @@ export default function LogInForm({ isIncorrect }: { isIncorrect: boolean }) {
 			<LoginHeader />
 			<form class="login-form" method="POST">
 				<h1 class="login-h1">Вход</h1>
-				<hr class="lg:hidden w-16 h-1 bg-white-900 relative right-9 my-8" />
-				<p class="text-xs lg:hidden pr-5 leading-6 mb-12">Удобный инструмент для инвестиций в недвижимость с помощью технологических технологий</p>
+				<hr class="relative right-9 my-8 w-16 h-1 lg:hidden bg-white-900" />
+				<p class="pr-5 mb-12 text-xs leading-6 lg:hidden">Удобный инструмент для инвестиций в недвижимость с помощью технологических технологий</p>
 				<input required class="login-input" name="email" type="email" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" />
 				<input required class="login-input" name="password" type={showPass ? "text" : "password"} placeholder="ПАРОЛЬ" />
 				{isIncorrect ? <p class="text-red-500">Неправильный E-mail или пароль!</p> : <></>}
@@ -21,8 +21,8 @@ export default function LogInForm({ isIncorrect }: { isIncorrect: boolean }) {
 					Нет аккаунта? Зарегистрироваться
 				</a>
 			</form>
-			<div class="hidden lg:col justify-center items-center lg:w-1/2 font-light">
-				<h1 class="text-5xl mb-3">15 НОВЫХ ОБЪЕКТОВ</h1>
+			<div class="hidden justify-center items-center font-light lg:w-1/2 lg:col">
+				<h1 class="mb-3 text-5xl">15 НОВЫХ ОБЪЕКТОВ</h1>
 				<p class="text-2xl text-gray-700">35% годовых - рекордная доходность!</p>
 			</div>
 			<LoginFooter />

@@ -14,11 +14,11 @@ export default function SignUpForm() {
 			<form class="login-form" method="POST">
 				<h1 class="login-h1">Регистрация</h1>
 				{/* why right-9? 9 is the form padding */}
-				<hr class="lg:hidden w-16 h-1 bg-white-900 relative right-9 my-8" />
-				<p class="text-xs lg:hidden pr-5 leading-6 mb-12">Удобный инструмент для инвестиций в недвижимость с помощью технологических технологий</p>
-				<div class="row gap-x-5">
-					<input required class="login-input w-5/12" name="name" type="text" placeholder="ИМЯ" />
-					<input required class="login-input w-7/12" name="email" type="email" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" {...bindInput(email, setEmail)} />
+				<hr class="relative right-9 my-8 w-16 h-1 lg:hidden bg-white-900" />
+				<p class="pr-5 mb-12 text-xs leading-6 lg:hidden">Удобный инструмент для инвестиций в недвижимость с помощью технологических технологий</p>
+				<div class="gap-x-5 row">
+					<input required class="w-5/12 login-input" name="name" type="text" placeholder="ИМЯ" />
+					<input required class="w-7/12 login-input" name="email" type="email" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" {...bindInput(email, setEmail)} />
 				</div>
 				<IncorrectWarning pred={isEmail} val={email} msg="Неверный E-mail!" />
 				<input required class="login-input" name="password" type={showPass ? "text" : "password"} placeholder="ВВЕДИТЕ ПАРОЛЬ" {...(bindInput(pass, setPass))} />
@@ -29,9 +29,9 @@ export default function SignUpForm() {
 					Уже есть аккаунт? Войти
 				</a>
 			</form>
-			<div class="hidden lg:col justify-center items-center lg:w-1/2 font-light">
+			<div class="hidden justify-center items-center font-light lg:w-1/2 lg:col">
 				<div class="text-right">
-					<h1 class="text-5xl mb-3">БОЛЕЕ 100 ИНВЕСТОРОВ</h1>
+					<h1 class="mb-3 text-5xl">БОЛЕЕ 100 ИНВЕСТОРОВ</h1>
 					<p class="text-2xl text-gray-700">75 СОТРУДНИКОВ НА НАШИХ ОБЪЕКТАХ</p>
 				</div>
 			</div>
