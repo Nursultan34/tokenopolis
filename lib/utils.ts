@@ -13,3 +13,7 @@ export function redirectToC(path: string, cookie: string): Response {
     headers: { Location: path, "Set-Cookie": cookie },
   });
 }
+
+export function bindInput(value: string, setValue: (newVal: string) => void) {
+  return { value, onInput: (e) => setValue(e.target?.value) }
+}

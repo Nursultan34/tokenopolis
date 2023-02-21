@@ -22,7 +22,7 @@ export default function LogInForm({ isIncorrect }: { isIncorrect: boolean }) {
           Нет аккаунта? Зарегистрироваться
         </a>
       </form>
-      <div class="hidden lg:flex flex-col justify-center items-center lg:w-1/2 font-light">
+      <div class="hidden lg:col justify-center items-center lg:w-1/2 font-light">
         <h1 class="text-5xl mb-3">15 НОВЫХ ОБЪЕКТОВ</h1>
         <p class="text-2xl text-gray-700">35% годовых - рекордная доходность!</p>
       </div>

@@ -16,20 +16,24 @@ export function randomKeypair() {
 
 export type Balance = { name: "XLM", balance: number } | { name: string, balance: number, issuer: string };
 export function getBalances(account: Account): Balance[] {
-  return account.balances.flatMap(b => {
+  return account.balances.map(b => {
     if (b.asset_type == "native") {
-      return [{
+      return {
         name: "XLM",
-        balance: b.balance
-      }]
+        balance: parseFloat(b.balance),
+      } as Balance;
     } else {
+      // Why is TypeScript so fucking dumb
+      // THE `asset_code` WILL EXIST ON MY TYPE IF I CHECKED ITS EXISTANCE
+      // THIS FUCKING "|" TYPE OPERATOR I HATE THIS STICK SO MUCH WHY NOT
+      // JUST HAVE ENUMS OR ALGEBRAIC DATA TYPES AS REGULAR PEOPLE DO
       if (b.asset_code) {
-        return [{
+        return {
           name: b.asset_code,
           issuer: b.asset_issuer as string,
-          balance: b.balance,
-        }];
-      } else { return [] }
+          balance: parseFloat(b.balance),
+        } as Balance;
+      } else { return undefined }
     }
-  });
+  }).filter(x => x != undefined) as Balance[];
 }
