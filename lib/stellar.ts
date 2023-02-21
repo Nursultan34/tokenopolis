@@ -14,12 +14,22 @@ export function randomKeypair() {
   return stellar.Keypair.random();
 }
 
-// FIXME
-export function getBalances(account: Account): [string, number][] {
-  return account.balances.map((b) => {
-    return [
-      b.asset_type == "native" ? "XLM" : b.asset_code,
-      parseFloat(b.balance),
-    ]; // TODO: handle assets without asset_code
+export type Balance = { name: "XLM", balance: number } | { name: string, balance: number, issuer: string };
+export function getBalances(account: Account): Balance[] {
+  return account.balances.flatMap(b => {
+    if (b.asset_type == "native") {
+      return [{
+        name: "XLM",
+        balance: b.balance
+      }]
+    } else {
+      if (b.asset_code) {
+        return [{
+          name: b.asset_code,
+          issuer: b.asset_issuer as string,
+          balance: b.balance,
+        }];
+      } else { return [] }
+    }
   });
 }

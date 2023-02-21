@@ -53,13 +53,11 @@ export const handler: Handlers = {
   },
 };
 
-// FIXME (getBalances)
 // Selects XLM and PCN balance values from the balance list
-function selectBalances(balances: [string, number][]): { xlm: number; pcn: number } {
-  const xlm_predicate = (b: AnyObj) => b.asset_type == "native";
-  const pcn_predicate = (b: AnyObj) => (b.asset_type == "credit_alphanum4" &&
-                                       b.asset_code == "PCN" &&
-                                       b.asset_issuer == "ASSET_ISSUER"); // TODO: get the asset issuer from the config
+function selectBalances(balances: stellar.Balance[]): { xlm: number; pcn: number } {
+  const xlm_predicate = (b: stellar.Balance) => b.name == "XLM" && (b.issuer == undefined);
+  const pcn_predicate = (b: stellar.Balance) => (b.name == "PCN" &&
+                                                b.issuer == "ASSET_ISSUER"); // TODO: get the asset issuer from the config
   return {
     xlm: balances.find(xlm_predicate)?.balance ?? 0,
     pcn: balances.find(pcn_predicate)?.balance ?? 0,
