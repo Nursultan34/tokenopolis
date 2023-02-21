@@ -13,9 +13,9 @@ import skey from "../jwtkey.json" assert { type: "json" };
 
 // The example of loading the key (mind the JSON import statement on the 1st line);
 export const JWTKey = await crypto.subtle.importKey(
-  "jwk",
-  skey,
-  { name: "HMAC", hash: "SHA-512" },
-  true,
-  ["sign", "verify"],
+	"jwk",
+	skey,
+	{ name: "HMAC", hash: "SHA-512" },
+	true,
+	["sign", "verify"],
 );

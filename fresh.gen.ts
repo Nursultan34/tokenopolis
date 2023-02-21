@@ -13,20 +13,20 @@ import * as $$2 from "./islands/NightThemeSwitcher.tsx";
 import * as $$3 from "./islands/SignUpForm.tsx";
 
 const manifest = {
-  routes: {
-    "./routes/_app.tsx": $0,
-    "./routes/dashboard.tsx": $1,
-    "./routes/login.tsx": $2,
-    "./routes/signup.tsx": $3,
-  },
-  islands: {
-    "./islands/AddressView.tsx": $$0,
-    "./islands/LogInForm.tsx": $$1,
-    "./islands/NightThemeSwitcher.tsx": $$2,
-    "./islands/SignUpForm.tsx": $$3,
-  },
-  baseUrl: import.meta.url,
-  config,
+	routes: {
+		"./routes/_app.tsx": $0,
+		"./routes/dashboard.tsx": $1,
+		"./routes/login.tsx": $2,
+		"./routes/signup.tsx": $3,
+	},
+	islands: {
+		"./islands/AddressView.tsx": $$0,
+		"./islands/LogInForm.tsx": $$1,
+		"./islands/NightThemeSwitcher.tsx": $$2,
+		"./islands/SignUpForm.tsx": $$3,
+	},
+	baseUrl: import.meta.url,
+	config,
 };
 
 export default manifest;
