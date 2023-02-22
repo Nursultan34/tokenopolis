@@ -5,6 +5,7 @@ import { getUser } from "#/db.ts";
 import { checkCookieAuth } from "#/auth.ts";
 import { asset } from "$fresh/runtime.ts";
 import NightThemeSwitcher from "@/islands/NightThemeSwitcher.tsx";
+import DashboardMenu from "@/islands/DashboardMenu.tsx";
 import AddressView from "@/islands/AddressView.tsx";
 import { redirectTo } from "#/utils.ts";
 import { Chart } from "$fresh_charts/mod.ts";
@@ -56,9 +57,7 @@ function selectBalances(balances: stellar.Balance[]): { xlm: number; pcn: number
 export default function Dashboard({ data }: PageProps<DashboardData>) {
 	return (
 		<main class="pr-8 pl-28 h-screen dark:bg-black bg-gray-bg">
-			<div class="fixed left-0 items-center py-5 w-20 h-full col bg-dark-800">
-				<img src={asset("/lk-logo.svg")} />
-			</div>
+			<DashboardMenu />
 			<header class="h-24 row children:(items-center row h-full gap-x-3) font-light justify-between">
 				<div class="gap-x-10">
 					<h1 class="text-2xl">Панель управления</h1>
@@ -185,7 +184,7 @@ function EventCalendar() {
 					<span class="text-3xl">11:45</span>
 				</div>
 				<div class="my-3 text-sm text-gray-450">ОКОНЧАНИЕ СТРОИТЕЛЬСТВА ВИЛЛЫ</div>
-				<hr class="mx-1 mb-4 text-gray-500" />
+				<hr class="mx-1 mb-4 text-dark-1" />
 			</div>
 			<div>
 				<div class="justify-between font-light row">
@@ -195,7 +194,7 @@ function EventCalendar() {
 					<span class="text-3xl">11:45</span>
 				</div>
 				<div class="my-3 text-sm text-gray-450">ОКОНЧАНИЕ СТРОИТЕЛЬСТВА ВИЛЛЫ</div>
-				<hr class="mx-1 mb-4 text-gray-500" />
+				<hr class="mx-1 mb-4 text-dark-1" />
 			</div>
 		</>
 	);
