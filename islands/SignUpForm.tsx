@@ -14,7 +14,7 @@ export default function SignUpForm() {
 			<form class="login-form" method="POST">
 				<h1 class="login-h1">Регистрация</h1>
 				{/* why right-9? 9 is the form padding */}
-				<hr class="relative right-9 my-8 w-16 h-1 lg:hidden bg-white-900" />
+				<hr class="relative right-9 my-8 w-16 h-1 bg-white lg:hidden" />
 				<p class="pr-5 mb-12 text-xs leading-6 lg:hidden">Удобный инструмент для инвестиций в недвижимость с помощью технологических технологий</p>
 				<div class="gap-x-5 row">
 					<input required class="w-5/12 login-input" name="name" type="text" placeholder="ИМЯ" />

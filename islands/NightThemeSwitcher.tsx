@@ -14,7 +14,7 @@ export default function NightThemeSwitcher() {
 			}}
 		>
 			{ifDark(theme, "НОЧНАЯ", "ДНЕВНАЯ") + " ТЕМА"}
-			<div class="mt-1 ml-2 w-16 h-6 bg-gray-300 rounded-full">
+			<div class="mt-1 ml-2 w-16 h-6 rounded-full bg-gray-switcher">
 				<div class={"w-10 h-6 bg-yellow rounded-full relative" + (ifDark(theme, " left-6", ""))}>
 				</div>
 			</div>

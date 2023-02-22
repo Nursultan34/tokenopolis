@@ -6,7 +6,7 @@ import { checkCookieAuth } from "#/auth.ts";
 import { asset } from "$fresh/runtime.ts";
 import NightThemeSwitcher from "@/islands/NightThemeSwitcher.tsx";
 import AddressView from "@/islands/AddressView.tsx";
-import { bindInput, redirectTo } from "#/utils.ts";
+import { redirectTo } from "#/utils.ts";
 import { Chart } from "$fresh_charts/mod.ts";
 import type { ComponentChildren } from "preact";
 
@@ -33,9 +33,9 @@ export const handler: Handlers = {
 			const keypair = stellar.Keypair.fromSecret(privKey);
 			// Get the balances list
 			const balances = await stellar.loadAccount(keypair.publicKey())
-				.then(stellar.getBalances)
-				.catch((_e) => [])
-				.then(selectBalances);
+										  .then(stellar.getBalances)
+										  .catch((_e) => [])
+										  .then(selectBalances);
 			const transactions = [false, false, true, false, true];
 			return ctx.render({ name, address: keypair.publicKey(), balances, transactions });
 		} else return redirectTo("/login");
@@ -46,7 +46,7 @@ export const handler: Handlers = {
 function selectBalances(balances: stellar.Balance[]): { xlm: number; pcn: number } {
 	const xlm_predicate = (b: stellar.Balance) => b.name == "XLM" && (b.issuer == undefined);
 	const pcn_predicate = (b: stellar.Balance) => (b.name == "PCN" &&
-		b.issuer == "ASSET_ISSUER"); // TODO: get the asset issuer from the config
+												  b.issuer == "ASSET_ISSUER"); // TODO: get the asset issuer from the config
 	return {
 		xlm: balances.find(xlm_predicate)?.balance ?? 0,
 		pcn: balances.find(pcn_predicate)?.balance ?? 0,
@@ -55,7 +55,7 @@ function selectBalances(balances: stellar.Balance[]): { xlm: number; pcn: number
 
 export default function Dashboard({ data }: PageProps<DashboardData>) {
 	return (
-		<main class="pr-8 pl-28 dark:bg-[rgba(0,0,0,0)] bg-[#E6E6E6]">
+		<main class="pr-8 pl-28 h-screen dark:bg-black bg-gray-bg">
 			<div class="fixed left-0 items-center py-5 w-20 h-full col bg-dark-800">
 				<img src={asset("/lk-logo.svg")} />
 			</div>
@@ -79,8 +79,8 @@ export default function Dashboard({ data }: PageProps<DashboardData>) {
 				{/* Left Top/Bottom part */}
 				<div class="col gap-5 children:(w-full h-full)">
 					{/* Left Top part */}
-					<div class="row children:(w-full h-full rounded-sm) gap-x-5">
-						<DashboardEntry basis="31%" classes="bg-dark-700 p-6! relative">
+					<div class="row children:(w-full h-full) gap-x-5">
+						<DashboardEntry basis="31%" classes="dark:bg-dark-1 p-6! relative" highlighted>
 							<div class="justify-between items-center p-6 m-1 mx-3 mb-6 rounded-sm row bg-yellow">
 								<div>
 									<div class="mb-5 font-bold text-dark-750">POLISCOIN</div>
@@ -118,19 +118,19 @@ export default function Dashboard({ data }: PageProps<DashboardData>) {
 					</div>
 					{/* Left Bottom part */}
 					<div class="flex children:(w-full h-full) flex-row gap-x-5">
-						<DashboardEntry name="График PCN/XLM" basis="31%">
+						<DashboardEntry name="График PCN/XLM" basis="31%" highlighted>
 						</DashboardEntry>
 						<DashboardEntry basis="40%" name="КАЛЕНДАРЬ СОБЫТИЙ">
 							<EventCalendar />
 						</DashboardEntry>
-						<DashboardEntry name="рынок" basis="32.5%">
+						<DashboardEntry name="рынок" basis="32.5%" highlighted>
 						</DashboardEntry>
 					</div>
 				</div>
 				{/* Right Top/Bottom part */}
 				<div class="w-full h-full col" style="flex-basis: 30%">
 					{/* Right Top part */}
-					<DashboardEntry name="ТРАНЗАКЦИИ" basis="65%">
+					<DashboardEntry name="ТРАНЗАКЦИИ" basis="65%" highlighted>
 						<Transactions transactions={data.transactions} />
 					</DashboardEntry>
 					{/* Right Bottom part */}
@@ -142,9 +142,11 @@ export default function Dashboard({ data }: PageProps<DashboardData>) {
 	);
 }
 
-function DashboardEntry({ children, name, classes, basis }: { children: ComponentChildren; name?: string; classes?: string; basis?: string }) {
+function DashboardEntry({ children, name, classes, basis, highlighted }: { children: ComponentChildren; name?: string; classes?: string; basis?: string; highlighted?: boolean }) {
 	return (
-		<div class={`bg-dark-750 pt-5 px-7 ${classes ?? ""}`} style={`flex-basis: ${basis}`}>
+		<div class={`${highlighted ? "bg-white dark:bg-slate-1" : "bg-gray-card dark:bg-dark-2"}
+					 pt-5 px-7 rounded-sm ${classes ?? ""}`}
+			 style={`flex-basis: ${basis}`}>
 			{name == undefined ? <></> : <h1 class="relative right-2 mb-4 text-xl font-light">{name}</h1>}
 			{children}
 		</div>
@@ -155,7 +157,7 @@ function Transactions({ transactions }: { transactions: Transaction[] }) {
 	return (
 		<>
 			{transactions.map((transaction) => (
-				<div class="justify-between p-3 mb-5 w-full h-20 text-xs bg-dark-700 col">
+				<div class="justify-between p-3 mb-5 w-full h-20 text-xs col dark:bg-slate-2">
 					<div class="justify-between row">
 						<span>16:23, 12 дек 2018</span>
 						<span class="gap-x-2 row">
