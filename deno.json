@@ -13,5 +13,10 @@
 			"lineWidth": 180,
 			"indentWidth": 4
 		}
+	},
+	"lint": {
+		"rules": {
+			"exclude": ["no-explicit-any", "import-map-remap", "valid-typeof"]
+		}
 	}
 }

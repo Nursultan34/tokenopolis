@@ -1,30 +1,27 @@
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useReducer } from "preact/hooks";
 
 export default function NightThemeSwitcher() {
-	const [theme, setTheme] = useState(localStorage.getItem("theme") as "dark" | "light" || "dark");
-	useEffect(() => setHtmlDark(theme == "dark"));
+	const [isDark, toggleTheme] = useReducer(
+		(dark: boolean, _) => {
+			localStorage.setItem("dark", (!dark).toString());
+			setHtmlDark(!dark);
+			return dark;
+		},
+		// Set to "true" to make the light theme the default (also delete _app.tsx to make it faster)
+		localStorage.getItem("dark") == "false"
+	);
+
+	useEffect(() => setHtmlDark(isDark));
+
 	return (
-		<div
-			class="w-24 text-xs font-light"
-			onClick={(_) => {
-				const newTheme = ifDark(theme, "light", "dark");
-				setTheme(newTheme);
-				localStorage.setItem("theme", newTheme);
-				setHtmlDark(theme == "dark");
-			}}
-		>
-			{ifDark(theme, "НОЧНАЯ", "ДНЕВНАЯ") + " ТЕМА"}
+		<div class="w-24 text-xs font-light" onClick={(_) => toggleTheme([])}>
+			{isDark ? "НОЧНАЯ" : "ДНЕВНАЯ"} ТЕМА
 			<div class="mt-1 ml-2 w-16 h-6 rounded-full bg-gray-switcher">
-				<div class={"w-10 h-6 bg-yellow rounded-full relative" + (ifDark(theme, " left-6", ""))}>
+				<div class={"w-10 h-6 bg-yellow rounded-full relative" + (isDark ? " left-6" : "")}>
 				</div>
 			</div>
 		</div>
 	);
-}
-
-function ifDark<T>(theme: "dark" | "light", then: T, else_: T) {
-	if (theme == "dark") return then;
-	else return else_;
 }
 
 function setHtmlDark(dark: boolean) {

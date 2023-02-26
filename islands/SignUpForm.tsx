@@ -1,8 +1,8 @@
-import { useState } from "preact/hooks";
-import { isEmail } from "https://deno.land/x/isemail/mod.ts";
-import LoginHeader from "@/components/LoginHeader.tsx";
-import LoginFooter from "@/components/LoginFooter.tsx";
-import { bindInput } from "#/utils.ts";
+import LoginHeader		from "@/components/LoginHeader.tsx";
+import LoginFooter		from "@/components/LoginFooter.tsx";
+import { bindInput }	from "#/utils.ts";
+import { isEmail }		from "https://deno.land/x/isemail@v1.0.1/mod.ts";
+import { useState }		from "preact/hooks";
 
 export default function SignUpForm() {
 	const [email, setEmail] = useState("");

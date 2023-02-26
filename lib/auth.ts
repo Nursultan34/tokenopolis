@@ -7,6 +7,13 @@
 
 import { JWTKey } from "#/jwtkey.ts";
 import * as djwt from "https://deno.land/x/djwt@v2.8/mod.ts";
+import * as F from "https://deno.land/x/fae@v1.0.0/mod.ts";
+
+// Convers T | undefined to a Promise (fails if undefined)
+const promiseFromMaybe = <T,>(val: T | undefined): Promise<T> => val == undefined ? Promise.reject() : Promise.resolve(val);
+// If `v` matches the predicate `p`, return a Promise of v, fail otherwise
+// @ts-ignore _
+const assert = F.curry((p, v) => p(v) ? Promise.resolve(v) : Promise.reject());
 
 // Takes a email and generates a JWT with the key
 export function genJWT(email: string): Promise<string> {
@@ -17,11 +24,10 @@ export function genJWT(email: string): Promise<string> {
 
 // Takes the user's cookie list and if the JWT cookie exists
 // and is valid - returns user's e-mail adress, otherwise undefined
-export async function checkCookieAuth(cookies: Record<string, string>): Promise<string | undefined> {
-	if (cookies.auth) {
-		const payload = await djwt.verify(cookies.auth, JWTKey)
-			.catch((_e) => undefined) as { email: string } | undefined;
-		// TODO: check if the account exists (the cookie may stay after the user deleted the account)
-		return payload?.email;
-	} else return undefined;
+export function checkCookieAuth(cookies: Record<string, string>): Promise<string | undefined> {
+	return promiseFromMaybe(cookies.auth)
+		.then(jwt => djwt.verify(jwt, JWTKey))
+		.then(assert(F.propIs("String", "email")))
+		.then(payload => payload.email as string);
+	// TODO: check if the account exists (the cookie may stay after the user deleted the account)
 }

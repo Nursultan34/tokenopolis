@@ -1,8 +1,8 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
-import LogInForm from "@/islands/LogInForm.tsx";
-import { verifyPassword } from "#/db.ts";
-import { genJWT } from "#/auth.ts";
-import { redirectToC } from "#/utils.ts";
+import { Handlers, PageProps }	from "$fresh/server.ts";
+import LogInForm				from "@/islands/LogInForm.tsx";
+import { verifyPassword }		from "#/db.ts";
+import { genJWT }				from "#/auth.ts";
+import { redirectToC, mayFail, assertStr } from "#/utils.ts";
 
 interface FormData {
 	isIncorrect: boolean;
@@ -23,11 +23,11 @@ export const handler: Handlers<FormData | LoginData> = {
 		// And passes it to the component
 		return ctx.render({ isIncorrect });
 	},
-	async POST(req, ctx) {
+	POST: mayFail(async (req, _ctx) => {
 		const data = await req.formData();
-		const email = data.get("email");
-		const password = data.get("password");
-		if (!(typeof email == "string" && typeof password == "string")) return new Response("Error");
+		const email = assertStr(data.get("email"));
+		const password = assertStr(data.get("password"));
+		// TODO: also add a "user doesn't exist" warning
 		// If the password is correct
 		if (await verifyPassword(email, password)) {
 			// Create the JWT
@@ -37,7 +37,7 @@ export const handler: Handlers<FormData | LoginData> = {
 		} else {
 			return Response.redirect(`${new URL(req.url).origin}/login?incorrect`);
 		}
-	},
+	}),
 };
 
 export default function LogIn(data: PageProps<FormData>) {

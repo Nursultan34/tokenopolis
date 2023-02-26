@@ -9,10 +9,11 @@ import * as $2 from "./routes/dashboard.tsx";
 import * as $3 from "./routes/login.tsx";
 import * as $4 from "./routes/signup.tsx";
 import * as $$0 from "./islands/AddressView.tsx";
-import * as $$1 from "./islands/DashboardMenu.tsx";
-import * as $$2 from "./islands/LogInForm.tsx";
-import * as $$3 from "./islands/NightThemeSwitcher.tsx";
-import * as $$4 from "./islands/SignUpForm.tsx";
+import * as $$1 from "./islands/DashboardHeader.tsx";
+import * as $$2 from "./islands/DashboardMenu.tsx";
+import * as $$3 from "./islands/LogInForm.tsx";
+import * as $$4 from "./islands/NightThemeSwitcher.tsx";
+import * as $$5 from "./islands/SignUpForm.tsx";
 
 const manifest = {
 	routes: {
@@ -24,10 +25,11 @@ const manifest = {
 	},
 	islands: {
 		"./islands/AddressView.tsx": $$0,
-		"./islands/DashboardMenu.tsx": $$1,
-		"./islands/LogInForm.tsx": $$2,
-		"./islands/NightThemeSwitcher.tsx": $$3,
-		"./islands/SignUpForm.tsx": $$4,
+		"./islands/DashboardHeader.tsx": $$1,
+		"./islands/DashboardMenu.tsx": $$2,
+		"./islands/LogInForm.tsx": $$3,
+		"./islands/NightThemeSwitcher.tsx": $$4,
+		"./islands/SignUpForm.tsx": $$5,
 	},
 	baseUrl: import.meta.url,
 	config,

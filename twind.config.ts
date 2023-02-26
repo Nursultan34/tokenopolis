@@ -15,7 +15,6 @@ export default {
 		"login-header": apply`lg:absolute w-full h-24 row justify-between children:(row items-center)`,
 		"login-form": apply`col lg:h-full px-9 lg:(pl-72 pr-16) justify-center lg:w-1/2`,
 		"login-submit": apply`bg-yellow py-3 w-full lg:w-3/4 my-5 rounded-md text-xl`,
-		"neumorphic-light": apply`shadow-[-2.17893px -2.17893px 17px 3px rgb(255, 255, 255), 2.17893px 2.17893px 11px rgba(24, 24, 29, 0.4)] rounded-md`,
 		"lk-input": apply`p-5 bg-white dark:bg-slate-2 rounded-sm placeholder::text-gray-600`,
 		"bg-none": css({ backgroundImage: "none" }),
 	},

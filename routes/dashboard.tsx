@@ -1,15 +1,15 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
-import { getCookies } from "https://deno.land/std@v0.171.0/http/cookie.ts";
-import * as stellar from "#/stellar.ts";
-import { getUser } from "#/db.ts";
-import { checkCookieAuth } from "#/auth.ts";
-import { asset } from "$fresh/runtime.ts";
-import NightThemeSwitcher from "@/islands/NightThemeSwitcher.tsx";
-import DashboardMenu from "@/islands/DashboardMenu.tsx";
-import AddressView from "@/islands/AddressView.tsx";
-import { redirectTo } from "#/utils.ts";
-import { Chart } from "$fresh_charts/mod.ts";
-import type { ComponentChildren } from "preact";
+import { Handlers, PageProps }		from "$fresh/server.ts";
+import { asset }					from "$fresh/runtime.ts";
+import { getCookies }				from "https://deno.land/std@v0.171.0/http/cookie.ts";
+import DashboardHeader				from "@/islands/DashboardHeader.tsx";
+import DashboardMenu				from "@/islands/DashboardMenu.tsx";
+import * as stellar					from "#/stellar.ts";
+import { getUser }					from "#/db.ts";
+import { checkCookieAuth }			from "#/auth.ts";
+import { redirectTo, const_,
+		 valuesMatch }				from "#/utils.ts";
+import type { ComponentChildren }	from "preact";
+//import { Chart } from "$fresh_charts/mod.ts";
 
 // Data that the dashboard needs
 type Transaction = boolean[];
@@ -29,14 +29,16 @@ export const handler: Handlers = {
 		const email = await checkCookieAuth(cookies);
 		if (email) {
 			// As we checked the JWT, non-existence of the user is impossible
-			const privKey = await getUser(email).then(($) => $![2]);
-			const name = await getUser(email).then(($) => $![0]);
+			const user = (await getUser(email))!;
+			const privKey = user[0] as string;
+			const name = user[2] as string;
 			const keypair = stellar.Keypair.fromSecret(privKey);
 			// Get the balances list
-			const balances = await stellar.loadAccount(keypair.publicKey())
-										  .then(stellar.getBalances)
-										  .catch((_e) => [])
-										  .then(selectBalances);
+			const balances =
+				await stellar.server.loadAccount(keypair.publicKey())
+							 		.then(stellar.getBalances)
+									.catch(const_([]))
+									.then(selectBalances);
 			const transactions = [false, false, true, false, true];
 			return ctx.render({ name, address: keypair.publicKey(), balances, transactions });
 		} else return redirectTo("/login");
@@ -45,9 +47,8 @@ export const handler: Handlers = {
 
 // Selects XLM and PCN balance values from the balance list
 function selectBalances(balances: stellar.Balance[]): { xlm: number; pcn: number } {
-	const xlm_predicate = (b: stellar.Balance) => b.name == "XLM" && (b.issuer == undefined);
-	const pcn_predicate = (b: stellar.Balance) => (b.name == "PCN" &&
-												  b.issuer == "ASSET_ISSUER"); // TODO: get the asset issuer from the config
+	const xlm_predicate = valuesMatch({ name: "XLM", issuer: undefined });
+	const pcn_predicate = valuesMatch({ name: "PCN", issuer: "GDVND3QFHQ7ZN7S7ATVIXIJFSMTFXROMOB3HXMR2OUQVU4JPUDATV3TL" }); // TODO: get the asset issuer from the config
 	return {
 		xlm: balances.find(xlm_predicate)?.balance ?? 0,
 		pcn: balances.find(pcn_predicate)?.balance ?? 0,
@@ -57,22 +58,10 @@ function selectBalances(balances: stellar.Balance[]): { xlm: number; pcn: number
 export default function Dashboard({ data }: PageProps<DashboardData>) {
 	return (
 		<main class="pr-8 pl-28 h-screen dark:bg-black bg-gray-bg">
+			{ data.balances.xlm }<br />
+			{ data.balances.pcn }
 			<DashboardMenu />
-			<header class="h-24 row children:(items-center row h-full gap-x-3) font-light justify-between">
-				<div class="gap-x-10">
-					<h1 class="text-2xl">Панель управления</h1>
-					<input class="w-72 h-8 lk-input" type="text" placeholder="Поиск по сайту..." />
-					<NightThemeSwitcher />
-				</div>
-				<div>
-					<AddressView address={data.address} />
-					<img
-						class="w-10 rounded-full"
-						src="https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg"
-					/>
-					<span class="font-bold">{data.name}</span>
-				</div>
-			</header>
+			<DashboardHeader address={data.address} name={data.name} />
 			{/* Left/Right part */}
 			<div class="row h-[calc(100vh-8rem)] w-full gap-5 children:(w-full h-full)">
 				{/* Left Top/Bottom part */}
@@ -143,7 +132,7 @@ export default function Dashboard({ data }: PageProps<DashboardData>) {
 
 function DashboardEntry({ children, name, classes, basis, highlighted }: { children: ComponentChildren; name?: string; classes?: string; basis?: string; highlighted?: boolean }) {
 	return (
-		<div class={`${highlighted ? "bg-white dark:bg-slate-1" : "bg-gray-card dark:bg-dark-2"}
+		<div class={`${highlighted ? "bg-white dark:bg-slate-1" : "bg-gray-card bg-gray-bg dark:bg-dark-2"}
 					 pt-5 px-7 rounded-sm ${classes ?? ""}`}
 			 style={`flex-basis: ${basis}`}>
 			{name == undefined ? <></> : <h1 class="relative right-2 mb-4 text-xl font-light">{name}</h1>}

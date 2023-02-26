@@ -14,6 +14,27 @@ export function redirectToC(path: string, cookie: string): Response {
 	});
 }
 
-export function bindInput(value: string, setValue: (newVal: string) => void) {
-	return { value, onInput: (e) => setValue(e.target?.value) };
+import { Handler, HandlerContext } from "$fresh/server.ts";
+
+export function mayFail(fn: Handler): Handler {
+	return (req: Request, ctx: HandlerContext) => {
+		try { return fn(req, ctx) } catch { return new Response("error") }
+	}
 }
+
+export function assertType(type_: string, val: unknown) {
+	if (typeof val != type_) throw new Error("Type assertion failed")
+	else return val;
+}
+
+export const assertStr = (val: unknown): string => assertType('string', val) as string;
+
+export const bindInput = (value: string, setValue: (newVal: string) => void) => ({
+	value,
+	onInput: (e: Event) => setValue((e.target as HTMLInputElement).value)
+})
+
+export const const_ = <T,>(v: T) => (..._: unknown[]) => v;
+export const valuesMatch = (target: Record<string, any>) => (value: Record<string, any>) =>
+	Object.keys(value).map(key => value[key] == target[key]).reduce((a, b) => a && b);
+export const split = (delimiter: string) => (input: string) => input.split(delimiter);
