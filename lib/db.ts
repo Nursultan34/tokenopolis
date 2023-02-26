@@ -34,7 +34,7 @@ export const getUser = (email: string): Promise<[string, string, string] | undef
 export async function verifyPassword(email: string, password: string): Promise<boolean | undefined> {
 	const record = await redis.get(email);
 	if (record) {
-		return bcrypt.compare(password, record.split(",")[0]);
+		return bcrypt.compare(password, record.split(",")[1]);
 	} else {
 		return undefined;
 	}

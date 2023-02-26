@@ -17,9 +17,11 @@ export function redirectToC(path: string, cookie: string): Response {
 import { Handler, HandlerContext } from "$fresh/server.ts";
 
 export function mayFail(fn: Handler): Handler {
-	return (req: Request, ctx: HandlerContext) => {
-		try { return fn(req, ctx) } catch { return new Response("error") }
-	}
+	return (req: Request, ctx: HandlerContext) =>
+		// A trick to use Promise error handlers instead of try/catch
+		Promise.resolve(fn)
+			   .then(fn => fn(req, ctx))
+		       .catch(const_(new Response("Error")));
 }
 
 export function assertType(type_: string, val: unknown) {

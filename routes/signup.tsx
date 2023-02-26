@@ -32,7 +32,7 @@ export const handler: Handlers = {
 		const name = assertStr(data.get("name"));
 		const password = assertStr(data.get("password"));
 		// If the credentials are okay
-		if (isEmail(email) && isCorrectPassword(password) && (name.length < 40)) { throw new Error() }
+		if (!(isEmail(email) && isCorrectPassword(password) && (name.length < 40))) { throw new Error() }
 		// Build the redirect response that will also set the authentication cookie
 		const jwt = await register(email, name, password);
 		return redirectToC("/dashboard", `auth=${jwt}; max-age=31536000`);

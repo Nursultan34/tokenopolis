@@ -30,8 +30,8 @@ export const handler: Handlers = {
 		if (email) {
 			// As we checked the JWT, non-existence of the user is impossible
 			const user = (await getUser(email))!;
-			const privKey = user[0] as string;
-			const name = user[2] as string;
+			const name = user[0] as string;
+			const privKey = user[2] as string;
 			const keypair = stellar.Keypair.fromSecret(privKey);
 			// Get the balances list
 			const balances =
@@ -58,8 +58,6 @@ function selectBalances(balances: stellar.Balance[]): { xlm: number; pcn: number
 export default function Dashboard({ data }: PageProps<DashboardData>) {
 	return (
 		<main class="pr-8 pl-28 h-screen dark:bg-black bg-gray-bg">
-			{ data.balances.xlm }<br />
-			{ data.balances.pcn }
 			<DashboardMenu />
 			<DashboardHeader address={data.address} name={data.name} />
 			{/* Left/Right part */}
