@@ -30,9 +30,8 @@ export const handler: Handlers = {
 		if (email) {
 			// As we checked the JWT, non-existence of the user is impossible
 			const user = (await getUser(email))!;
-			const name = user[0] as string;
-			const privKey = user[2] as string;
-			const keypair = stellar.Keypair.fromSecret(privKey);
+			const name = user.name;
+			const keypair = user.wallet;
 			// Get the balances list
 			const balances =
 				await stellar.server.loadAccount(keypair.publicKey())
