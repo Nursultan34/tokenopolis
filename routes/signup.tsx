@@ -1,11 +1,11 @@
-import { Handlers }		from "$fresh/server.ts";
-import SignUpForm		from "@/islands/SignUpForm.tsx";
-import * as stellar		from "#/stellar.ts";
+import { Handlers } from "$fresh/server.ts";
+import SignUpForm from "@/islands/SignUpForm.tsx";
+import * as stellar from "#/stellar.ts";
 import { addUserToDB, User } from "#/db.ts";
-import { genJWT }		from "#/auth.ts";
-import { redirectToC, mayFail, assertStr } from "#/utils.ts";
-import { isEmail }		from "https://deno.land/x/isemail@v1.0.1/mod.ts";
-import * as bcrypt		from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
+import { genJWT } from "#/auth.ts";
+import { assertStr, mayFail, redirectToC } from "#/utils.ts";
+import { isEmail } from "https://deno.land/x/isemail@v1.0.1/mod.ts";
+import * as bcrypt from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
 
 // Adds the user to the database and returns the JWT token for his authentication
 async function register(email: string, name: string, password: string): Promise<string> {
@@ -18,7 +18,7 @@ async function register(email: string, name: string, password: string): Promise<
 		email,
 		name,
 		passHash,
-		wallet: keypair
+		wallet: keypair,
 	});
 	return genJWT(email);
 }
@@ -37,7 +37,7 @@ export const handler: Handlers = {
 		const name = assertStr(data.get("name"));
 		const password = assertStr(data.get("password"));
 		// If the credentials are okay
-		if (!(isEmail(email) && isCorrectPassword(password) && (name.length < 40))) { throw new Error() }
+		if (!(isEmail(email) && isCorrectPassword(password) && (name.length < 40))) throw new Error();
 		// Build the redirect response that will also set the authentication cookie
 		const jwt = await register(email, name, password);
 		return redirectToC("/dashboard", `auth=${jwt}; max-age=31536000`);

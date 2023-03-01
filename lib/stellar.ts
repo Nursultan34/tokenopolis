@@ -8,7 +8,7 @@ import { const_ } from "#/utils.ts";
 // Settings
 enum StellarNet {
 	Test = 1,
-	Public = 2
+	Public = 2,
 }
 const net = StellarNet.Test;
 const issuerKeypair = stellar.Keypair.fromSecret("SB666ZIMIDTTDDKSRL3M7BLCSSPFQUE4RS7T67HN5PCOYNWVOXVJFFA6");
@@ -20,9 +20,7 @@ const transactionOptions = {
 
 // The way SICP JS Edition stated
 export const server = new stellar.Server(
-	net == StellarNet.Test
-	? "https://horizon-testnet.stellar.org"
-	: "https://horizon.stellar.org"
+	net == StellarNet.Test ? "https://horizon-testnet.stellar.org" : "https://horizon.stellar.org",
 );
 
 // Reexports some of the stellar-sdk library's stuff
@@ -38,28 +36,28 @@ export function getBalances(account: Account): Balance[] {
 	return account.balances.map((b): Balance | undefined =>
 		// @ts-ignore _
 		match(b)
-			.with({ asset_type: "native" }, b => ({
+			.with({ asset_type: "native" }, (b) => ({
 				name: "XLM",
-				balance: parseFloat(b.balance)
+				balance: parseFloat(b.balance),
 			}))
-			.with({ asset_code: P._ }, b => ({
+			.with({ asset_code: P._ }, (b) => ({
 				name: b.asset_code,
 				issuer: b.asset_issuer as string,
-				balance: parseFloat(b.balance)
+				balance: parseFloat(b.balance),
 			}))
-			.otherwise(const_(undefined)))
+			.otherwise(const_(undefined))
+	)
 		.filter((x) => x != undefined) as Balance[];
 }
 
-const transactionFor = async (keypair: stellar.Keypair) =>
-	new stellar.TransactionBuilder(await server.loadAccount(keypair.publicKey()), transactionOptions);
+const transactionFor = async (keypair: stellar.Keypair) => new stellar.TransactionBuilder(await server.loadAccount(keypair.publicKey()), transactionOptions);
 
 export async function setTrust(asset: string, target: stellar.Keypair) {
 	const transaction = (await transactionFor(target))
 		.addOperation(
 			stellar.Operation.changeTrust({
 				asset: assetFromName(asset),
-			})
+			}),
 		)
 		.setTimebounds(0, 0)
 		.build();
@@ -74,7 +72,7 @@ export async function sendTokens(asset: string, destination: string, amount: str
 				amount,
 				destination,
 				asset: assetFromName(asset),
-			})
+			}),
 		)
 		.setTimebounds(0, 0)
 		.build();

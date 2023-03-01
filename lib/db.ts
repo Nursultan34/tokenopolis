@@ -35,7 +35,7 @@ export const getUser = (email: string): Promise<User | undefined> =>
 	redis
 		.get(email)
 		.then(split(","))
-		.then(d => ({
+		.then((d) => ({
 			email,
 			name: d[0],
 			passHash: d[1],

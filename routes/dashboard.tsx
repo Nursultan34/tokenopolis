@@ -1,14 +1,13 @@
-import { Handlers, PageProps }		from "$fresh/server.ts";
-import { asset }					from "$fresh/runtime.ts";
-import { getCookies }				from "https://deno.land/std@v0.171.0/http/cookie.ts";
-import DashboardHeader				from "@/islands/DashboardHeader.tsx";
-import DashboardMenu				from "@/islands/DashboardMenu.tsx";
-import * as stellar					from "#/stellar.ts";
-import { getUser }					from "#/db.ts";
-import { checkCookieAuth }			from "#/auth.ts";
-import { redirectTo, const_,
-		 valuesMatch }				from "#/utils.ts";
-import type { ComponentChildren }	from "preact";
+import { Handlers, PageProps } from "$fresh/server.ts";
+import { asset } from "$fresh/runtime.ts";
+import { getCookies } from "https://deno.land/std@v0.171.0/http/cookie.ts";
+import Menu from "@/components/Menu.tsx";
+import Header from "@/components/Header.tsx";
+import * as stellar from "#/stellar.ts";
+import { getUser } from "#/db.ts";
+import { checkCookieAuth } from "#/auth.ts";
+import { const_, redirectTo, valuesMatch } from "#/utils.ts";
+import type { ComponentChildren } from "preact";
 //import { Chart } from "$fresh_charts/mod.ts";
 
 // Data that the dashboard needs
@@ -33,11 +32,10 @@ export const handler: Handlers = {
 			const name = user.name;
 			const keypair = user.wallet;
 			// Get the balances list
-			const balances =
-				await stellar.server.loadAccount(keypair.publicKey())
-							 		.then(stellar.getBalances)
-									.catch(const_([]))
-									.then(selectBalances);
+			const balances = await stellar.server.loadAccount(keypair.publicKey())
+				.then(stellar.getBalances)
+				.catch(const_([]))
+				.then(selectBalances);
 			const transactions = [false, false, true, false, true];
 			return ctx.render({ name, address: keypair.publicKey(), balances, transactions });
 		} else return redirectTo("/login");
@@ -56,9 +54,9 @@ function selectBalances(balances: stellar.Balance[]): { xlm: number; pcn: number
 
 export default function Dashboard({ data }: PageProps<DashboardData>) {
 	return (
-		<main class="pr-8 pl-28 h-screen dark:bg-black bg-gray-bg">
-			<DashboardMenu />
-			<DashboardHeader address={data.address} name={data.name} />
+		<main class="h-screen dark:bg-black bg-gray-bg">
+			<Menu />
+			<Header />
 			{/* Left/Right part */}
 			<div class="row h-[calc(100vh-8rem)] w-full gap-5 children:(w-full h-full)">
 				{/* Left Top/Bottom part */}
@@ -129,9 +127,11 @@ export default function Dashboard({ data }: PageProps<DashboardData>) {
 
 function DashboardEntry({ children, name, classes, basis, highlighted }: { children: ComponentChildren; name?: string; classes?: string; basis?: string; highlighted?: boolean }) {
 	return (
-		<div class={`${highlighted ? "bg-white dark:bg-slate-1" : "bg-gray-card bg-gray-bg dark:bg-dark-2"}
+		<div
+			class={`${highlighted ? "bg-white dark:bg-slate-1" : "bg-gray-card bg-gray-bg dark:bg-dark-2"}
 					 pt-5 px-7 rounded-sm ${classes ?? ""}`}
-			 style={`flex-basis: ${basis}`}>
+			style={`flex-basis: ${basis}`}
+		>
 			{name == undefined ? <></> : <h1 class="relative right-2 mb-4 text-xl font-light">{name}</h1>}
 			{children}
 		</div>

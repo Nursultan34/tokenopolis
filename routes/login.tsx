@@ -1,8 +1,8 @@
-import { Handlers, PageProps }	from "$fresh/server.ts";
-import LogInForm				from "@/islands/LogInForm.tsx";
-import { verifyPassword }		from "#/db.ts";
-import { genJWT }				from "#/auth.ts";
-import { redirectToC, mayFail, assertStr } from "#/utils.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
+import LogInForm from "@/islands/LogInForm.tsx";
+import { verifyPassword } from "#/db.ts";
+import { genJWT } from "#/auth.ts";
+import { assertStr, mayFail, redirectToC } from "#/utils.ts";
 
 interface FormData {
 	isIncorrect: boolean;

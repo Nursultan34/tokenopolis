@@ -1,6 +1,6 @@
-import { asset }	from "$fresh/runtime.ts";
-import LoginHeader	from "@/components/LoginHeader.tsx";
-import LoginFooter	from "@/components/LoginFooter.tsx";
+import { asset } from "$fresh/runtime.ts";
+import LoginHeader from "@/components/loginScreen/LoginHeader.tsx";
+import LoginFooter from "@/components/loginScreen/LoginFooter.tsx";
 import { useState } from "preact/hooks";
 
 export default function LogInForm({ isIncorrect }: { isIncorrect: boolean }) {

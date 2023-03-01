@@ -11,9 +11,9 @@ import * as F from "https://deno.land/x/fae@v1.0.0/mod.ts";
 import { const_ } from "#/utils.ts";
 
 // Convers T | undefined to a Promise (fails if undefined)
-const promiseFromMaybe = <T,>(val: T | undefined): Promise<T> => val == undefined ? Promise.reject() : Promise.resolve(val);
+const promiseFromMaybe = <T>(val: T | undefined): Promise<T> => val == undefined ? Promise.reject() : Promise.resolve(val);
 // If `v` matches the predicate `p`, return a Promise of v, fail otherwise
-const assert = p => v => p(v) ? Promise.resolve(v) : Promise.reject();
+const assert = (p) => (v) => p(v) ? Promise.resolve(v) : Promise.reject();
 
 // Takes a email and generates a JWT with the key
 export function genJWT(email: string): Promise<string> {
@@ -26,9 +26,9 @@ export function genJWT(email: string): Promise<string> {
 // and is valid - returns user's e-mail adress, otherwise undefined
 export function checkCookieAuth(cookies: Record<string, string>): Promise<string | undefined> {
 	return promiseFromMaybe(cookies.auth)
-		.then(jwt => djwt.verify(jwt, JWTKey))
+		.then((jwt) => djwt.verify(jwt, JWTKey))
 		.then(assert(F.propIs("String", "email")))
-		.then(payload => payload.email as string)
+		.then((payload) => payload.email as string)
 		.catch(const_(undefined));
 	// TODO: check if the account exists (the cookie may stay after the user deleted the account)
 }

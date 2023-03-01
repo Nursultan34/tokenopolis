@@ -1,4 +1,4 @@
-import { asset } 		  from "$fresh/runtime.ts";
+import { asset } from "$fresh/runtime.ts";
 import NightThemeSwitcher from "@/islands/NightThemeSwitcher.tsx";
 
 export default function LoginHeader() {

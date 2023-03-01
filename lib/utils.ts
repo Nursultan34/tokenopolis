@@ -20,23 +20,22 @@ export function mayFail(fn: Handler): Handler {
 	return (req: Request, ctx: HandlerContext) =>
 		// A trick to use Promise error handlers instead of try/catch
 		Promise.resolve(fn)
-			   .then(fn => fn(req, ctx))
-		       .catch(const_(new Response("Error")));
+			.then((fn) => fn(req, ctx))
+			.catch(const_(new Response("Error")));
 }
 
 export function assertType(type_: string, val: unknown) {
-	if (typeof val != type_) throw new Error("Type assertion failed")
+	if (typeof val != type_) throw new Error("Type assertion failed");
 	else return val;
 }
 
-export const assertStr = (val: unknown): string => assertType('string', val) as string;
+export const assertStr = (val: unknown): string => assertType("string", val) as string;
 
 export const bindInput = (value: string, setValue: (newVal: string) => void) => ({
 	value,
-	onInput: (e: Event) => setValue((e.target as HTMLInputElement).value)
-})
+	onInput: (e: Event) => setValue((e.target as HTMLInputElement).value),
+});
 
-export const const_ = <T,>(v: T) => (..._: unknown[]) => v;
-export const valuesMatch = (target: Record<string, any>) => (value: Record<string, any>) =>
-	Object.keys(value).map(key => value[key] == target[key]).reduce((a, b) => a && b);
+export const const_ = <T>(v: T) => (..._: unknown[]) => v;
+export const valuesMatch = (target: Record<string, any>) => (value: Record<string, any>) => Object.keys(value).map((key) => value[key] == target[key]).reduce((a, b) => a && b);
 export const split = (delimiter: string) => (input: string) => input.split(delimiter);

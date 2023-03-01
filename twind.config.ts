@@ -18,24 +18,38 @@ export default {
 		"lk-input": apply`p-5 bg-white dark:bg-slate-2 rounded-sm placeholder::text-gray-600`,
 		"bg-none": css({ backgroundImage: "none" }),
 	},
+	content: [
+		"./component/**/*.{js,jsx,ts,tsx}",
+		"./islands/**/*.{js,jsx,ts,tsx}",
+		"./lib/**/*.{js,jsx,ts,tsx}",
+		"./routes/**/*.{js,jsx,ts,tsx}",
+	],
 	theme: {
 		colors: {
-			yellow: "#F4C500",
+			yellow: {
+				main: "#F4C500",
+				light: "#FFE661",
+			},
 			white: "#FFFFFF",
 			gray: {
+				white: "#F6F6F6",
 				bg: "#D1D1D1",
 				card: "#EEEEEE",
 				switcher: "#A09696",
+				main: "#656565",
+				dashed: "#B8B8B7",
 			},
 			dark: {
 				1: "#2B2B2C",
 				2: "#1B1B1C",
+				3: "#202121",
 			},
 			slate: {
 				1: "#1D2024",
 				2: "#2A2B31",
 			},
 			black: "#000000",
+			darkGray: "#202121",
 			green: {
 				1: "#78D72E",
 				2: "#0AB85A",
@@ -61,12 +75,12 @@ export default {
 				"shadow-pulse": {
 					from: { "filter": "drop-shadow(0px 0px 4px rgba(219, 168, 1, 0.8))" },
 					to: { "filter": "drop-shadow(0px 0px 1rem rgba(219, 168, 1, 0.8))" },
-				}
+				},
 			},
 			animation: {
-				"shadow-pulse": "shadow-pulse 3s linear infinite alternate"
-			}
-		}
+				"shadow-pulse": "shadow-pulse 3s linear infinite alternate",
+			},
+		},
 	},
 	preflight: {
 		body: apply`dark:bg-black min-h-screen text-black dark:text-white`,

@@ -9,7 +9,7 @@ export default function NightThemeSwitcher() {
 			return newTheme;
 		},
 		// Set to "true" to make the light theme the default (also delete _app.tsx to make it faster)
-		localStorage.getItem("dark") != "false"
+		localStorage.getItem("dark") != "false",
 	);
 
 	useEffect(() => setHtmlDark(isDark), []);
