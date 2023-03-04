@@ -29,6 +29,7 @@ export default {
 			yellow: {
 				main: "#F4C500",
 				light: "#FFE661",
+				btn: "#FFD600"
 			},
 			white: "#FFFFFF",
 			gray: {
@@ -38,6 +39,7 @@ export default {
 				switcher: "#A09696",
 				main: "#656565",
 				dashed: "#B8B8B7",
+				fon: "#F6F6F6"
 			},
 			dark: {
 				1: "#2B2B2C",
@@ -53,6 +55,7 @@ export default {
 			green: {
 				1: "#78D72E",
 				2: "#0AB85A",
+				btn: "#00986B",
 			},
 			red: {
 				1: "#DC1A09",
@@ -60,6 +63,9 @@ export default {
 			},
 			brown: "#A98232",
 			mustard: "#D48E00",
+			blue: {
+				btn: "#0094E0"
+			}
 		},
 		screens: {
 			"lg": "1300px",
