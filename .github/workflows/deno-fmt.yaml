@@ -9,9 +9,4 @@ jobs:
         with:
           deno-version: v1.x # Run with latest stable Deno.
       - run: |
-          deno fmt
-          git config --global user.name "unsafe-andrew"
-          git config --global user.email "andrew.lus@tuta.io"
-          git add -A
-          git commit -m "Format"
-          git push
+          deno fmt --check
