@@ -27,8 +27,11 @@ export default {
 	theme: {
 		colors: {
 			yellow: {
-				main: "#F4C500",
+				main:"#F4C500",
 				light: "#FFE661",
+				gray: "#FFB800",
+				orange: "#FFD600",
+				btn: "#FFD600"
 				btn: "#FFD600",
 			},
 			white: "#FFFFFF",
@@ -52,9 +55,12 @@ export default {
 			},
 			black: "#000000",
 			darkGray: "#202121",
+			violet: '#4e3678',
+			sideMenuColor: "rgba(255, 255, 255)",
 			green: {
 				1: "#78D72E",
 				2: "#0AB85A",
+				3: "#00986B"
 				btn: "#00986B",
 			},
 			red: {
