@@ -1,3 +1,4 @@
 deno.lock
 dump.rdb
 fresh.gen.ts
+**/.DS_Store
