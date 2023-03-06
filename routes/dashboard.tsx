@@ -8,10 +8,9 @@ import NightThemeSwitcher from "@/islands/NightThemeSwitcher.tsx";
 import { redirectTo } from "#/utils.ts";
 import { Chart } from "$fresh_charts/mod.ts";
 import type { ComponentChildren } from "preact";
-import {Header} from "../components/generalComponents/Header.tsx";
-import {SideMenu} from "../components/generalComponents/SideMenu.tsx";
+import { Header } from "../components/generalComponents/Header.tsx";
+import { SideMenu } from "../components/generalComponents/SideMenu.tsx";
 import { DashboardComponent } from "../components/DashBoardComponent/DashboardComponent.tsx";
-
 
 type Transaction = boolean[];
 interface DashboardData {
@@ -26,13 +25,13 @@ interface DashboardData {
 
 export default function Dashboard({ data }: PageProps<DashboardData>) {
 	return (
-		<main class="h-screen w-screen dark:bg-black" style={{overflowY: 'hidden', backgroundColor: '#F0F0F0', position: 'fixed'}}>
-			<div className="w-full h-[10%]" style={{display: 'flex', flex: 0.5}}>
-				<Header/>
+		<main class="h-screen w-screen dark:bg-black" style={{ overflowY: "hidden", backgroundColor: "#F0F0F0", position: "fixed" }}>
+			<div className="w-full h-[10%]" style={{ display: "flex", flex: 0.5 }}>
+				<Header />
 			</div>
-			<div className="w-full h-[90%]" style={{display: 'flex', flex: 10}}>
+			<div className="w-full h-[90%]" style={{ display: "flex", flex: 10 }}>
 				<SideMenu>
-					<DashboardComponent/>
+					<DashboardComponent />
 				</SideMenu>
 			</div>
 		</main>

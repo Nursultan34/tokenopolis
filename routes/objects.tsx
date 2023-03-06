@@ -1,74 +1,73 @@
-import { asset }					from "$fresh/runtime.ts";
+import { asset } from "$fresh/runtime.ts";
 
 const objectsData = [
 	{
 		name: "Soho kompleks, Montenegro",
 		number: "40494",
-		cost:"285,14",
-		tokenCost:"35,7",
+		cost: "285,14",
+		tokenCost: "35,7",
 		investors: "135",
 		square: "75",
-		date:"12-2023",
+		date: "12-2023",
 		profitability: "12,4",
 		imgs: "/",
 	},
 	{
 		name: "Soho kompleks, Bar",
 		number: "40494",
-		cost:"285,14",
-		tokenCost:"35,7",
+		cost: "285,14",
+		tokenCost: "35,7",
 		investors: "135",
 		square: "75",
-		date:"12-2023",
+		date: "12-2023",
 		profitability: "12,4",
 		imgs: "/",
 	},
 	{
 		name: "Super puper Soho kompleks, Budva",
 		number: "40494",
-		cost:"285,14",
-		tokenCost:"35,7",
+		cost: "285,14",
+		tokenCost: "35,7",
 		investors: "135",
 		square: "75",
-		date:"12-2023",
+		date: "12-2023",
 		profitability: "12,4",
 		imgs: "/",
 	},
 	{
 		name: "Soho kompleks, Montenegro",
 		number: "40494",
-		cost:"285,14",
-		tokenCost:"35,7",
+		cost: "285,14",
+		tokenCost: "35,7",
 		investors: "135",
 		square: "75",
-		date:"12-2023",
+		date: "12-2023",
 		profitability: "12,4",
 		imgs: "/",
 	},
 	{
 		name: "Soho kompleks, Montenegro",
 		number: "40494",
-		cost:"285,14",
-		tokenCost:"35,7",
+		cost: "285,14",
+		tokenCost: "35,7",
 		investors: "135",
 		square: "75",
-		date:"12-2023",
+		date: "12-2023",
 		profitability: "12,4",
 		imgs: "/",
 	},
 	{
 		name: "Soho kompleks, Montenegro",
 		number: "40494",
-		cost:"285,14",
-		tokenCost:"35,7",
+		cost: "285,14",
+		tokenCost: "35,7",
 		investors: "135",
 		square: "75",
-		date:"12-2023",
+		date: "12-2023",
 		profitability: "12,4",
 		imgs: "/",
 	},
-	
-]
+];
 
 export default function Objects() {
 	return (
@@ -80,7 +79,7 @@ export default function Objects() {
 				</div>
 			</div>
 		</main>
-	)
+	);
 }
 
 function ObjectsBlocks({ objectsData }) {
@@ -95,7 +94,18 @@ function ObjectsBlocks({ objectsData }) {
 
 const textxs = "text-gray-main text-xs";
 
-function Object({ name, number, cost, tokenCost, investors, square, date, profitability }: { name: string, number: string, cost: string, tokenCost: string, investors: string, square: string, date: string, profitability: string }) {
+function Object(
+	{ name, number, cost, tokenCost, investors, square, date, profitability }: {
+		name: string;
+		number: string;
+		cost: string;
+		tokenCost: string;
+		investors: string;
+		square: string;
+		date: string;
+		profitability: string;
+	},
+) {
 	return (
 		<div class="row justify-between min-w-[715px] max-h-[439px] bg-white px-10 py-12 text-black shadow-lg">
 			<div id="object-img" class="relative">
@@ -153,5 +163,5 @@ function Object({ name, number, cost, tokenCost, investors, square, date, profit
 				</div>
 			</div>
 		</div>
-	)
+	);
 }
