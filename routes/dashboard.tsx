@@ -9,12 +9,12 @@ import dashboardScreen from "@/lib/screenWrapper.tsx";
  * import { Chart } from "$fresh_charts/mod.ts";
  * import type { ComponentChildren } from "preact"; */
 import RelevantObjectsComponent from "@/components/dashboard/RelevantObjects.tsx";
-import MyWalletComponent 		from "@/components/dashboard/MyWallet.tsx";
-import CalendarComponent 		from "@/components/dashboard/Calendar.tsx";
-import TransactionsComponent	from "@/components/dashboard/Transactions.tsx";
+import MyWalletComponent from "@/components/dashboard/MyWallet.tsx";
+import CalendarComponent from "@/components/dashboard/Calendar.tsx";
+import TransactionsComponent from "@/components/dashboard/Transactions.tsx";
 /* import { DashboardComponent } from "../components/DashBoardComponent/DashboardComponent.tsx"; */
-import { tw } from 'twind';
-import { css } from 'twind/css';
+import { tw } from "twind";
+import { css } from "twind/css";
 
 interface Token {
 	name: string;
@@ -24,25 +24,25 @@ interface Token {
 interface DashboardData {
 	name: string;
 	address: string;
-	transactions: { target: string, incoming: boolean }[];
-	balances: { name: string, img: string, valXLM: number, valEUR: number }[];
+	transactions: { target: string; incoming: boolean }[];
+	balances: { name: string; img: string; valXLM: number; valEUR: number }[];
 	relevantObjects: {
-		id: number,
-		name: string,
+		id: number;
+		name: string;
 		img: string;
-		token: Token,
-		readiness: number,
-		location: number,
-		alreadyBought: number,
-		minXLM: number
+		token: Token;
+		readiness: number;
+		location: number;
+		alreadyBought: number;
+		minXLM: number;
 	};
 	myObjects: {
-		id: number,
-		name: string
-		img: string,
-		token: Token,
-		readiness: number,
-		amount: number,
+		id: number;
+		name: string;
+		img: string;
+		token: Token;
+		readiness: number;
+		amount: number;
 	};
 	balanceEUR: number;
 	balanceXLM: number;
@@ -58,11 +58,11 @@ export const handler: Handlers = {
 				{ name: "POLISVILLA", img: "img.png", valXLM: 100, valEUR: 69 },
 			],
 			relevantObjects: [
-				{ id: 1, name: "uhh", img: "img.png", readiness: 80, token: {} }
-			]
+				{ id: 1, name: "uhh", img: "img.png", readiness: 80, token: {} },
+			],
 		});
-	}
-}
+	},
+};
 
 export default function Dashboard({ data }: PageProps<any>) {
 	const gridStyle = css`grid-column-start: 1; grid-column-end: 3; grid-auto-rows: 50px`;
@@ -75,8 +75,8 @@ export default function Dashboard({ data }: PageProps<any>) {
 					<div class={`${tw(gridStyle)} row`}>
 						{/* <div class="row"> */}
 						{/* <div style={{ display: "flex", flex: 3, backgroundColor: "red" }}> */}
-							{/* <MyObjectComponent testObjectToken={testObjectToken} testObjectInfo={testObjectInfo} /> */}
-							{/* </div> */}
+						{/* <MyObjectComponent testObjectToken={testObjectToken} testObjectInfo={testObjectInfo} /> */}
+						{/* </div> */}
 						<div style={{ display: "flex", flex: 2, marginLeft: 15 }}>
 							<CalendarComponent events={[]} />
 						</div>
@@ -86,6 +86,6 @@ export default function Dashboard({ data }: PageProps<any>) {
 					</div>
 				</div>
 			</div>
-		</main>
+		</main>,
 	);
 }

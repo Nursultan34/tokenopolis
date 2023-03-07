@@ -70,7 +70,7 @@ const objectsData = [
 ];
 
 export default function Objects() {
-	const Object = ({ name, number, cost, tokenCost, investors, square, date, profitability }) =>
+	const Object = ({ name, number, cost, tokenCost, investors, square, date, profitability }) => (
 		<div class="row justify-between min-w-[715px] max-h-[439px] bg-white px-10 py-12 text-black shadow-lg">
 			<div id="object-img" class="relative">
 				<img class="w-[354px] h-[343px]" src={asset("/photos/photo1.svg")} alt="" />
@@ -126,7 +126,8 @@ export default function Objects() {
 					<button class="w-full h-12 bg-yellow-btn hover:bg-orange-main">ИНВЕСТИРОВАТЬ</button>
 				</div>
 			</div>
-		</div>;
+		</div>
+	);
 
 	return (
 		<main class="bg-gray-fon">

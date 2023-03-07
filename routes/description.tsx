@@ -11,7 +11,7 @@ export default function Description() {
 					<RightSection />
 				</section>
 			</div>
-		</main>
+		</main>,
 	);
 }
 

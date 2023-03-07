@@ -82,7 +82,7 @@ export default {
 			boxShadow: {
 				side: "inset -1px 0px 3px 0px rgba(0, 0, 0, 0.30);",
 				"menu-button": "1px 1px 10px 0px rgba(0, 0, 0, 0.20)",
-			}
+			},
 		},
 	},
 	preflight: {

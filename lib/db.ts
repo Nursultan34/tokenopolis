@@ -5,10 +5,11 @@ import * as bcrypt from "https://deno.land/x/bcrypt@v0.4.1/mod.ts";
 import { const_, split } from "#/utils.ts";
 import { Keypair } from "#/stellar.ts";
 
-const gq = (q: string) => fetch("http://localhost:5000/graphql", {
-	method: "POST",
-	body: JSON.stringify({ query: q }),
-}).then(res => res.json());
+const gq = (q: string) =>
+	fetch("http://localhost:5000/graphql", {
+		method: "POST",
+		body: JSON.stringify({ query: q }),
+	}).then((res) => res.json());
 
 const redis = await connect({
 	username: "default",
