@@ -1,12 +1,10 @@
 import { asset } from "$fresh/runtime.ts";
-import { FunctionComponent } from "preact";
 import { useEffect, useState } from "preact/hooks";
 
 const DARK = "dark";
-
 const LIGHT = "light";
 
-function IconMessageUser() {
+export default function IconMessageUser() {
 	const [active, setActive] = useState(false);
 	const [userState, setUserState] = useState(false);
 	const [messageState, setMessageState] = useState(false);
@@ -190,5 +188,3 @@ function setHtmlDark(theme: string) {
 		document.getElementsByTagName("html")[0].classList.remove("dark");
 	}
 }
-
-export default IconMessageUser;

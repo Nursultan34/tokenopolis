@@ -40,6 +40,6 @@ export const handler: Handlers<FormData | LoginData> = {
 	}),
 };
 
-export default function LogIn(data: PageProps<FormData>) {
-	return <LogInForm isIncorrect={data.data.isIncorrect} />;
+export default function LogIn({ data }: PageProps<FormData>) {
+	return <LogInForm isIncorrect={data.isIncorrect} />;
 }

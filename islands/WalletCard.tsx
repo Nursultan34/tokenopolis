@@ -1,6 +1,7 @@
-import { ObjectWalletCard } from "../components/DashBoardComponent/generalComponent/WalletCardComponent.tsx";
+/* import { ObjectWalletCard } from "../components/DashBoardComponent/generalComponent/WalletCardComponent.tsx"; */
 
-function WalletCard(props: ObjectWalletCard) {
+/* function WalletCard(props: ObjectWalletCard) { */
+function WalletCard(props) {
 	const { tokenName, tokenImage, tokenValueXLM, tokenValueEuro, date } = props;
 	return (
 		<div className="w-[calc(12rem)] h-[calc(8.5rem)] bg-darkGray mt-2 ml-2 flex-auto hover:opacity-90">

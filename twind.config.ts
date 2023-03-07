@@ -67,7 +67,6 @@ export default {
 				2: "#0AB85A",
 			},
 			violet: "#4e3678",
-			sideMenuColor: "rgba(255, 255, 255)",
 			// green: {
 			// 	1: "#78D72E",
 			// 	2: "#0AB85A",
@@ -103,6 +102,10 @@ export default {
 			animation: {
 				"shadow-pulse": "shadow-pulse 3s linear infinite alternate",
 			},
+			boxShadow: {
+				side: "inset -1px 0px 3px 0px rgba(0, 0, 0, 0.30);",
+				"menu-button": "1px 1px 10px 0px rgba(0, 0, 0, 0.20)",
+			}
 		},
 	},
 	preflight: {

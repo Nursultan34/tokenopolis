@@ -36,6 +36,9 @@ export const bindInput = (value: string, setValue: (newVal: string) => void) => 
 	onInput: (e: Event) => setValue((e.target as HTMLInputElement).value),
 });
 
+import { useReducer } from "preact/hooks";
+export const boolState = () => useReducer(b => !b, false);
+
 export const const_ = <T>(v: T) => (..._: unknown[]) => v;
 export const valuesMatch = (target: Record<string, any>) => (value: Record<string, any>) => Object.keys(value).map((key) => value[key] == target[key]).reduce((a, b) => a && b);
 export const split = (delimiter: string) => (input: string) => input.split(delimiter);

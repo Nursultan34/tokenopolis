@@ -70,43 +70,7 @@ const objectsData = [
 ];
 
 export default function Objects() {
-	return (
-		<main class="bg-gray-fon">
-			<div id="objects-container" class="col h-screen pt-3.5 pb-10 pr-40 pl-[60px]">
-				<p class="text-gray-main">Объекты</p>
-				<div id="blocks-container" class="row flex-wrap w-auto gap-5 overflow-y-scroll">
-					<ObjectsBlocks objectsData={objectsData} />
-				</div>
-			</div>
-		</main>
-	);
-}
-
-function ObjectsBlocks({ objectsData }) {
-	const objectsTable = objectsData.map((data: any) => <Object {...data} />);
-
-	return (
-		<>
-			{objectsTable}
-		</>
-	);
-}
-
-const textxs = "text-gray-main text-xs";
-
-function Object(
-	{ name, number, cost, tokenCost, investors, square, date, profitability }: {
-		name: string;
-		number: string;
-		cost: string;
-		tokenCost: string;
-		investors: string;
-		square: string;
-		date: string;
-		profitability: string;
-	},
-) {
-	return (
+	const Object = ({ name, number, cost, tokenCost, investors, square, date, profitability }) =>
 		<div class="row justify-between min-w-[715px] max-h-[439px] bg-white px-10 py-12 text-black shadow-lg">
 			<div id="object-img" class="relative">
 				<img class="w-[354px] h-[343px]" src={asset("/photos/photo1.svg")} alt="" />
@@ -162,6 +126,44 @@ function Object(
 					<button class="w-full h-12 bg-yellow-btn hover:bg-orange-main">ИНВЕСТИРОВАТЬ</button>
 				</div>
 			</div>
-		</div>
+		</div>;
+
+	return (
+		<main class="bg-gray-fon">
+			<div id="objects-container" class="col h-screen pt-3.5 pb-10 pr-40 pl-[60px]">
+				<p class="text-gray-main">Объекты</p>
+				<div id="blocks-container" class="row flex-wrap w-auto gap-5 overflow-y-scroll">
+					<ObjectsBlocks objectsData={objectsData} />
+				</div>
+			</div>
+		</main>
 	);
 }
+
+function ObjectsBlocks({ objectsData }) {
+	const objectsTable = objectsData.map((data: any) => <Object {...data} />);
+
+	return (
+		<>
+			{objectsTable}
+		</>
+	);
+}
+
+const textxs = "text-gray-main text-xs";
+/*
+ * function Object(
+ * 	{ name, number, cost, tokenCost, investors, square, date, profitability }: {
+ * 		name: string;
+ * 		number: string;
+ * 		cost: string;
+ * 		tokenCost: string;
+ * 		investors: string;
+ * 		square: string;
+ * 		date: string;
+ * 		profitability: string;
+ * 	},
+ * ) {
+ * 	return (
+ * 	);
+ * } */

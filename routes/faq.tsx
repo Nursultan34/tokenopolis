@@ -136,7 +136,7 @@ function ThirdSection() {
 						<a href={article.href}>
 							<div class="w-[634px] h-[112px] border rounded border-[#D1D1D1] row items-center justify-start">
 								<img
-									src={asset(`${article.img}`)}
+									src={asset(article.img)}
 									class="px-2 pl-2 pr-[20px]"
 								/>
 								<p class="w-[353px] h-[44px] uppercase mr-[56px]">

@@ -1,10 +1,10 @@
 import { asset } from "$fresh/runtime.ts";
-import LoginHeader from "@/components/loginScreen/LoginHeader.tsx";
-import LoginFooter from "@/components/loginScreen/LoginFooter.tsx";
-import { useState } from "preact/hooks";
+import LoginHeader from "@/components/LoginHeader.tsx";
+import LoginFooter from "@/components/LoginFooter.tsx";
+import { boolState } from "#/utils.ts";
 
 export default function LogInForm({ isIncorrect }: { isIncorrect: boolean }) {
-	const [showPass, setShowPass] = useState(false);
+	const [showPass, togglePass] = boolState();
 	return (
 		<main class="login-main">
 			<LoginHeader />
