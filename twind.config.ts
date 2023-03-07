@@ -26,61 +26,38 @@ export default {
 	],
 	theme: {
 		colors: {
+			white: {
+				light: "#FFFF",
+				dark: "#FCFCFC",
+			},
+			gray: {
+				light: "#F6F6F6",
+				cool: "#D1D1D1",
+				card: "#EEEEEE",
+				dark: "#656565",
+				dashed: "#B8B8B7",
+			},
+			dark: {
+				light: "#2B2B2C",
+				dark: "#1B1B1C",
+				midnight: "#202121",
+				main: "#202121",
+			},
 			yellow: {
 				main: "#F4C500",
 				light: "#FFE661",
-				btn: "#FFD600",
-			},
-			orange: {
-				main: "#FFB800",
-			},
-			helpme: {
-				main: "#F4C500",
-				light: "#FFE661",
-				gray: "#FFB800",
+				dark: "#FFB800",
 				orange: "#FFD600",
-				btn: "#FFD600",
-			},
-			white: "#FFFFFF",
-			gray: {
-				white: "#F6F6F6",
-				bg: "#D1D1D1",
-				card: "#EEEEEE",
-				switcher: "#A09696",
-				main: "#656565",
-				dashed: "#B8B8B7",
-				fon: "#F6F6F6",
-			},
-			dark: {
-				1: "#2B2B2C",
-				2: "#1B1B1C",
-				3: "#202121",
-			},
-			slate: {
-				1: "#1D2024",
-				2: "#2A2B31",
-			},
-			black: "#000000",
-			darkGray: "#202121",
-			green: {
-				1: "#78D72E",
-				2: "#0AB85A",
 			},
 			violet: "#4e3678",
-			// green: {
-			// 	1: "#78D72E",
-			// 	2: "#0AB85A",
-			// 	3: "#00986B"
-			// 	btn: "#00986B",
-			// },
-			red: {
-				1: "#DC1A09",
-				2: "#C11D0F",
+			green: {
+				light: "#78D72E",
+				yellow: "#0AB85A",
+				dark: "#00986B",
 			},
-			brown: "#A98232",
-			mustard: "#D48E00",
-			blue: {
-				btn: "#0094E0",
+			red: {
+				light: "#DC1A09",
+				dark: "#C11D0F",
 			},
 		},
 		screens: {
