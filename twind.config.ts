@@ -17,6 +17,7 @@ export default {
 		"login-submit": apply`bg-yellow py-3 w-full lg:w-3/4 my-5 rounded-md text-xl`,
 		"lk-input": apply`p-5 bg-white dark:bg-slate-2 rounded-sm placeholder::text-gray-600`,
 		"bg-none": css({ backgroundImage: "none" }),
+		"gridStyle": css`grid-column-start: 1; grid-column-end: 3; grid-auto-rows: 50px`,
 	},
 	content: [
 		"./component/**/*.{js,jsx,ts,tsx}",
@@ -30,6 +31,7 @@ export default {
 				light: "#FFFF",
 				dark: "#FCFCFC",
 			},
+			black: "#000000",
 			gray: {
 				light: "#F6F6F6",
 				cool: "#D1D1D1",
@@ -41,7 +43,6 @@ export default {
 				light: "#2B2B2C",
 				dark: "#1B1B1C",
 				midnight: "#202121",
-				main: "#202121",
 			},
 			yellow: {
 				main: "#F4C500",

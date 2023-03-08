@@ -8,14 +8,13 @@ import dashboardScreen from "@/lib/screenWrapper.tsx";
  * import { redirectTo } from "#/utils.ts";
  * import { Chart } from "$fresh_charts/mod.ts";
  * import type { ComponentChildren } from "preact"; */
-import RelevantObjectsComponent from "@/components/dashboard/RelevantObjects.tsx";
-import MyWalletComponent from "@/components/dashboard/MyWallet.tsx";
-import CalendarComponent from "@/components/dashboard/Calendar.tsx";
-import TransactionsComponent from "@/components/dashboard/Transactions.tsx";
+//import RelevantObjectsComponent from "@/components/dashboard/RelevantObjects.tsx";
+//import MyWalletComponent from "@/components/dashboard/MyWallet.tsx";
+//import CalendarComponent from "@/components/dashboard/Calendar.tsx";
+//import TransactionsComponent from "@/components/dashboard/Transactions.tsx";
 /* import { DashboardComponent } from "../components/DashBoardComponent/DashboardComponent.tsx"; */
-import { tw } from "twind";
-import { css } from "twind/css";
 
+import { css, tw } from "twind/css";
 interface Token {
 	name: string;
 	img: string;
@@ -65,24 +64,21 @@ export const handler: Handlers = {
 };
 
 export default function Dashboard({ data }: PageProps<any>) {
-	const gridStyle = css`grid-column-start: 1; grid-column-end: 3; grid-auto-rows: 50px`;
 	return dashboardScreen(
-		<main class="h-full w-full dark:bg-black" style={{ overflowY: "hidden", backgroundColor: "#F0F0F0", position: "fixed" }}>
+		<main class="h-full w-full dark:bg-black" style={{ overflowY: "hidden", backgroundColor: "#F0F0F0"}}>
 			<div class="w-full h-[90%]" style={{ display: "flex", flex: 10 }}>
-				<div class="grid grid-cols-3 grid-rows-2 grid-flow-row gap-4 auto-cols-max auto-rows-max w-full h-full p-5">
-					<RelevantObjectsComponent objects={data.relevantObjects} />
-					<MyWalletComponent balances={data.balances} balanceEUR={data.balanceEUR} balanceXLM={data.balanceXLM} />
-					<div class={`${tw(gridStyle)} row`}>
-						{/* <div class="row"> */}
-						{/* <div style={{ display: "flex", flex: 3, backgroundColor: "red" }}> */}
-						{/* <MyObjectComponent testObjectToken={testObjectToken} testObjectInfo={testObjectInfo} /> */}
-						{/* </div> */}
+				<div class="grid grid-cols-3 grid-rows-2 grid-flow-row gap-4 auto-cols-max auto-rows-max w-full h-full">
+					<div class={`bg-black gridStyle`}>
+					</div>
+					<div class="bg-white-dark bg-red-light">
+					</div>
+					<div class={`gridStyle flex flex-row bg-yellow-light`}>
+						<div style={{ display: "flex", flex: 3, backgroundColor: "red" }}>
+						</div>
 						<div style={{ display: "flex", flex: 2, marginLeft: 15 }}>
-							<CalendarComponent events={[]} />
 						</div>
 					</div>
-					<div class="bg-white">
-						<TransactionsComponent transactions={[]} />
+					<div class="bg-white bg-green-light">
 					</div>
 				</div>
 			</div>

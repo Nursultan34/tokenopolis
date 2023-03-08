@@ -1,9 +1,9 @@
 import { asset } from "$fresh/runtime.ts";
-/* import IconMessageUser from "@/islands/IconUser.tsx"; */
+import IconMessageUser from "../islands/IconUser.tsx";
 
 export default function Header() {
 	return (
-		<header class="h-28 flex-shrink-0 w-full bg-white flex flex-row">
+		<header class="h-28 flex-shrink-0 w-full bg-white-dark flex flex-row">
 			<div class="grid flex-none w-36 justify-items-center items-center">
 				<img src={asset("headerImage/LogoIcon.png")} class="w-11 h-12" />
 			</div>
@@ -20,7 +20,7 @@ export default function Header() {
 					</div>
 					<text class="font-medium mr-3">Nikita Resheteev</text>
 					<div class="mr-7">
-						{/* <IconMessageUser /> */}
+						<IconMessageUser />
 					</div>
 				</div>
 			</div>
