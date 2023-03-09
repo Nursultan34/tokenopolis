@@ -1,5 +1,5 @@
 import { asset } from "$fresh/runtime.ts";
-import NightThemeSwitcher from "@/islands/NightThemeSwitcher.tsx";
+/* import NightThemeSwitcher from "@/islands/NightThemeSwitcher.tsx"; */
 
 export default function LoginHeader() {
 	return (
@@ -11,7 +11,7 @@ export default function LoginHeader() {
 				<span class="hidden mx-3 text-xs lg:block">Рус</span>
 			</div>
 			<div class="items-center px-12 row">
-				<NightThemeSwitcher />
+				{/* <NightThemeSwitcher /> */}
 			</div>
 		</div>
 	);
