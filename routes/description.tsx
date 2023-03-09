@@ -3,7 +3,7 @@ import dashboardScreen from "@/lib/screenWrapper.tsx";
 
 export default function Description() {
 	return dashboardScreen(
-		<main class="bg-gray-white dark:bg-black text-black">
+		<article class="bg-gray-white dark:bg-black text-black">
 			<div class="mx-auto mt-[15px] w-[1479px] h-[2302px]">
 				<p class="mb-[4px] text-gray-main">Объекты &gt; Porto Montenegro</p>
 				<section class="flex gap-x-[32px] pl-[36px] pt-[44px] pb-[48px] bg-white rounded-sm shadow-lg shadow-black/15">
@@ -11,7 +11,7 @@ export default function Description() {
 					<RightSection />
 				</section>
 			</div>
-		</main>,
+		</article>,
 	);
 }
 

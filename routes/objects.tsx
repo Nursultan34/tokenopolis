@@ -130,14 +130,14 @@ export default function Objects() {
 	);
 
 	return (
-		<main class="bg-gray-fon">
+		<article class="bg-gray-fon">
 			<div id="objects-container" class="col h-screen pt-3.5 pb-10 pr-40 pl-[60px]">
 				<p class="text-gray-main">Объекты</p>
 				<div id="blocks-container" class="row flex-wrap w-auto gap-5 overflow-y-scroll">
 					<ObjectsBlocks objectsData={objectsData} />
 				</div>
 			</div>
-		</main>
+		</article>
 	);
 }
 

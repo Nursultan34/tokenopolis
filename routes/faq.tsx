@@ -2,13 +2,13 @@ import { asset } from "$fresh/runtime.ts";
 
 export default function Faq() {
 	return (
-		<div class="bg(gray-fon) row w-full h-full text(black) py-[42px] pl-[60px]">
+		<article class="bg(gray-fon) row w-full h-full text(black) py-[42px] pl-[60px]">
 			<FirstSection />
 			<div class="col gap-6">
 				<SecondSection />
 				<ThirdSection />
 			</div>
-		</div>
+		</article>
 	);
 }
 

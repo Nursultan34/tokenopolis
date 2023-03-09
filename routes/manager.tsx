@@ -3,7 +3,7 @@ import { tw } from "twind";
 
 export default function Manager() {
 	return (
-		<div class="flex gap-5 bg(gray-fon) w-full h-full text-black pb-[44px]">
+		<article class="flex gap-5 bg(gray-fon) w-full h-full text-black pb-[44px]">
 			<div class="col gap-[20px] w-[732px] h-[894px] ml-[60px] mt-10">
 				<FirstSection />
 				<SecondSection />
@@ -12,7 +12,7 @@ export default function Manager() {
 				<ThirdSection />
 				<FourthSection />
 			</div>
-		</div>
+		</article>
 	);
 }
 

@@ -65,7 +65,7 @@ export const handler: Handlers = {
 
 export default function Dashboard({ data }: PageProps<any>) {
 	return dashboardScreen(
-		<main class="h-full w-full dark:bg-black" style={{ overflowY: "hidden", backgroundColor: "#F0F0F0" }}>
+		<article class="h-full w-full dark:bg-black" style={{ overflowY: "hidden", backgroundColor: "#F0F0F0" }}>
 			<div class="w-full h-[90%]" style={{ display: "flex", flex: 10 }}>
 				<div class="grid grid-cols-3 grid-rows-2 grid-flow-row gap-4 auto-cols-max auto-rows-max w-full h-full">
 					<div class={`bg-black gridStyle`}>
@@ -82,6 +82,6 @@ export default function Dashboard({ data }: PageProps<any>) {
 					</div>
 				</div>
 			</div>
-		</main>,
+		</article>,
 	);
 }
