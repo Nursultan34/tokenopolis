@@ -33,6 +33,7 @@ export default {
 			},
 			black: "#000000",
 			gray: {
+				main: "#F0F0F0",
 				light: "#F6F6F6",
 				cool: "#D1D1D1",
 				card: "#EEEEEE",
@@ -83,6 +84,7 @@ export default {
 			boxShadow: {
 				side: "inset -1px 0px 3px 0px rgba(0, 0, 0, 0.30);",
 				"menu-button": "1px 1px 10px 0px rgba(0, 0, 0, 0.20)",
+				"header": "0px 2px 6px 0px rgba(0,0,0,0.20)",
 			},
 		},
 	},

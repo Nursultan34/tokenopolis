@@ -3,7 +3,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
  * import * as stellar from "#/stellar.ts";
  * import { getUser } from "#/db.ts";
  * import { checkCookieAuth } from "#/auth.ts"; */
-import dashboardScreen from "@/lib/screenWrapper.tsx";
+import screenWrapper from "@/lib/screenWrapper.tsx";
 /* import NightThemeSwitcher from "@/islands/NightThemeSwitcher.tsx";
  * import { redirectTo } from "#/utils.ts";
  * import { Chart } from "$fresh_charts/mod.ts";
@@ -64,9 +64,9 @@ export const handler: Handlers = {
 };
 
 export default function Dashboard({ data }: PageProps<any>) {
-	return dashboardScreen(
-		<article class="h-full w-full dark:bg-black" style={{ overflowY: "hidden", backgroundColor: "#F0F0F0" }}>
-			<div class="w-full h-[90%]" style={{ display: "flex", flex: 10 }}>
+	return screenWrapper(
+		<article class="h-full w-full bg-violet dark:bg-black" style={{ overflowY: "hidden"}}>
+			<div class="w-full h-full" style={{ display: "flex", flex: 10 }}>
 				<div class="grid grid-cols-3 grid-rows-2 grid-flow-row gap-4 auto-cols-max auto-rows-max w-full h-full">
 					<div class={`bg-black gridStyle`}>
 					</div>

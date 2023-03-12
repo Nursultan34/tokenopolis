@@ -1,8 +1,8 @@
 import { asset } from "$fresh/runtime.ts";
-import dashboardScreen from "@/lib/screenWrapper.tsx";
+import screenWrapper from "@/lib/screenWrapper.tsx";
 
 export default function Description() {
-	return dashboardScreen(
+	return screenWrapper(
 		<article class="bg-gray-white dark:bg-black text-black">
 			<div class="mx-auto mt-[15px] w-[1479px] h-[2302px]">
 				<p class="mb-[4px] text-gray-main">Объекты &gt; Porto Montenegro</p>

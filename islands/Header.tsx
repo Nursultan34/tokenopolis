@@ -34,13 +34,13 @@ export default function Header() {
 	useEffect(() => setHtmlDark(isDark), [isDark]);
 
 	return (
-		<header class="row h-[10%] justify-center items-center h-28 flex-1 flex-shrink-0 w-full bg-white-dark">
+		<header class="h-24 flex-shrink-0 w-full bg-white-dark flex flex-row shadow-header z-10">
 			<div class="grid flex-none w-36 justify-items-center items-center">
 				<img src={asset("headerImage/LogoIcon.png")} class="w-11 h-12" />
 			</div>
 			<div class="flex-auto w-max flex items-center">
-				<text class="text-sm text-gray-main font-sans font-light ml-6">ВАШ КОШЕЛЕК:</text>
-				<text class="text-sm text-gray-main font-sans ml-3">1Cs4wu6pu5qCZ35bSLNVzG..</text>
+				<text class="text-sm text-gray-dashed font-sans font-light ml-6">ВАШ КОШЕЛЕК:</text>
+				<text class="text-sm text-gray-dashed font-sans ml-3">1Cs4wu6pu5qCZ35bSLNVzG..</text>
 				<img class="ml-3" src={asset("headerImage/documentcopy.png")} style={{ width: 24, height: 24 }}></img>
 				<img class="ml-3" src={asset("headerImage/QrCode.png")} style={{ width: 47, height: 39 }}></img>
 			</div>
