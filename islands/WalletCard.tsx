@@ -1,8 +1,4 @@
-/* import { ObjectWalletCard } from "../components/DashBoardComponent/generalComponent/WalletCardComponent.tsx"; */
-
-/* function WalletCard(props: ObjectWalletCard) { */
-function WalletCard(props) {
-	const { tokenName, tokenImage, tokenValueXLM, tokenValueEuro, date } = props;
+function WalletCard({ tokenName, tokenImage, tokenValueXLM, tokenValueEuro, date }) {
 	return (
 		<div class="w-[calc(12rem)] h-[calc(8.5rem)] bg-darkGray mt-2 ml-2 flex-auto hover:opacity-90">
 			<div class="flex flex-row justify-between pl-4 pr-4 pt-4" style={{ display: "flex", flex: 1 }}>
