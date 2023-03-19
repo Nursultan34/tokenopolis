@@ -14,7 +14,7 @@ export default function LogInForm({ isIncorrect }: { isIncorrect: boolean }) {
 				<p class="pr-5 mb-12 text-xs leading-6 lg:hidden">Удобный инструмент для инвестиций в недвижимость с помощью технологических технологий</p>
 				<input required class="login-input" name="email" type="email" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" />
 				<input required class="login-input" name="password" type={showPass ? "text" : "password"} placeholder="ПАРОЛЬ" />
-				{isIncorrect ? <p class="text-red-500">Неправильный E-mail или пароль!</p> : <></>}
+				{isIncorrect && <p class="text-red-500">Неправильный E-mail или пароль!</p>}
 				<button type="submit" class="login-submit">ВОЙТИ</button>
 				<br />
 				<a href="/signup" class="m-0! p-2! hover:text-gray-600 text-xs">
