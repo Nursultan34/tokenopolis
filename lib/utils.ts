@@ -42,3 +42,12 @@ export const boolState = () => useReducer((b) => !b, false);
 export const const_ = <T>(v: T) => (..._: unknown[]) => v;
 export const valuesMatch = (target: Record<string, any>) => (value: Record<string, any>) => Object.keys(value).map((key) => value[key] == target[key]).reduce((a, b) => a && b);
 export const split = (delimiter: string) => (input: string) => input.split(delimiter);
+
+export function match<T, O>(target: T, options: [T, O][]): O {
+	const result = options.find((x) => target == x[0]) as [T, O];
+	if (result != undefined) {
+		return result[1];
+	} else {
+		throw new Error("non-exhaustive match");
+	}
+}

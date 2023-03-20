@@ -17,8 +17,13 @@ export default {
 		"login-submit": apply`bg-yellow py-3 w-full lg:w-3/4 my-5 rounded-md text-xl`,
 		"lk-input": apply`p-5 bg-white dark:bg-slate-2 rounded-sm placeholder::text-gray-600`,
 		"bg-none": css({ backgroundImage: "none" }),
-		"profile-selin": apply`pl-4 bg-gray-back rounded-sm text-dark-midnight text-lg`,
 		"gridStyle": css`grid-column-start: 1; grid-column-end: 3; grid-auto-rows: 50px`,
+		"aspect-square": css`aspect-ratio: 1 / 1;`,
+		"flex-basis-1/2": css`flex-basis: calc(50% - 1.25rem);`,
+		"flex-basis-1/3": css`flex-basis: calc(33% - 1.25rem);`,
+		"flex-basis-full": css`flex-basis: 100%;`,
+		"flex-basis-fit": css`flex-basis: fit-content;`,
+		"profile-selin": apply`pl-4 bg-gray-back rounded-sm text-dark-midnight text-lg`,
 		"scrollbar": css`&::-webkit-scrollbar { width: 10px; }; &::-webkit-scrollbar-track { background-color: #FCFCFC; border: 1px solid #B8B8B7; border-radius: 2px; }; &::-webkit-scrollbar-thumb { background-color: #FFD600; border: 1px solid #B8B8B7; border-radius: 2px; }`
 	},
 	content: [
@@ -67,6 +72,7 @@ export default {
 		},
 		screens: {
 			"lg": "1300px",
+			"xl": "1900px",
 		},
 		fontFamily: {
 			sans: "Roboto, sans-serif",
@@ -93,6 +99,7 @@ export default {
 	},
 	preflight: {
 		body: apply`dark:bg-black min-h-screen text-black dark:text-white`,
+		button: apply`focus:outline-none bg-[rgba(0, 0, 0, 0)]`,
 		"@import": "url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap')",
 	},
 } as Options;
