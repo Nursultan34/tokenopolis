@@ -17,7 +17,9 @@ export default {
 		"login-submit": apply`bg-yellow py-3 w-full lg:w-3/4 my-5 rounded-md text-xl`,
 		"lk-input": apply`p-5 bg-white dark:bg-slate-2 rounded-sm placeholder::text-gray-600`,
 		"bg-none": css({ backgroundImage: "none" }),
+		"profile-selin": apply`pl-4 bg-gray-back rounded-sm text-dark-midnight text-lg`,
 		"gridStyle": css`grid-column-start: 1; grid-column-end: 3; grid-auto-rows: 50px`,
+		"scrollbar": css`&::-webkit-scrollbar { width: 10px; }; &::-webkit-scrollbar-track { background-color: #FCFCFC; border: 1px solid #B8B8B7; border-radius: 2px; }; &::-webkit-scrollbar-thumb { background-color: #FFD600; border: 1px solid #B8B8B7; border-radius: 2px; }`
 	},
 	content: [
 		"./component/**/*.{js,jsx,ts,tsx}",
@@ -39,6 +41,7 @@ export default {
 				card: "#EEEEEE",
 				dark: "#656565",
 				dashed: "#B8B8B7",
+				back: "#E5E5E5",
 			},
 			dark: {
 				light: "#2B2B2C",
