@@ -15,6 +15,11 @@ import screenWrapper from "@/lib/screenWrapper.tsx";
 /* import { DashboardComponent } from "../components/DashBoardComponent/DashboardComponent.tsx"; */
 
 import { css, tw } from "twind/css";
+import { ActualObjectComponent } from "../components/dashboard/ActualObject.tsx";
+import { CalendarComponent } from "../components/dashboard/CalendarComponent.tsx";
+import MyObjectComponent from "../components/dashboard/MyObjectComponent.tsx";
+import { TransactionsComponent } from "../components/dashboard/TransactionsComponent.tsx";
+import WalletComponent from "../components/dashboard/WalletComponent.tsx";
 interface Token {
 	name: string;
 	img: string;
@@ -47,6 +52,32 @@ interface DashboardData {
 	balanceXLM: number;
 }
 
+export interface IObjectInfo {
+    numberObject: string;
+    objectName: string;
+    objectLocate: string;
+}
+
+export interface ITokenObject {
+    tokenImage: string;
+    tokenName: string;
+    minXlm: string;
+    payCount: number;
+}
+
+const testObjectInfo: IObjectInfo = {
+	numberObject: '40494',
+	objectName: 'Montenegro, Soho komleks',
+	objectLocate: 'Tivat 85320, Montenegro'
+}
+
+const testObjectToken: ITokenObject = {
+	tokenImage: 'https://pngicon.ru/file/uploads/ikonka-bitkoin.png',
+	tokenName: 'ALFATOKEN',
+	minXlm: 'min 8XLM',
+	payCount: 135,
+}
+
 export const handler: Handlers = {
 	GET(req, ctx) {
 		return ctx.render({
@@ -65,21 +96,28 @@ export const handler: Handlers = {
 
 export default function Dashboard({ data }: PageProps<any>) {
 	return screenWrapper(
-		<article class="h-full w-full bg-violet dark:bg-black" style={{ overflowY: "hidden"}}>
-			<div class="w-full h-full" style={{ display: "flex", flex: 10 }}>
-				<div class="grid grid-cols-3 grid-rows-2 grid-flow-row gap-4 auto-cols-max auto-rows-max w-full h-full">
-					<div class={`bg-black gridStyle`}>
-					</div>
-					<div class="bg-white-dark bg-red-light">
-					</div>
-					<div class={`gridStyle flex flex-row bg-yellow-light`}>
-						<div style={{ display: "flex", flex: 3, backgroundColor: "red" }}>
-						</div>
-						<div style={{ display: "flex", flex: 2, marginLeft: 15 }}>
-						</div>
-					</div>
-					<div class="bg-white bg-green-light">
-					</div>
+		<article class="h-full w-full dark:bg-black flex-col" style={{ overflowY: "hidden"}}>
+			<div class="flex h-[53%] w-full">
+				<div class="h-full w-[68.5%] bg-white-light">
+					<ActualObjectComponent testObjectInfo={testObjectInfo} testObjectToken={testObjectToken}/>
+				</div>
+				<div class="h-full w-[1.5%]"/>
+				<div class="h-full w-[30%]">
+					<WalletComponent />
+				</div>
+			</div>
+			<div class="h-[2.5%] w-full"/>
+			<div class="flex h-[45%] w-full">
+				<div class="h-full w-[43.5%]">
+					<MyObjectComponent testObjectInfo={testObjectInfo} testObjectToken={testObjectToken} />
+				</div>
+				<div class="w-[1.5%] h-full"/>
+				<div class="h-full w-[23.5%]">
+					<CalendarComponent />
+				</div>
+				<div class="w-[1.5%] h-full"/>
+				<div class="h-full w-[30%]">
+					<TransactionsComponent/>
 				</div>
 			</div>
 		</article>,

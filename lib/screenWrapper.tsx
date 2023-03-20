@@ -15,7 +15,7 @@ export default function screenWrapper(children: any) {
         style={{ display: "flex", flex: 10 }}
       >
         <Menu />
-        <div class="h-full w-full bg-white-dark dark:bg-black  p-5 ">
+        <div class="h-full w-full bg-gray-light dark:bg-black p-5">
           {children}
         </div>
       </div>
