@@ -58,6 +58,7 @@ export default {
 				light: "#FFE661",
 				dark: "#FFB800",
 				orange: "#FFD600",
+				brown: "#A87700",
 			},
 			violet: "#4e3678",
 			green: {
