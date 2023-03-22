@@ -3,3 +3,4 @@ dump.rdb
 fresh.gen.ts
 **/.DS_Store
 unfiltered/
+.idea/

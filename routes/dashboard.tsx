@@ -1,25 +1,10 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-/* import { getCookies } from "https://deno.land/std@v0.171.0/http/cookie.ts";
- * import * as stellar from "#/stellar.ts";
- * import { getUser } from "#/db.ts";
- * import { checkCookieAuth } from "#/auth.ts"; */
 import screenWrapper from "@/lib/screenWrapper.tsx";
-/* import NightThemeSwitcher from "@/islands/NightThemeSwitcher.tsx";
- * import { redirectTo } from "#/utils.ts";
- * import { Chart } from "$fresh_charts/mod.ts";
- * import type { ComponentChildren } from "preact"; */
-//import RelevantObjectsComponent from "@/components/dashboard/RelevantObjects.tsx";
-//import MyWalletComponent from "@/components/dashboard/MyWallet.tsx";
-//import CalendarComponent from "@/components/dashboard/Calendar.tsx";
-//import TransactionsComponent from "@/components/dashboard/Transactions.tsx";
-/* import { DashboardComponent } from "../components/DashBoardComponent/DashboardComponent.tsx"; */
-
-import { css, tw } from "twind/css";
-import { ActualObjectComponent } from "../components/dashboard/ActualObject.tsx";
-import { CalendarComponent } from "../components/dashboard/CalendarComponent.tsx";
-import MyObjectComponent from "../components/dashboard/MyObjectComponent.tsx";
-import { TransactionsComponent } from "../components/dashboard/TransactionsComponent.tsx";
-import WalletComponent from "../components/dashboard/WalletComponent.tsx";
+import RelevantObjects from "@/components/dashboard/RelevantObjects.tsx";
+import Calendar from "@/components/dashboard/Calendar.tsx";
+import MyObjects from "@/components/dashboard/MyObjects.tsx";
+import Transactions from "@/components/dashboard/Transactions.tsx";
+import Wallet from "@/components/dashboard/Wallet.tsx";
 interface Token {
 	name: string;
 	img: string;
@@ -99,25 +84,25 @@ export default function Dashboard({ data }: PageProps<any>) {
 		<article class="h-full w-full dark:bg-black flex-col" style={{ overflowY: "hidden"}}>
 			<div class="flex h-[53%] w-full">
 				<div class="h-full w-[68.5%] bg-white-light">
-					<ActualObjectComponent testObjectInfo={testObjectInfo} testObjectToken={testObjectToken}/>
+					<RelevantObjects testObjectInfo={testObjectInfo} testObjectToken={testObjectToken}/>
 				</div>
 				<div class="h-full w-[1.5%]"/>
 				<div class="h-full w-[30%]">
-					<WalletComponent />
+					<Wallet />
 				</div>
 			</div>
 			<div class="h-[2.5%] w-full"/>
 			<div class="flex h-[45%] w-full">
 				<div class="h-full w-[43.5%]">
-					<MyObjectComponent testObjectInfo={testObjectInfo} testObjectToken={testObjectToken} />
+					<MyObjects testObjectInfo={testObjectInfo} testObjectToken={testObjectToken} />
 				</div>
 				<div class="w-[1.5%] h-full"/>
 				<div class="h-full w-[23.5%]">
-					<CalendarComponent />
+					<Calendar />
 				</div>
 				<div class="w-[1.5%] h-full"/>
 				<div class="h-full w-[30%]">
-					<TransactionsComponent/>
+					<Transactions/>
 				</div>
 			</div>
 		</article>,

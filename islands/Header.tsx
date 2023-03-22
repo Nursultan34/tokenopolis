@@ -85,7 +85,7 @@ export default function Header() {
 							],
 							[PopUp.None, <></>],
 						])}
-						{currentPopUp != PopUp.None && (
+						{(currentPopUp != PopUp.None) && (
 							<div onClick={() => openPopUp(PopUp.None)} class="h-[calc(100vh-93px)] w-screen bg-black absolute bottom-0 left-0 opacity-50 z-10" />
 						)}
 					</div>

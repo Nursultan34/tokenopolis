@@ -50,7 +50,7 @@ function DayOfMonth({event, children}) {
     !!event ? styleOfDay += "bg-gray-bg" : styleOfDay += "bg-yellow-light" 
     return (
         <div class="col mt-2">
-            <div className={styleOfDay}>
+            <div class={styleOfDay}>
             <span class="w-12 ml-2 text-darkGray text-2xl">{children}</span>
                 <span class="ml-2 text-black text-xs">{event.head}</span>
             </div>
