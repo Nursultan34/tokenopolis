@@ -1,5 +1,4 @@
-import adminWrapper from "@/islands/AdminWrapper.tsx";
-import AdminWrapper from "../../islands/adminWrapper.tsx";
+import AdminWrapper from "../../islands/AdminWrapper.tsx";
 
 export default function CalendarAdminScreen() {
 	return (

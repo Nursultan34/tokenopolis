@@ -24,11 +24,9 @@ export default function AdminWrapper({ children }: any) {
 				style={{ display: "flex", flex: 10 }}
 			>
 				<AdminMenu />
-				{
-					/* <div class="h-full w-full bg-gray-light dark:bg-black p-5">
-          {children}
-        </div> */
-				}
+					<div class="h-full w-full bg-gray-light dark:bg-black p-5">
+            {children}
+          </div>
 			</div>
 		</main>
 	);
