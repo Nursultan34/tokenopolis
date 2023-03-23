@@ -1,5 +1,3 @@
-import { asset } from "$fresh/runtime.ts";
-import { useState } from "preact/hooks";
 import ObjectsTable from "@/islands/ObjectsTable.tsx";
 
 const objectsData = [
@@ -72,7 +70,7 @@ const objectsData = [
 
 export default function Objects() {
 	return (
-		<main class="bg-gray-light dark:bg-black">
+		<main>
 			<ObjectsTable objects={objectsData} />
 		</main>
 	);

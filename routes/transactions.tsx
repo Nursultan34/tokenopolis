@@ -1,11 +1,10 @@
 import { asset } from "$fresh/runtime.ts";
-import Menu from "@/components/Menu.tsx";
 import Item from "@/islands/Transaction.tsx";
 import dashboardScreen from "#/screenWrapper.tsx";
 
 export default function Transactions() {
 	return dashboardScreen(
-		<main class="bg-gray-white dark:bg-black text-black pb-[42px]">
+		<main class="pb-[42px]">
 			<div class="max-w-[1480px] mx-auto pt-[42px] pb-[19px] border-b-1 border-gray-bg">
 				<div class="flex gap-x-4 mb-1">
 					<div class="flex items-center">

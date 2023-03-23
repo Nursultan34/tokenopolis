@@ -98,7 +98,7 @@ export default {
 		},
 	},
 	preflight: {
-		body: apply`dark:bg-black min-h-screen text-black dark:text-white`,
+		// body: apply`dark:bg-black min-h-screen text-black dark:text-white`,
 		button: apply`focus:outline-none bg-[rgba(0, 0, 0, 0)]`,
 		"@import": "url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap')",
 	},

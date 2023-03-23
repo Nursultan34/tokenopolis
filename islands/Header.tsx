@@ -31,7 +31,7 @@ export default function Header() {
 	useEffect(() => setHtmlDark(isDark), [isDark]);
 
 	return (
-		<header class="h-24 flex-shrink-0 w-full bg-white-dark flex flex-row shadow-header z-20">
+		<header class="h-24 flex-shrink-0 w-full bg-white-dark dark:bg-black flex flex-row shadow-header z-20">
 			<div class="grid flex-none w-36 justify-items-center items-center">
 				<img src={asset("headerImage/LogoIcon.png")} class="w-11 h-12" />
 			</div>

@@ -3,7 +3,7 @@ import Menu from '@/components/Menu.tsx'
 
 export default function screenWrapper(children: any) {
   return (
-    <main class='col h-screen w-screen'>
+    <main class='col h-screen w-screen bg-white-light dark:bg-black text-black dark:text-white-light'>
       <div
         class={`h-[10%] flex justify-center items-center`}
         style={{ display: 'flex', flex: 1 }}
@@ -11,11 +11,11 @@ export default function screenWrapper(children: any) {
         <Header />
       </div>
       <div
-        class='row h-[90%] bg-white-dark'
+        class='row h-[90%]'
         style={{ display: 'flex', flex: 10 }}
       >
         <Menu />
-        <div class='h-full w-full bg-gray-light dark:bg-black p-5'>
+        <div class='h-full w-full p-5'>
           {children}
         </div>
       </div>
