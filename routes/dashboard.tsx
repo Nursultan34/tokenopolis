@@ -38,30 +38,30 @@ interface DashboardData {
 }
 
 export interface IObjectInfo {
-    numberObject: string;
-    objectName: string;
-    objectLocate: string;
+	numberObject: string;
+	objectName: string;
+	objectLocate: string;
 }
 
 export interface ITokenObject {
-    tokenImage: string;
-    tokenName: string;
-    minXlm: string;
-    payCount: number;
+	tokenImage: string;
+	tokenName: string;
+	minXlm: string;
+	payCount: number;
 }
 
 const testObjectInfo: IObjectInfo = {
-	numberObject: '40494',
-	objectName: 'Montenegro, Soho komleks',
-	objectLocate: 'Tivat 85320, Montenegro'
-}
+	numberObject: "40494",
+	objectName: "Montenegro, Soho komleks",
+	objectLocate: "Tivat 85320, Montenegro",
+};
 
 const testObjectToken: ITokenObject = {
-	tokenImage: 'https://pngicon.ru/file/uploads/ikonka-bitkoin.png',
-	tokenName: 'ALFATOKEN',
-	minXlm: 'min 8XLM',
+	tokenImage: "https://pngicon.ru/file/uploads/ikonka-bitkoin.png",
+	tokenName: "ALFATOKEN",
+	minXlm: "min 8XLM",
 	payCount: 135,
-}
+};
 
 export const handler: Handlers = {
 	GET(req, ctx) {
@@ -81,28 +81,28 @@ export const handler: Handlers = {
 
 export default function Dashboard({ data }: PageProps<any>) {
 	return screenWrapper(
-		<article class="h-full w-full flex-col" style={{ overflowY: "hidden"}}>
+		<article class="h-full w-full flex-col" style={{ overflowY: "hidden" }}>
 			<div class="flex h-[53%] w-full">
 				<div class="h-full w-[68.5%] bg-white-light">
-					<RelevantObjects testObjectInfo={testObjectInfo} testObjectToken={testObjectToken}/>
+					<RelevantObjects testObjectInfo={testObjectInfo} testObjectToken={testObjectToken} />
 				</div>
-				<div class="h-full w-[1.5%]"/>
+				<div class="h-full w-[1.5%]" />
 				<div class="h-full w-[30%]">
 					<Wallet />
 				</div>
 			</div>
-			<div class="h-[2.5%] w-full"/>
+			<div class="h-[2.5%] w-full" />
 			<div class="flex h-[45%] w-full">
 				<div class="h-full w-[43.5%]">
 					<MyObjects testObjectInfo={testObjectInfo} testObjectToken={testObjectToken} />
 				</div>
-				<div class="w-[1.5%] h-full"/>
+				<div class="w-[1.5%] h-full" />
 				<div class="h-full w-[23.5%]">
 					<Calendar />
 				</div>
-				<div class="w-[1.5%] h-full"/>
+				<div class="w-[1.5%] h-full" />
 				<div class="h-full w-[30%]">
-					<Transactions/>
+					<Transactions />
 				</div>
 			</div>
 		</article>,

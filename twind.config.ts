@@ -24,7 +24,8 @@ export default {
 		"flex-basis-full": css`flex-basis: 100%;`,
 		"flex-basis-fit": css`flex-basis: fit-content;`,
 		"profile-selin": apply`pl-4 bg-gray-back rounded-sm text-dark-midnight text-lg`,
-		"scrollbar": css`&::-webkit-scrollbar { width: 10px; }; &::-webkit-scrollbar-track { background-color: #FCFCFC; border: 1px solid #B8B8B7; border-radius: 2px; }; &::-webkit-scrollbar-thumb { background-color: #FFD600; border: 1px solid #B8B8B7; border-radius: 2px; }`
+		"scrollbar":
+			css`&::-webkit-scrollbar { width: 10px; }; &::-webkit-scrollbar-track { background-color: #FCFCFC; border: 1px solid #B8B8B7; border-radius: 2px; }; &::-webkit-scrollbar-thumb { background-color: #FFD600; border: 1px solid #B8B8B7; border-radius: 2px; }`,
 	},
 	content: [
 		"./component/**/*.{js,jsx,ts,tsx}",
