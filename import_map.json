@@ -11,6 +11,7 @@
 		"@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.0.1",
 		"twind": "https://esm.sh/twind@0.16.17",
 		"twind/": "https://esm.sh/twind@0.16.17/",
-		"std/": "https://deno.land/std@0.177.0/"
+		"std/": "https://deno.land/std@0.177.0/",
+		"preact/compat": "https://esm.sh/preact@10.11.0/compat"
 	}
 }

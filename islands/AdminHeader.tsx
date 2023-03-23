@@ -1,7 +1,8 @@
 import { asset } from "$fresh/runtime.ts";
 //import IconMessageUser from "@/islands/IconUser.tsx";
 import { boolState } from "#/utils.ts";
-import { useEffect, useReducer } from "preact/hooks";
+import { useEffect, useMemo, useReducer, useState } from "preact/hooks";
+import { createPortal } from "preact/compat";
 
 function match<T, O>(target: T, options: [T, O][]): O {
 	const result = options.find((x) => target == x[0]) as [T, O];
@@ -30,6 +31,17 @@ export default function AdminHeader() {
 	}, localStorage.getItem("dark") != "false");
 	useEffect(() => setHtmlDark(isDark), [isDark]);
 
+	const [test, setTest] = useState(false);
+	console.log(test, "test");
+	const createToken = () => {
+		setTest((prev) => !prev);
+	};
+	useEffect(() => {
+		const modalRootElement = document.querySelector("#modal");
+	}, [test]);
+	const createObject = () => {
+		window.alert("object");
+	};
 	return (
 		<header class="h-24 flex-shrink-0 w-full bg-white-dark flex flex-row shadow-header z-20">
 			<div class="grid flex-none w-36 justify-items-center items-center">
@@ -37,8 +49,8 @@ export default function AdminHeader() {
 			</div>
 			<div class="flex-auto flex flex-row w-max items-center justify-end">
 				<div class="flex flex-row justify-center items-center mr-4">
-                    <CustomButton name="Добавить токен" />
-                    <CustomButton name="Добавить объект" />
+					<CustomButton name="Добавить токен" buttonFunction={createToken} />
+					<CustomButton name="Добавить объект" buttonFunction={createObject} />
 					<div class="w-[56px] h-[56px] rounded-[50px] border border-gray-bg mr-3 flex justify-center items-center">
 						<img
 							src={asset("headerImage/EllipseImage.png")}
@@ -291,10 +303,20 @@ function setHtmlDark(dark: boolean) {
 	}
 }
 
-function CustomButton ({name}: {name:string}) {
-    return(
-        <button class="bg-yellow-orange w-60 h-12 mr-5 active:bg-yellow-orange focus:bg-yellow-orange">
-            {name}
-        </button>
-    )
+function CustomButton({ name, buttonFunction }: { name: string; buttonFunction: () => void }) {
+	return (
+		<button class="bg-yellow-orange w-60 h-12 mr-5 active:bg-yellow-orange focus:bg-yellow-orange" onClick={buttonFunction}>
+			{name}
+		</button>
+	);
 }
+
+const ModalView = () => {
+	return (
+		<div class="w-full h-full flex justify-center items-center absolute bg-gray-dashed">
+			<div>
+				Modalka
+			</div>
+		</div>
+	);
+};

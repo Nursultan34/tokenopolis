@@ -140,13 +140,13 @@ class Calendar {
 				if (day <= length && (i > 0 || j >= intitalDay)) {
 					days.push({
 						day: day < 10 ? `0${day}` : day,
-						event: {head: "", body: ""},
+						event: { head: "", body: "" },
 					});
 					day++;
 				} else {
 					days.push({
 						day: null,
-						event: {head: "", body: ""},
+						event: { head: "", body: "" },
 					});
 				}
 			}
@@ -156,12 +156,12 @@ class Calendar {
 
 		if (days[0].day === "01") {
 			for (let i = 0; i < 6; i++) {
-				days.unshift({ day: null, event: {head: "", body: ""} });
+				days.unshift({ day: null, event: { head: "", body: "" } });
 			}
-			days.push({ day: null, event: {head: "", body: ""} });
+			days.push({ day: null, event: { head: "", body: "" } });
 		} else {
 			days.shift();
-			days.push({ day: null, event: {head: "", body: ""} });
+			days.push({ day: null, event: { head: "", body: "" } });
 		}
 
 		if (days[0].day === null) {

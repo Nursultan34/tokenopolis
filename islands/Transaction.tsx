@@ -60,7 +60,8 @@ export default function Item({ status }: { status?: string }) {
 							<img
 								class="self-center ml-3 w-7 h-7 hover:(cursor-pointer)"
 								src={asset("./documentcopy.svg")}
-									   {...[]/* onMouseEnter={() => setShow("show")}
+								{
+									...[] /* onMouseEnter={() => setShow("show")}
 										   onMouseLeave={() => {
 										   setShow("hide");
 										   setMake("hide");
@@ -68,7 +69,8 @@ export default function Item({ status }: { status?: string }) {
 										   onClick={() => {
 										   setMake("show");
 										   setShow("hide");
-										   }} */}
+										   }} */
+								}
 							/>
 						</label>
 						<label class="flex self-start text-[18px] font-bold font-open-sans">
@@ -91,8 +93,10 @@ export default function Item({ status }: { status?: string }) {
 					<button class="w-40 text-black text-center bg-gray-waiting">ПОСМОТРЕТЬ НА ЭКСПЛОРЕРЕ</button>
 				</div>
 			)}
-			{/* {true && <p class="absolute top-20 right-64 text-xs text-darkGray">КОПИРОВАТЬ НОМЕР</p>}
-				{true && <p class="absolute top-20 right-64 text-xs text-green-3">НОМЕР СКОПИРОВАН</p>} */}
+			{
+				/* {true && <p class="absolute top-20 right-64 text-xs text-darkGray">КОПИРОВАТЬ НОМЕР</p>}
+				{true && <p class="absolute top-20 right-64 text-xs text-green-3">НОМЕР СКОПИРОВАН</p>} */
+			}
 		</div>
 	);
 }

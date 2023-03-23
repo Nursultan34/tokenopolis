@@ -1,7 +1,9 @@
-import adminWrapper from "../../lib/adminWrapper.tsx";
+import AdminWrapper from "@/islands/AdminWrapper.tsx";
 
-export default function FAQAdminScreen () {
-    return adminWrapper (
-        <div>faq admin</div>
-    )
+export default function FAQAdminScreen() {
+	return (
+		<AdminWrapper>
+			<div>Admin Calendar</div>
+		</AdminWrapper>
+	);
 }

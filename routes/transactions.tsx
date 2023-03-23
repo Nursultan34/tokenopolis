@@ -60,6 +60,6 @@ export default function Transactions() {
 					<Item />
 				</div>
 			</div>
-		</main>
+		</main>,
 	);
 }

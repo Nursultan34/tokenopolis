@@ -7,7 +7,7 @@ export default function AdminMenu() {
 				{[
 					{ img: "sideMenuIcon/buildings2.png", desc: "ОБЪЕКТЫ", href: "/admin/objects" },
 					{ img: "sideMenuIcon/calendar.png", desc: "КАЛЕНДАРЬ", href: "/admin/calendar" },
-                    { img: "sideMenuIcon/profilecircle.png", desc: "УВЕДОМЛЕНИЯ", href: "/admin/notifications" },
+					{ img: "sideMenuIcon/profilecircle.png", desc: "УВЕДОМЛЕНИЯ", href: "/admin/notifications" },
 					{ img: "sideMenuIcon/profilecircle.png", desc: "ВАШ МЕНЕДЖЕР", href: "/admin/manager" },
 				].map(MenuButton)}
 			</div>
