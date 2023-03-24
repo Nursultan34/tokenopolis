@@ -32,7 +32,7 @@ export default function AdminHeader() {
 	useEffect(() => setHtmlDark(isDark), [isDark]);
 
 	const [test, setTest] = useState(false);
-	console.log(test, "test");
+	/* console.log(test, "test"); */
 	const createToken = () => {
 		setTest((prev) => !prev);
 	};
