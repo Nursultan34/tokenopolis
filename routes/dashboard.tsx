@@ -109,7 +109,7 @@ export const handler: Handlers = {
 
 export default function Dashboard({ data }: PageProps<any>) {
 	return screenWrapper(
-		<article class="h-full w-full dark:bg-black flex-col" style={{ overflowY: "hidden"}}>
+		<article class="h-full w-full flex-col" style={{ overflowY: "hidden"}}>
 			<div class="flex h-[53%] w-full">
 				<div class="h-full w-[68.5%] bg-white-light">
 					<RelevantObjects objects={data.relevantObjects} />

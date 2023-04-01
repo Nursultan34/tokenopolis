@@ -1,3 +1,5 @@
+import AdminObjectsCard from "../../islands/AdminObjectsCard.tsx";
+
 export interface ObjectDataType {
 	image: string;
 	tokenImage: string;
@@ -108,9 +110,10 @@ const ObjectData: ObjectDataType[] = [
 
 export default function AdminObjects() {
 	return (
-		<div class="w-full h-full overflow-scroll">
+		<div class="w-full h-full overflow-scroll ">
 			<Section />
 			<div class="pl-6 pr-6 -mt-5">
+				{ObjectData.map(AdminObjectsCard)}
 			</div>
 		</div>
 	);

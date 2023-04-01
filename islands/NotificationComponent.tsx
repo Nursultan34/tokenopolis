@@ -45,7 +45,7 @@ export default function NotificationComponent() {
 			<div class="items-center flex justify-center w-full h-[10%] mt-5">
 				<button class="flex w-[90%] h-12 border flex justify-center items-center bg-gray-light border-gray-cool" onClick={() => console.log("tttt")}>
 					<text class="text-base mr-4 font-light">Добавить уведомление</text>
-					<img src="adminIcon/plus.png" class="w-7 h-7" />
+					<img src="/adminIcon/plus.png" class="w-7 h-7" />
 				</button>
 			</div>
 			<div class="w-[100%] h-full flex flex-col justify-start items-center overflow-scroll mt-5">

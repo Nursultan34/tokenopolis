@@ -19,7 +19,7 @@ export default function ObjectsAdminScreen() {
 				<div class="flex-auto w-[74%]">
 					<AdminObjects />
 				</div>
-				<div class="w-[1%] bg-gray-light" />
+				<div class="w-[1%] bg-gray-light"></div>
 				<div class="flex-auto w-[25%]">
 					<div class="bg-yellow-light h-[40%]"></div>
 					<div class="h-[2%] bg-gray-light" />

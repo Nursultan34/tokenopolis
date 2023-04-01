@@ -15,7 +15,7 @@ export default function screenWrapper(children: any, address = "1Cs4wu6pu5qCZ35b
 				style={{ display: "flex", flex: 10 }}
 			>
 				<Menu />
-				<div class="h-full w-full p-5">
+				<div class="h-full w-full p-5 bg-gray-back">
 					{children}
 				</div>
 			</div>
