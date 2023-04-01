@@ -1,4 +1,4 @@
-import AdminObjects from "../../components/admin/AdminObjects.tsx";
+import AdminObjectsCard from "@/islands/AdminObjectsCard.tsx";
 import NotificationComponent from "../../islands/NotificationComponent.tsx";
 import adminWrapper from "@/lib/adminWrapper.tsx";
 import ModalContainer from "@/islands/ModalContainer.tsx";
@@ -17,7 +17,7 @@ export default function ObjectsAdminScreen() {
 			</article>
 			<article class="bg-white-light flex h-[95%]">
 				<div class="flex-auto w-[74%]">
-					<AdminObjects />
+					<AdminObjectsCard />
 				</div>
 				<div class="w-[1%] bg-gray-light"></div>
 				<div class="flex-auto w-[25%]">
