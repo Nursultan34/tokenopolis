@@ -14,11 +14,11 @@ export default function Item({ status }: { status?: string }) {
 					<span class="font-bold font-open-sans">12 дек 2018</span>
 
 					<div class="bg-gray-white">
-						<img src={asset("./lk-logo.svg")} class="" />
+						<img src={asset("/./lk-logo.svg")} class="" />
 					</div>
 
 					<div class="flex gap-x-2">
-						<img src={asset("./transaction-arrow.svg")} alt="" />
+						<img src={asset("/./transaction-arrow.svg")} alt="" />
 						1Cs4wu6pu5qCZ35bSLNVzGyEx5N6uzbg9t
 					</div>
 				</div>
@@ -59,7 +59,7 @@ export default function Item({ status }: { status?: string }) {
 							/>
 							<img
 								class="self-center ml-3 w-7 h-7 hover:(cursor-pointer)"
-								src={asset("./documentcopy.svg")}
+								src={asset("/./documentcopy.svg")}
 								{
 									...[] /* onMouseEnter={() => setShow("show")}
 										   onMouseLeave={() => {

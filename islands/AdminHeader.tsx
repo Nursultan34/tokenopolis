@@ -45,7 +45,7 @@ export default function AdminHeader() {
 	return (
 		<header class="h-24 flex-shrink-0 w-full bg-white-dark flex flex-row shadow-header z-20">
 			<div class="grid flex-none w-36 justify-items-center items-center">
-				<img src={asset("headerImage/LogoIcon.png")} class="w-11 h-12" />
+				<img src={asset("/headerImage/LogoIcon.png")} class="w-11 h-12" />
 			</div>
 			<div class="flex-auto flex flex-row w-max items-center justify-end">
 				<div class="flex flex-row justify-center items-center mr-4">
@@ -53,21 +53,21 @@ export default function AdminHeader() {
 					<CustomButton name="Добавить объект" buttonFunction={createObject} />
 					<div class="w-[56px] h-[56px] rounded-[50px] border border-gray-bg mr-3 flex justify-center items-center">
 						<img
-							src={asset("headerImage/EllipseImage.png")}
+							src={asset("/headerImage/EllipseImage.png")}
 							class="w-[48px] h-[48px]"
 						/>
 					</div>
 					<text class="font-medium mr-3">Nikita Resheteev</text>
 					<div class="mr-7 flex">
 						<img
-							src={asset("headerImage/Account.png")}
+							src={asset("/headerImage/Account.png")}
 							style={{ width: 44, height: 44 }}
 							class="hover:opacity-70 mr-3"
 							onClick={() => openPopUp(PopUp.Settings)}
 						/>
 						<img
 							class="mr-3"
-							src={asset("headerImage/Message.png")}
+							src={asset("/headerImage/Message.png")}
 							style={{ width: 44, height: 44 }}
 							onClick={() => openPopUp(PopUp.Notifications)}
 						/>
@@ -116,14 +116,14 @@ function SettingsPopUp({ isDark, toggleTheme }) {
 										<text class="mr-4 flex flex-row justify-center items-center font-light">
 											<img
 												class="mr-3"
-												src={asset("headerImage/Vector.png")}
+												src={asset("/headerImage/Vector.png")}
 												style={{ width: 7.1, height: 15.84 }}
 											/>{" "}
 											ВЫБРАТЬ ЯЗЫК
 										</text>
 										<img
 											class="mr-3.5"
-											src={asset("headerImage/translate.png")}
+											src={asset("/headerImage/translate.png")}
 											style={{ width: 25.08, height: 25.08 }}
 										/>
 									</button>
@@ -168,7 +168,7 @@ function SettingsPopUp({ isDark, toggleTheme }) {
 									</text>
 									<img
 										class="mr-3.5"
-										src={asset("headerImage/translate.png")}
+										src={asset("/headerImage/translate.png")}
 										style={{ width: 25.08, height: 25.08 }}
 									/>
 								</button>
@@ -187,7 +187,7 @@ function SettingsPopUp({ isDark, toggleTheme }) {
 							</text>
 							<img
 								class="mr-3.5"
-								src={asset("headerImage/profilecircle.png")}
+								src={asset("/headerImage/profilecircle.png")}
 								style={{ width: 28, height: 27 }}
 							/>
 						</div>
@@ -205,7 +205,7 @@ function SettingsPopUp({ isDark, toggleTheme }) {
 						>
 							<img
 								class="mr-3.5"
-								src={asset("headerImage/sun.png")}
+								src={asset("/headerImage/sun.png")}
 								style={{ width: 38, height: 38 }}
 							/>
 							<text class="mr-4 flex flex-row justify-center items-center text-xs font-light">
@@ -221,7 +221,7 @@ function SettingsPopUp({ isDark, toggleTheme }) {
 						>
 							<img
 								class="mr-3.5"
-								src={asset("headerImage/moon.png")}
+								src={asset("/headerImage/moon.png")}
 								style={{ width: 33, height: 28 }}
 							/>
 							<text class="mr-4 flex flex-row justify-center items-center text-xs font-light">
@@ -240,7 +240,7 @@ function SettingsPopUp({ isDark, toggleTheme }) {
 							<div class="mr-4 text-xl font-light">Выход</div>
 							<img
 								class="mr-3.5"
-								src={asset("headerImage/logout.png")}
+								src={asset("/headerImage/logout.png")}
 								style={{ width: 26, height: 26 }}
 							/>
 						</div>
@@ -278,7 +278,7 @@ function NotificationsPopUp() {
 					<text class="font-medium text-lg">Уведомление</text>
 					<img
 						style={{ width: 26, height: 26 }}
-						src={asset("headerImage/MessageTwo.png")}
+						src={asset("/headerImage/MessageTwo.png")}
 					/>
 				</div>
 				<div style={{ width: 255, height: 1 }} class="bg-gray-dashed ml-4" />

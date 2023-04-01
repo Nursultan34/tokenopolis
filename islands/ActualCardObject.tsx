@@ -4,7 +4,7 @@ import { css, tw } from "twind/css";
 
 export default function ActualCardObjectComponent(props: ICardObjectComponent) {
 	const backgroundImage = css`background-image: url(${
-		asset("dashboardIcon/percent.png")
+		asset("/dashboardIcon/percent.png")
 	}); background-size: no-repeat; background-position: center; background-size: cover; width: 62px; height: 62px;`;
 	return (
 		<div
@@ -20,7 +20,7 @@ export default function ActualCardObjectComponent(props: ICardObjectComponent) {
 				<text className={` ${props.cardType === "all" ? "text-sm" : "text-xs"} font-semibold mt-1`}>{props.objectInfo?.objectName}</text>
 				{props.cardType === "all" && (
 					<div className="flex flex-row mt-1">
-						<img src={asset("dashboardIcon/location.png")} style={{ width: 16, height: 16 }} />
+						<img src={asset("/dashboardIcon/location.png")} style={{ width: 16, height: 16 }} />
 						<text className="text-yellow-dark text-xs">{props.objectInfo?.objectLocate}</text>
 					</div>
 				)}

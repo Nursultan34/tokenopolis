@@ -22,7 +22,7 @@ function FirstSection() {
 			<div class="col gap-6 w-full h-full">
 				<div class="row w-[88%] h-[60%] gap-6">
 					<div class="w-72 rounded-sm">
-						<img src={asset("manager-ava.png")} class="object-contain" />
+						<img src={asset("/manager-ava.png")} class="object-contain" />
 					</div>
 
 					<div class="col items-start mt-36">
@@ -33,10 +33,10 @@ function FirstSection() {
 
 						<div class="flex justify-end items-start w-48 h-14 gap-2 mt-12">
 							<div class="bg(green-btn) w-24 h-16 flex justify-center items-center rounded-lg">
-								<img src={asset("phone.svg")} />
+								<img src={asset("/phone.svg")} />
 							</div>
 							<div class="bg(blue-btn) w-24 h-16 flex justify-center items-center rounded-lg">
-								<img src={asset("telegram.svg")} />
+								<img src={asset("/telegram.svg")} />
 							</div>
 						</div>
 					</div>
@@ -74,7 +74,7 @@ function SecondSection() {
 				</div>
 			</div>
 			<img
-				src={asset("contact-vector.svg")}
+				src={asset("/contact-vector.svg")}
 				class="w-52 h-52 absolute right-16 top-11"
 			/>
 		</div>
@@ -117,12 +117,12 @@ function FourthSection() {
 			<h3 class="text-lg font-bold ml-9 mb-5">Направление деятельности</h3>
 			<div class="flex items-center justify-center">
 				<div class="w-10 h-20 flex items-center justify-center">
-					<img src={asset("arrow-left.svg")} />
+					<img src={asset("/arrow-left.svg")} />
 				</div>
 
 				<div class="flex w-[69%] h-72 border border-[#B8B8B7] rounded">
 					<div class="w-48 h-48 rounded mx-6 my-11">
-						<img src={asset("rectangle.png")} class="object-contain" />
+						<img src={asset("/rectangle.png")} class="object-contain" />
 					</div>
 					<p class="w-72 h-40 mt-11 mr-6">
 						Инфраструктурные проекты. Работы по прокладке инженерных коммуникаций и сетей (свет, водопровод, канализация, дороги), строительство и монтаж септиков,
@@ -131,7 +131,7 @@ function FourthSection() {
 				</div>
 
 				<div class="w-10 h-20 flex items-center justify-center">
-					<img src={asset("arrow-right.svg")} />
+					<img src={asset("/arrow-right.svg")} />
 				</div>
 			</div>
 		</div>

@@ -7,7 +7,7 @@ import { getImages } from "#/utils.ts";
 export const handler: Handlers = {
 	async GET(req, ctx) {
 		const obj = await getObject(ctx.params.id);
-		const pics = getImages("objects", ctx.params.id);
+		// const pics = getImages("objects", ctx.params.id);
 		return ctx.render(obj);
 	}
 }

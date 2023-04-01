@@ -61,7 +61,7 @@ export default function RelevantObjects({ objects }) {
 
 function ObjectCard({ id, name, location, img, investersAmount, readiness, tokenName, tokenImg, tokenPrice }) {
 	const backgroundImage = css`background-image: url(${
-		asset("dashboardIcon/percent.png")
+		asset("/dashboardIcon/percent.png")
 	}); background-size: no-repeat; background-position: center; background-size: cover; width: 62px; height: 62px;`;
 	return (
 		<div class="w-full bg-gray-light flex flex-row rounded justify-center items-center mt-2 hover:bg-gray-coo hover:shadow-side" style={{ height: 120 }}>
@@ -72,7 +72,7 @@ function ObjectCard({ id, name, location, img, investersAmount, readiness, token
 				<text class="text-xs text-gray-dark">ОБЪЕКТ №{id}</text>
 				<text class="text-sm font-semibold mt-1">{name}</text>
 				<div class="flex flex-row mt-1">
-					<img src={asset("dashboardIcon/location.png")} style={{ width: 16, height: 16 }} />
+					<img src={asset("/dashboardIcon/location.png")} style={{ width: 16, height: 16 }} />
 					<text class="text-yellow-dark text-xs">{location}</text>
 				</div>
 			</div>
@@ -94,7 +94,7 @@ function ObjectCard({ id, name, location, img, investersAmount, readiness, token
 				<div class="text-sm font-light text-green-dark">{investersAmount} УЖЕ КУПИЛИ</div>
 			</div>
 			<div class="flex flex-col justify-center items-center" style={{ display: "flex", flex: 1 }}>
-				<button class="border border-gray-cool bg-white-light rounded-sm text-sm font-light hover:bg-gray-cool" style={{ width: "10rem", height: 40 }}>подробнее</button>
+				<a href={`/object/${id}`} class="border border-gray-cool bg-white-light rounded-sm text-sm font-light hover:bg-gray-cool" style={{ width: "10rem", height: 40 }}>подробнее</a>
 				<button class="border mt-1 border-yellow-orange bg-yellow-orange rounded-sm font-light hover:bg-yellow-main" style={{ width: "10rem", height: 40 }}>
 					ИНВЕСТИРОВАТЬ
 				</button>

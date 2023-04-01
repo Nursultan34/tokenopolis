@@ -69,7 +69,7 @@ function FirstSection() {
 						<div class="bg(gray-light) w-[95%] rounded">
 							<div class="row justify-between p-7 pr-8">
 								<h3 class="font-bold text-lg">{question.title}</h3>
-								<img src={asset("cross.svg")} class="w-[20px]" />
+								<img src={asset("/cross.svg")} class="w-[20px]" />
 							</div>
 						</div>
 					))}
@@ -93,7 +93,7 @@ function SecondSection() {
 				</button>
 			</div>
 			<img
-				src={asset("contact-vector.svg")}
+				src={asset("/contact-vector.svg")}
 				class="w-[25%] absolute right-9 top-10"
 			/>
 		</div>
@@ -138,7 +138,7 @@ function ThirdSection() {
 							<div class="w-[93%] h-[118%] border rounded border-[#D1D1D1] row items-center justify-start">
 								<img src={asset(article.img)} class="px-2 pl-2 pr-5" />
 								<p class="w-[56%] uppercase mr-14">{article.title}</p>
-								<img src={asset("arrow-article.svg")} />
+								<img src={asset("/arrow-article.svg")} />
 							</div>
 						</a>
 					))}

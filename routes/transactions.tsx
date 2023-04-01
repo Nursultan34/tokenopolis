@@ -17,7 +17,7 @@ export default function Transactions() {
 							/>
 						</label>
 
-						<img src={asset("./calendar.png")} alt="" />
+						<img src={asset("/./calendar.png")} alt="" />
 					</div>
 
 					<div class="flex items-center">
@@ -30,7 +30,7 @@ export default function Transactions() {
 							/>
 						</label>
 
-						<img src={asset("./calendar.png")} alt="" />
+						<img src={asset("/./calendar.png")} alt="" />
 					</div>
 				</div>
 

@@ -25,7 +25,7 @@ export default function MyObjects({ testObjectToken, testObjectInfo }) {
 
 function MyObject({ id, name, img, token, amount, readiness }) {
 	const backgroundImage = css`background-image: url(${
-		asset("dashboardIcon/percent.png")
+		asset("/dashboardIcon/percent.png")
 	}); background-size: no-repeat; background-position: center; background-size: cover; width: 62px; height: 62px;`;
 	return (
 		<div class={"w-full bg-gray-light flex flex-row rounded justify-center items-center mt-2 hover:shadow-side"} style={{ height: 100 }}>

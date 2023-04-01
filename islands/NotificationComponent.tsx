@@ -71,7 +71,7 @@ function NotificationsCard({ number, month, desc }: NotificationType) {
 				</div>
 			</div>
 			<div class="w-[30%] flex justify-center items-center">
-				<img src={asset("adminIcon/close.png")} class={"w-7 h-7"} />
+				<img src={asset("/adminIcon/close.png")} class={"w-7 h-7"} />
 			</div>
 		</div>
 	);
