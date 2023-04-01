@@ -18,7 +18,7 @@ export enum PopUp {
 	None,
 }
 
-export default function Header() {
+export default function Header({ address, name }) {
 	const [currentPopUp, openPopUp] = useReducer(
 		(currentPopUp: PopUp, newPopUp: PopUp) => currentPopUp == newPopUp ? PopUp.None : newPopUp,
 		PopUp.None,
@@ -40,7 +40,8 @@ export default function Header() {
 					ВАШ КОШЕЛЕК:
 				</text>
 				<text class="text-sm text-gray-dashed font-sans ml-3">
-					1Cs4wu6pu5qCZ35bSLNVzG..
+					{/* 1Cs4wu6pu5qCZ35bSLNVzG.. */}
+					{address}
 				</text>
 				<img
 					class="ml-3"
@@ -63,7 +64,7 @@ export default function Header() {
 							class="w-[48px] h-[48px]"
 						/>
 					</div>
-					<text class="font-medium mr-3">Nikita Resheteev</text>
+					<text class="font-medium mr-3">{name}</text>
 					<div class="mr-7 flex">
 						<img
 							src={asset("headerImage/Account.png")}

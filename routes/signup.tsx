@@ -1,7 +1,7 @@
 import { Handlers } from "$fresh/server.ts";
 import SignUpForm from "@/islands/SignUpForm.tsx";
 import * as stellar from "#/stellar.ts";
-import { addUserToDB, User } from "#/db.ts";
+import { addUserToDB } from "#/db.ts";
 import { genJWT } from "#/auth.ts";
 import { assertStr, mayFail, redirectToC } from "#/utils.ts";
 import { isEmail } from "https://deno.land/x/isemail@v1.0.1/mod.ts";
@@ -18,7 +18,7 @@ async function register(email: string, name: string, password: string): Promise<
 		email,
 		name,
 		passHash,
-		wallet: keypair,
+		wallet: secretKey,
 	});
 	return genJWT(email);
 }

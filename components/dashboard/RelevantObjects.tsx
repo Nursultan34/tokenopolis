@@ -35,7 +35,7 @@ export interface DataType {
 	testObjectToken?: TokenObject;
 }
 
-export default function RelevantObjects(props: DataType) {
+export default function RelevantObjects({ objects }) {
 	const scrollbarStyle = css({
 		"&::-webkit-scrollbar": {
 			width: "15px",
@@ -53,20 +53,13 @@ export default function RelevantObjects(props: DataType) {
 		<div class="bg-white h-full w-full pl-5 pr-5 overflow-hidden">
 			<UpCardComponent first="Актуальные объекты" second="ГОТОВНОСТЬ" three="ТОКЕНЫ" typeCard="all" />
 			<div class={`mt-2 h-5/6 overflow-auto ${tw(scrollbarStyle)} pl-2`}>
-				{Array(6)
-					.fill({
-						img: "https://www.alfaplan.ru/upload/information_system_33/1/8/4/item_1846/information_items_property_254476.webp",
-						info: props.testObjectInfo,
-						token: props.testObjectToken,
-						readiness: 80,
-					})
-					.map(ObjectCard)}
+				{ objects.map(ObjectCard) }
 			</div>
 		</div>
 	);
 }
 
-function ObjectCard({ img, info, token, readiness }) {
+function ObjectCard({ id, name, location, img, investersAmount, readiness, tokenName, tokenImg, tokenPrice }) {
 	const backgroundImage = css`background-image: url(${
 		asset("dashboardIcon/percent.png")
 	}); background-size: no-repeat; background-position: center; background-size: cover; width: 62px; height: 62px;`;
@@ -76,11 +69,11 @@ function ObjectCard({ img, info, token, readiness }) {
 				<img class="rounded" src={img} style={{ width: 125, height: 120 }} />
 			</div>
 			<div class="flex flex-col" style={{ display: "flex", flex: 1 }}>
-				<text class="text-xs text-gray-dark">ОБЪЕКТ №{info?.numberObject}</text>
-				<text class="text-sm font-semibold mt-1">{info?.objectName}</text>
+				<text class="text-xs text-gray-dark">ОБЪЕКТ №{id}</text>
+				<text class="text-sm font-semibold mt-1">{name}</text>
 				<div class="flex flex-row mt-1">
 					<img src={asset("dashboardIcon/location.png")} style={{ width: 16, height: 16 }} />
-					<text class="text-yellow-dark text-xs">{info?.objectLocate}</text>
+					<text class="text-yellow-dark text-xs">{location}</text>
 				</div>
 			</div>
 			<div class={`flex flex-col justify-center items-center`} style={{ display: "flex", flex: 1 }}>
@@ -91,14 +84,14 @@ function ObjectCard({ img, info, token, readiness }) {
 			<div class="flex flex-col justify-center items-center" style={{ display: "flex", flex: 1 }}>
 				<div class="flex flex-row justify-center items-center">
 					<div class="mr-1" style={{ display: "flex", width: 20, height: 20 }}>
-						<img style={{ width: 20, height: 20 }} src={token?.tokenImage} />
+						<img style={{ width: 20, height: 20 }} src={tokenImg} />
 					</div>
 					<div style={{ display: "flex" }} class="flex flex-col">
-						<text class="font-light">{token?.tokenName}</text>
-						<text class="font-light">{token?.minXlm}</text>
+						<text class="font-light">{tokenName}</text>
+						<text class="font-light">{tokenPrice}</text>
 					</div>
 				</div>
-				<div class="text-sm font-light text-green-dark">{token?.payCount} УЖЕ КУПИЛИ</div>
+				<div class="text-sm font-light text-green-dark">{investersAmount} УЖЕ КУПИЛИ</div>
 			</div>
 			<div class="flex flex-col justify-center items-center" style={{ display: "flex", flex: 1 }}>
 				<button class="border border-gray-cool bg-white-light rounded-sm text-sm font-light hover:bg-gray-cool" style={{ width: "10rem", height: 40 }}>подробнее</button>

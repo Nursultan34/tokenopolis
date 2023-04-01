@@ -1,3 +1,5 @@
+import { expandGlob } from "https://deno.land/std@0.181.0/fs/mod.ts";
+
 // Returns a Response that redirects to `path`
 export function redirectTo(path: string): Response {
 	return new Response("", {
@@ -51,3 +53,9 @@ export function match<T, O>(target: T, options: [T, O][]): O {
 		throw new Error("non-exhaustive match");
 	}
 }
+
+export const getImages = (dir: string, id: string) =>
+	Deno.readDirSync(`/home/andrew/tokenopolis/static/${dir}/${id}`).map(p => `/${dir}/${id}/` + p);
+
+export const getFstImage = (dir: string, id: string) =>
+	`/${dir}/${id}/` + Deno.readDirSync(`/home/andrew/tokenopolis/static/${dir}/${id}`).next().value.name;

@@ -1,10 +1,18 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
-import screenWrapper from "@/lib/screenWrapper.tsx";
-import RelevantObjects from "@/components/dashboard/RelevantObjects.tsx";
-import Calendar from "@/components/dashboard/Calendar.tsx";
-import MyObjects from "@/components/dashboard/MyObjects.tsx";
-import Transactions from "@/components/dashboard/Transactions.tsx";
-import Wallet from "@/components/dashboard/Wallet.tsx";
+import { asset }                from "$fresh/runtime.ts";
+import { Handlers, PageProps }	from "$fresh/server.ts";
+import screenWrapper			from "@/lib/screenWrapper.tsx";
+import RelevantObjects			from "@/components/dashboard/RelevantObjects.tsx";
+import Calendar					from "@/components/dashboard/Calendar.tsx";
+import MyObjects				from "@/components/dashboard/MyObjects.tsx";
+import Transactions				from "@/components/dashboard/Transactions.tsx";
+import Wallet					from "@/components/dashboard/Wallet.tsx";
+
+import { getCookies }			from "https://deno.land/std@v0.171.0/http/cookie.ts";
+import { checkCookieAuth }		from "#/auth.ts";
+import { getUser, getObjects }	from "#/db.ts";
+import * as stellar				from "#/stellar.ts";
+import { redirectTo, const_, getFstImage } from "#/utils.ts";
+
 interface Token {
 	name: string;
 	img: string;
@@ -64,18 +72,38 @@ const testObjectToken: ITokenObject = {
 };
 
 export const handler: Handlers = {
-	GET(req, ctx) {
-		return ctx.render({
-			name: "Никита",
-			valXLM: 600,
-			valEUR: 1234,
-			balances: [
-				{ name: "POLISVILLA", img: "img.png", valXLM: 100, valEUR: 69 },
-			],
-			relevantObjects: [
-				{ id: 1, name: "uhh", img: "img.png", readiness: 80, token: {} },
-			],
-		});
+	async GET(req, ctx) {
+		const cookies = getCookies(req.headers);
+		const email = await checkCookieAuth(cookies);
+		if (email) {
+			// As we checked the JWT, non-existence of the user is impossible
+			const user = (await getUser(email))!;
+			console.log(user);
+			const name = user.name;
+			console.log(user.wallet);
+			const keypair = stellar.Keypair.fromSecret(user.wallet);
+			// Get the balances list
+			const balances =
+				await stellar.server.loadAccount(keypair.publicKey())
+							 		.then(stellar.getBalances)
+									.catch(const_([]));
+			const objects = (await getObjects())
+				.map(o => ({
+					img: asset(getFstImage("objects", o.id)),
+					tokenImg: asset(getFstImage("tokens", o.tokenName)),
+					...o
+				}));
+			return ctx.render({
+				name,
+				valXLM: 600,
+				valEUR: 1234,
+				address: keypair.publicKey(),
+				balances: [
+					{ name: "POLISVILLA", img: "img.png", valXLM: 100, valEUR: 69 },
+				],
+				relevantObjects: objects,
+			});
+		} else return redirectTo("/login");
 	},
 };
 
@@ -84,7 +112,8 @@ export default function Dashboard({ data }: PageProps<any>) {
 		<article class="h-full w-full flex-col" style={{ overflowY: "hidden" }}>
 			<div class="flex h-[53%] w-full">
 				<div class="h-full w-[68.5%] bg-white-light">
-					<RelevantObjects testObjectInfo={testObjectInfo} testObjectToken={testObjectToken} />
+					{ console.log(data.relevantObjects) }
+					<RelevantObjects objects={data.relevantObjects} />
 				</div>
 				<div class="h-full w-[1.5%]" />
 				<div class="h-full w-[30%]">
@@ -106,5 +135,5 @@ export default function Dashboard({ data }: PageProps<any>) {
 				</div>
 			</div>
 		</article>,
-	);
+	data.address, data.name);
 }
