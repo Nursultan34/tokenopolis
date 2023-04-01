@@ -1,21 +1,32 @@
 import { asset } from "$fresh/runtime.ts";
 import screenWrapper from "@/lib/screenWrapper.tsx";
+import { Handlers } from "$fresh/server.ts";
+import { getObject } from "#/db.ts";
+import { getImages } from "#/utils.ts";
 
-export default function Description() {
+export const handler: Handlers = {
+	async GET(req, ctx) {
+		const obj = await getObject(ctx.params.id);
+		const pics = getImages("objects", ctx.params.id);
+		return ctx.render(obj);
+	}
+}
+
+export default function Object({ data }) {
 	return screenWrapper(
-		<article class="bg-gray-white dark:bg-black text-black">
+		<article>
 			<div class="mx-auto mt-[15px] w-[1479px] h-[2302px]">
 				<p class="mb-[4px] text-gray-main">Объекты &gt; Porto Montenegro</p>
 				<section class="flex gap-x-[32px] pl-[36px] pt-[44px] pb-[48px] bg-white rounded-sm shadow-lg shadow-black/15">
-					<LeftSection />
-					<RightSection />
+					<LeftSection {...data} />
+					<RightSection {...data} />
 				</section>
 			</div>
 		</article>,
 	);
 }
 
-function LeftSection() {
+function LeftSection({ description, objectPrice, investersAmount }) {
 	return (
 		<div class="w-[804px] flex flex-col gap-[32px]">
 			<img src={asset("/100.png")} alt="" />
@@ -26,12 +37,12 @@ function LeftSection() {
 			</div>
 			<div class="flex gap-[80px] mt-[18px] ml-[37px] font-light">
 				<div class="text-center divide-y divide-gray-bg">
-					<p class="uppercase text-[18px]">Инвесторы</p>
+					<p class="uppercase text-[18px]">{investersAmount}</p>
 					<p class="text-[64px]">135</p>
 				</div>
 				<div class="text-center divide-y divide-gray-bg">
 					<p class="uppercase text-[18px]">Стоимость объекта</p>
-					<p class="text-[64px]">€202000</p>
+					<p class="text-[64px]">€{objectPrice}</p>
 				</div>
 				<div class="text-center divide-y divide-gray-bg">
 					<p class="uppercase text-[18px]">Стоимость аренды</p>
@@ -40,11 +51,7 @@ function LeftSection() {
 			</div>
 			<div class="flex flex-col gap-y-[30px] text-[18px]">
 				<p>Адрес: Tivat 85320, Montenegro</p>
-				<p>
-					Предлагаем апартаменты с 3 спальнями, 3 ванными комнатами и пристроенным гаражом на 2 машины. Здесь есть кухня с техникой из нержавеющей стали, фартук из
-					плитки, большая зона для завтрака и отдельная столовая. Все три спальни просторные, с гардеробными. Сзади внутренний дворик с установленным ограждением,
-					создающим отличное пространство для развлечений.
-				</p>
+				<p>{description}</p>
 			</div>
 			<div class="flex gap-x-[60px] mx-auto text-[18px]">
 				<div class="font-light">
@@ -93,14 +100,12 @@ function LeftSection() {
 	);
 }
 
-function RightSection() {
+function RightSection({ name, id, area, buildBegins, buildEnds }) {
 	return (
 		<div class="w-[510px] flex flex-col ">
 			<div class="flex flex-col">
-				<p class="font-bold font-open-sans text-[34px]">
-					Soho komleks, Montenegro
-				</p>
-				<p class="text-gray-main uppercase">Объект №40494</p>
+				<p class="font-bold font-open-sans text-[34px]">{name}</p>
+				<p class="text-gray-main uppercase">Объект №{id}</p>
 				<div class="flex gap-x-[4px]">
 					<img src={asset("/location.svg")} />
 					<p class="text-yellow-gold uppercase">Tivat 85320, Montenegro</p>
@@ -114,10 +119,11 @@ function RightSection() {
 					<p>Окончание строительства</p>
 				</div>
 				<div>
-					<p>75 кв м</p>
+					<p>{area} кв м</p>
 					<p>апартаменты</p>
-					<p>11-2022</p>
-					<p>12-2023</p>
+					{/* TODO: fix the dates */}
+					<p>{buildBegins}</p>
+					<p>{buildEnds}</p>
 				</div>
 			</div>
 			<div class="flex mt-[24px] gap-x-[20px] text-[18px]">
@@ -157,10 +163,10 @@ function RightSection() {
 					</p>
 					<div class="flex gap-x-[8px] mt-[20px]">
 						<button class="bg-green-3 w-[128px] h-[60px] flex justify-center items-center rounded-sm">
-							<img src={asset("phone.svg")} />
+							<img src={asset("/phone.svg")} />
 						</button>
 						<button class="bg-blue-1 w-[128px] h-[60px] flex justify-center items-center rounded-sm">
-							<img src={asset("telegram.svg")} />
+							<img src={asset("/telegram.svg")} />
 						</button>
 					</div>
 				</div>
