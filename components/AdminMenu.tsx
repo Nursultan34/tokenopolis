@@ -5,14 +5,14 @@ export default function AdminMenu() {
 		<nav class="col w-36 bg-sideMenuColor shadow-side">
 			<div class="col justify-start items-center flex-grow-4">
 				{[
-					{ img: "sideMenuIcon/buildings2.png", desc: "ОБЪЕКТЫ", href: "/admin/objects" },
-					{ img: "sideMenuIcon/calendar.png", desc: "КАЛЕНДАРЬ", href: "/admin/calendar" },
-					{ img: "sideMenuIcon/profilecircle.png", desc: "УВЕДОМЛЕНИЯ", href: "/admin/notifications" },
-					{ img: "sideMenuIcon/profilecircle.png", desc: "ВАШ МЕНЕДЖЕР", href: "/admin/manager" },
+					{ img: "/sideMenuIcon/buildings2.png", desc: "ОБЪЕКТЫ", href: "/admin/objects" },
+					{ img: "/sideMenuIcon/calendar.png", desc: "КАЛЕНДАРЬ", href: "/admin/calendar" },
+					{ img: "/sideMenuIcon/profilecircle.png", desc: "УВЕДОМЛЕНИЯ", href: "/admin/notifications" },
+					{ img: "/sideMenuIcon/profilecircle.png", desc: "ВАШ МЕНЕДЖЕР", href: "/admin/manager" },
 				].map(MenuButton)}
 			</div>
 			<div class="col justify-start items-center flex-1">
-				{[{ img: "headerImage/logout.png", desc: "ВЫХОД", href: "/login" }]
+				{[{ img: "/headerImage/logout.png", desc: "ВЫХОД", href: "/login" }]
 					.map(MenuButton)}
 			</div>
 		</nav>
