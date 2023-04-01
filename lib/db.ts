@@ -6,7 +6,7 @@ import { const_ } from "#/utils.ts";
 // import { Keypair } from "#/stellar.ts";
 
 const gq = (q: string) =>
-	fetch("http://localhost:5000/graphql", {
+	fetch("http://185.182.111.64:5000/graphql", {
 		method: "POST",
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify({ query: q }),
@@ -23,7 +23,7 @@ const extractEdges = key => res => res.data[key].edges.map(e => e.node);
 
 export async function addUserToDB({ email, name, passHash, wallet }): Promise<[]> {
 	if (await getUser(email) == undefined) {
-		await gq(`mutation CreateUser{createUser(input:{user:{email:"${email}"name:"${name}"password:"${passHash}"wallet:"${wallet}"}}){user{email}}}`);
+		console.log(await gq(`mutation CreateUser{createUser(input:{user:{email:"${email}"name:"${name}"password:"${passHash}"wallet:"${wallet}"}}){user{email}}}`));
 		return Promise.resolve([]);
 	} else {
 		return Promise.reject();
@@ -34,7 +34,7 @@ export async function addUserToDB({ email, name, passHash, wallet }): Promise<[]
 export const getUser = (email: string): Promise<Record<string, unknown> | undefined> =>
 	gq(`query GetUser{users(condition:{email:"${email}"}){edges{node{password birthDate email isAdmin name nick phone wallet}}}}`)
 		.then(extractEdges("users"))
-		.then(a => { console.log(a); return a; })
+		// .then(a => { console.log(a); return a; })
 		.then(l => l[0])
 		.catch(const_(undefined))
 
