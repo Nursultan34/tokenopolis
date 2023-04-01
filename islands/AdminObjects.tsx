@@ -1,5 +1,6 @@
 import { useState } from "preact/hooks";
 import { asset } from "$fresh/runtime.ts";
+import { createPortal } from "preact/compat";
 /* import { ObjectDataType } from "@/components/admin/AdminObjects.tsx"; */
 
 const ObjectData = [
@@ -96,7 +97,7 @@ const ObjectData = [
 	},
 ];
 
-export default function AdminObjectsCard () {
+export default function AdminObjects () {
 	const [size, setSize] = useState(false);
 	// useEffect(()=>{
 	//     console.log(size)
@@ -138,7 +139,7 @@ export default function AdminObjectsCard () {
 							<div>{investors}</div>
 						</div>
 						<div class="w-[14%] h-full flex">
-							<button onClick={() => console.log("rer")}>
+							<button onClick={() => createPortal(<CreateObjectModal/>, document.getElementById('modal-container')!)}>
 								<img src={asset("/adminIcon/update.png")} class="w-10 h-10" />
 							</button>
 							<button>
@@ -164,3 +165,11 @@ function Section() {
 		</section>
 	);
 }
+
+function CreateObjectModal () {
+	return(
+		<div class="bg-red-light w-52 h-52 justify-center items-center">
+			Hello
+		</div>
+	)
+} 
