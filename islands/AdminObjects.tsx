@@ -103,7 +103,7 @@ export default function AdminObjects() {
 	return (
 		<div class="w-full h-full overflow-scroll ">
 			<Section />
-			<div class="pl-6 pr-6 -mt-5">
+			<div class="pl-6 pr-6 -mt-5 col gap-y-3">
 				{ObjectData.map(AdminObjectCard)}
 			</div>
 		</div>
@@ -134,8 +134,8 @@ function CreateObjectModal() {
 function AdminObjectCard({ image, number, name, location, priceEuro, priceXLM, start, finish, tokenImage, token, investors }) {
 	const [isOpen, toggleOpen] = boolState();
 	return (
-		<div onClick={toggleOpen} class={`flex-col ${isOpen ? 'max-h-fit' : 'max-h-32'} transition-all`}>
-			<div class={`w-full h-32 flex bg-gray-light mt-5`}>
+		<div onClick={toggleOpen} class={`flex-col ${isOpen ? 'max-h-60' : 'max-h-32'} transition-height`}>
+			<div class={`w-full h-32 flex bg-gray-light mt-5 relative z-50`}>
 				<div class="w-[14%] h-full flex items-center justify-center">
 					<img src={image} class="w-24 h-24" />
 				</div>
@@ -171,7 +171,7 @@ function AdminObjectCard({ image, number, name, location, priceEuro, priceXLM, s
 					</button>
 				</div>
 			</div>
-			<div class={`${isOpen ? 'opacity-100': 'opacity-0'} transition-opacity`}>
+			<div class={`${isOpen ? 'opacity-[0.99]': 'opacity-0'} z-0 transition-opacity`}>
 				<div>
 					<div>Площадь объекта</div>
 					<input/>

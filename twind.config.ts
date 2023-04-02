@@ -27,6 +27,7 @@ export default {
 		"scrollbar":
 			css`&::-webkit-scrollbar { width: 10px; }; &::-webkit-scrollbar-track { background-color: #FCFCFC; border: 1px solid #B8B8B7; border-radius: 2px; }; &::-webkit-scrollbar-thumb { background-color: #FFD600; border: 1px solid #B8B8B7; border-radius: 2px; }`,
 		"ignore-clicks": css`pointerEvents: none;`,
+		"transition-height": css`transition: max-height 1s`,
 	},
 	content: [
 		"./component/**/*.{js,jsx,ts,tsx}",
