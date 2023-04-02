@@ -10,15 +10,19 @@ export default function ModalContainer() {
 		new MutationObserver(updateIsDisplayed).observe(modalContainer!, { childList: true, subtree: true });
 	}, [isDisplayed]);
 
-	return <div id="modal-container"
-				class={"w-screen h-screen flex justify-center items-center bg-black absolute transition-opacity "
-					 + (isDisplayed ? "opacity-50" : "opacity-0 ignore-clicks")}
-				onClick={() => removeChildren(document.getElementById("modal-container"))}>
-	</div>;
+	return (
+		<div
+			id="modal-container"
+			class={"w-screen h-screen flex justify-center items-center bg-black absolute transition-opacity " +
+				(isDisplayed ? "opacity-50" : "opacity-0 ignore-clicks")}
+			onClick={() => removeChildren(document.getElementById("modal-container"))}
+		>
+		</div>
+	);
 }
 
 function removeChildren(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
+	while (parent.firstChild) {
+		parent.removeChild(parent.firstChild);
+	}
 }

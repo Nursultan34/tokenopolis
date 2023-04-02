@@ -8,11 +8,11 @@ import { const_ } from "#/utils.ts";
 const gq = (q: string) =>
 	fetch("http://185.182.111.64:5000/graphql", {
 		method: "POST",
-		headers: {'Content-Type': 'application/json'},
+		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({ query: q }),
-	}).then(res => res.json());
+	}).then((res) => res.json());
 
-const extractEdges = key => res => res.data[key].edges.map(e => e.node);
+const extractEdges = (key) => (res) => res.data[key].edges.map((e) => e.node);
 
 // const redis = await connect({
 // 	username: "default",
@@ -35,27 +35,24 @@ export const getUser = (email: string): Promise<Record<string, unknown> | undefi
 	gq(`query GetUser{users(condition:{email:"${email}"}){edges{node{password birthDate email isAdmin name nick phone wallet}}}}`)
 		.then(extractEdges("users"))
 		// .then(a => { console.log(a); return a; })
-		.then(l => l[0])
-		.catch(const_(undefined))
+		.then((l) => l[0])
+		.catch(const_(undefined));
 
 export const getObjects = () =>
 	gq(`query RelevantObjects{objects{edges{node{id name tokenName tokenPrice location investersAmount}}}}`)
 		.then(extractEdges("objects"))
-		.catch(const_(undefined))
+		.catch(const_(undefined));
 
-export const getObject = id =>
+export const getObject = (id) =>
 	gq(`query Object{objects(condition:{id: ${id}}){edges{node{id name tokenName tokenPrice location investersAmount area buildBegins buildEnds description objectPrice}}}}`)
 		.then(extractEdges("objects"))
-        .then($ => $[0])
-        .catch(const_(undefined))
+		.then(($) => $[0])
+		.catch(const_(undefined));
 
 // User exists, password is correct => true
 // User exists, password is incorrect => false
 // User doesn't exist => undefined
 export async function verifyPassword(email: string, password: string): Promise<boolean | undefined> {
-	const password_hash =
-		(await gq(`query GetUser{users(condition:{email:"${email}"}){edges{node{password}}}}`).then(extractEdges))[0]?.password;
-	return (password_hash == undefined)
-		? undefined
-		: bcrypt.compare(password, password_hash);
+	const password_hash = (await gq(`query GetUser{users(condition:{email:"${email}"}){edges{node{password}}}}`).then(extractEdges))[0]?.password;
+	return (password_hash == undefined) ? undefined : bcrypt.compare(password, password_hash);
 }

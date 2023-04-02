@@ -53,7 +53,7 @@ export default function RelevantObjects({ objects }) {
 		<div class="bg-white h-full w-full pl-5 pr-5 overflow-hidden">
 			<UpCardComponent first="Актуальные объекты" second="ГОТОВНОСТЬ" three="ТОКЕНЫ" typeCard="all" />
 			<div class={`mt-2 h-5/6 overflow-auto ${tw(scrollbarStyle)} pl-2`}>
-				{ objects.map(ObjectCard) }
+				{objects.map(ObjectCard)}
 			</div>
 		</div>
 	);
@@ -94,7 +94,9 @@ function ObjectCard({ id, name, location, img, investersAmount, readiness, token
 				<div class="text-sm font-light text-green-dark">{investersAmount} УЖЕ КУПИЛИ</div>
 			</div>
 			<div class="flex flex-col justify-center items-center" style={{ display: "flex", flex: 1 }}>
-				<a href={`/object/${id}`} class="border border-gray-cool bg-white-light rounded-sm text-sm font-light hover:bg-gray-cool" style={{ width: "10rem", height: 40 }}>подробнее</a>
+				<a href={`/object/${id}`} class="border border-gray-cool bg-white-light rounded-sm text-sm font-light hover:bg-gray-cool" style={{ width: "10rem", height: 40 }}>
+					подробнее
+				</a>
 				<button class="border mt-1 border-yellow-orange bg-yellow-orange rounded-sm font-light hover:bg-yellow-main" style={{ width: "10rem", height: 40 }}>
 					ИНВЕСТИРОВАТЬ
 				</button>

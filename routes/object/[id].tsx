@@ -9,8 +9,8 @@ export const handler: Handlers = {
 		const obj = await getObject(ctx.params.id);
 		// const pics = getImages("objects", ctx.params.id);
 		return ctx.render(obj);
-	}
-}
+	},
+};
 
 export default function Object({ data }) {
 	return screenWrapper(
