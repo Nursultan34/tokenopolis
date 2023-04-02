@@ -1,3 +1,4 @@
+// TODO: connect this to the header
 export default function AddressView({ address }: { address: string }) {
 	return (
 		<span class="text-xs" title="Нажмите, чтобы скопировать адрес кошелька в буфер обмена" onClick={(_) => navigator.clipboard.writeText(address)}>

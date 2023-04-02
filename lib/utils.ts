@@ -1,4 +1,4 @@
-import { expandGlob } from "https://deno.land/std@0.181.0/fs/mod.ts";
+import { render } from 'preact';
 
 // Returns a Response that redirects to `path`
 export function redirectTo(path: string): Response {
@@ -45,6 +45,7 @@ export const const_ = <T>(v: T) => (..._: unknown[]) => v;
 export const valuesMatch = (target: Record<string, any>) => (value: Record<string, any>) => Object.keys(value).map((key) => value[key] == target[key]).reduce((a, b) => a && b);
 export const split = (delimiter: string) => (input: string) => input.split(delimiter);
 
+// Replace with Ramda's cond
 export function match<T, O>(target: T, options: [T, O][]): O {
 	const result = options.find((x) => target == x[0]) as [T, O];
 	if (result != undefined) {
@@ -54,6 +55,15 @@ export function match<T, O>(target: T, options: [T, O][]): O {
 	}
 }
 
-export const getImages = (dir: string, id: string) => Deno.readDirSync(`./static/${dir}/${id}`).map((p) => `/${dir}/${id}/` + p);
+export const getImages = (dir: string, id: string) =>
+	Array.from(Deno.readDirSync(`./static/${dir}/${id}`)).map(p => `/${dir}/${id}/` + p.name);
 
-export const getFstImage = (dir: string, id: string) => `/${dir}/${id}/` + Deno.readDirSync(`./static/${dir}/${id}`).next().value.name;
+export const getFstImage = (dir: string, id: string) =>
+	`/${dir}/${id}/` + Deno.readDirSync(`./static/${dir}/${id}`).next().value.name;
+
+export const popUp = content => render(content, document.getElementById("modal-container")!)
+
+export const eur = Intl.NumberFormat('en-DE', {
+    style: 'currency',
+    currency: 'EUR',
+});

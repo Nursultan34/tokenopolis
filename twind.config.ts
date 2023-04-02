@@ -7,27 +7,36 @@ export default {
 	selfURL: import.meta.url,
 	darkMode: "class",
 	plugins: {
-		"row": apply`flex flex-row`,
-		"col": apply`flex flex-col`,
-		"login-main": apply`w-full lg:row h-screen bg(login-bg cover dark:none)`,
-		"login-h1": apply`text-3xl lg:text-4xl font-light w-full lg:mb-14 mt-6 lg:mt-0`,
-		"login-input": apply`my-2 px-7 py-5 w-full bg-white dark:bg-black border border-black dark:border-white rounded-md placeholder::(text-black dark:text-white text-xs)`,
-		"login-header": apply`lg:absolute w-full h-24 row justify-between children:(row items-center)`,
-		"login-form": apply`col lg:h-full px-9 lg:(pl-72 pr-16) justify-center lg:w-1/2`,
-		"login-submit": apply`bg-yellow py-3 w-full lg:w-3/4 my-5 rounded-md text-xl`,
-		"lk-input": apply`p-5 bg-white dark:bg-slate-2 rounded-sm placeholder::text-gray-600`,
-		"bg-none": css({ backgroundImage: "none" }),
+		// Base classes
+		"row":		apply`flex flex-row`,
+		"col":		apply`flex flex-col`,
+		"center":	apply`flex justify-center items-center`,
+		"bg-none":				css({ backgroundImage: "none" }),
+		"aspect-square":		css`aspect-ratio: 1 / 1;`,
+		"flex-basis-1/2":		css`flex-basis: calc(50% - 1.25rem);`,
+		"flex-basis-1/3":		css`flex-basis: calc(33% - 1.25rem);`,
+		"flex-basis-full":		css`flex-basis: 100%;`,
+		"flex-basis-fit":		css`flex-basis: fit-content;`,
+		"ignore-clicks":		css`pointerEvents: none;`,
+		"transition-height":	css`transition: max-height 1s`,
+		// FIXME
 		"gridStyle": css`grid-column-start: 1; grid-column-end: 3; grid-auto-rows: 50px`,
-		"aspect-square": css`aspect-ratio: 1 / 1;`,
-		"flex-basis-1/2": css`flex-basis: calc(50% - 1.25rem);`,
-		"flex-basis-1/3": css`flex-basis: calc(33% - 1.25rem);`,
-		"flex-basis-full": css`flex-basis: 100%;`,
-		"flex-basis-fit": css`flex-basis: fit-content;`,
-		"profile-selin": apply`pl-4 bg-gray-back rounded-sm text-dark-midnight text-lg`,
-		"scrollbar":
-			css`&::-webkit-scrollbar { width: 10px; }; &::-webkit-scrollbar-track { background-color: #FCFCFC; border: 1px solid #B8B8B7; border-radius: 2px; }; &::-webkit-scrollbar-thumb { background-color: #FFD600; border: 1px solid #B8B8B7; border-radius: 2px; }`,
-		"ignore-clicks": css`pointerEvents: none;`,
-		"transition-height": css`transition: max-height 1s`,
+		// Login elements
+		"login-main":	apply`w-full lg:row h-screen bg(login-bg cover dark:none)`,
+		"login-h1":		apply`text-3xl lg:text-4xl font-light w-full lg:mb-14 mt-6 lg:mt-0`,
+		"login-input":	apply`my-2 px-7 py-5 w-full bg-white dark:bg-black border border-black dark:border-white rounded-md placeholder::(text-black dark:text-white text-xs)`,
+		"login-header": apply`lg:absolute w-full h-24 row justify-between children:(row items-center)`,
+		"login-form":	apply`col lg:h-full px-9 lg:(pl-72 pr-16) justify-center lg:w-1/2`,
+		"login-submit": apply`bg-yellow py-3 w-full lg:w-3/4 my-5 rounded-md text-xl`,
+		// Dashboard types
+		"lk-input":			apply`p-5 bg-white dark:bg-slate-2 rounded-sm placeholder::text-gray-600`,
+		"header":			apply`row w-full h-24 bg-white-dark shadow-header z-20`,
+		"profile-selin":	apply`pl-4 bg-gray-back rounded-sm text-dark-midnight text-lg`,
+		"scrollbar": css`
+			&::-webkit-scrollbar { width: 10px; };
+			&::-webkit-scrollbar-track { background-color: #FCFCFC; border: 1px solid #B8B8B7; border-radius: 2px; };
+			&::-webkit-scrollbar-thumb { background-color: #FFD600; border: 1px solid #B8B8B7; border-radius: 2px; }
+		`,
 	},
 	content: [
 		"./component/**/*.{js,jsx,ts,tsx}",

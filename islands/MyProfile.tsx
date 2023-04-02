@@ -24,58 +24,55 @@ export interface IPersonData {
 }
 
 export default function MyProfile() {
-	const personDate: IPersonData = {
-		personFirstData: {
-			img: "/pfp.png",
-			firstName: "Никита Решетеев",
-			lastName: "Resheteev",
-		},
-		personSecondData: {
-			birthday: "15.05.1995",
-			city: "Москва",
-			country: "Россия",
-			email: "nikita.resheteev@gmail.com",
-			extraEmail: "resheteev@yandex.ru",
-			extraPhoneNumber: "955 987-65-43",
-			phoneNumber: "922 123-45-67",
-			registrationDay: "02.02.2023",
-		},
+	const personData = {
+		pfp: "/pfp.png",
+		firstName: "Никита Решетеев",
+		lastName: "Resheteev",
+		birthday: "15.05.1995",
+		city: "Москва",
+		country: "Россия",
+		email: "nikita.resheteev@gmail.com",
+		extraEmail: "resheteev@yandex.ru",
+		extraPhoneNumber: "955 987-65-43",
+		phoneNumber: "922 123-45-67",
+		registrationDay: "02.02.2023",
 		about: "В меру упитанный мужчина в самом расцвете сил.",
-	};
+	}
 
 	return (
 		<div class="w-[39vw] col justify-between px-[56px] pt-[42px] pb-[80px] bg-white text-darkGray">
 			<div class="col">
 				<span class="text-2xl font-bold">Мой профиль</span>
 				<span class="text-sm">Личная информация</span>
-				<PersonPhoto data={personDate.personFirstData} />
+				<PersonPhoto img={personData.pfp} firstName={personData.firstName} lastName={personData.lastName} />
 			</div>
-			<PersonInfo data={personDate.personSecondData} />
+			<PersonInfo />
 			<div class="relative col">
 				<span class="text-xs">О СЕБЕ</span>
-				<span class="ml-4 mt-2 pr-6 text-lg overflow-auto">{personDate.about}</span>
+				<span class="ml-4 mt-2 pr-6 text-lg overflow-auto">{personData.about}</span>
 				<img class="absolute bottom-0 right-0 cursor-pointer" src={asset("/profile/edit.svg")} alt="icon" />
 			</div>
 		</div>
 	);
 }
 
-function PersonPhoto({ data }: { data: IPersonFirstData }) {
+function PersonPhoto({ img, firstName, lastName }) {
 	return (
 		<div class="row mt-5 items-center">
 			<div class="relative w-[210px]">
-				<img class="rounded-full" src={asset(data.img)} alt="photo" />
+				<img class="rounded-full" src={asset(img)} alt="photo" />
 				<img class="absolute bottom-3 right-0 cursor-pointer" src={asset("/profile/frame.svg")} alt="icon" />
 			</div>
 			<div class="col ml-9">
-				<span class="text-4xl font-bold">{data.firstName}</span>
-				<span class="text-2xl font-bold mt-3">{data.lastName}</span>
+				<span class="text-4xl font-bold">{firstName}</span>
+				<span class="text-2xl font-bold mt-3">{lastName}</span>
 			</div>
 		</div>
 	);
 }
 
-function PersonInfo({ data }: { data: IPersonSecondData }) {
+// ???
+function PersonInfo() {
 	const labelArray: string[] = [
 		"ДАТА РОЖДЕНИЯ",
 		"ДАТА РЕГИСТРАЦИИ",

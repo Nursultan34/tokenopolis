@@ -1,6 +1,5 @@
 import { asset } from "$fresh/runtime.ts";
-//import IconMessageUser from "@/islands/IconUser.tsx";
-import { boolState } from "#/utils.ts";
+import { boolState, popUp } from "#/utils.ts";
 import { useEffect, useReducer } from "preact/hooks";
 
 function match<T, O>(target: T, options: [T, O][]): O {
@@ -12,17 +11,7 @@ function match<T, O>(target: T, options: [T, O][]): O {
 	}
 }
 
-export enum PopUp {
-	Notifications,
-	Settings,
-	None,
-}
-
 export default function Header({ address, name }) {
-	const [currentPopUp, openPopUp] = useReducer(
-		(currentPopUp: PopUp, newPopUp: PopUp) => currentPopUp == newPopUp ? PopUp.None : newPopUp,
-		PopUp.None,
-	);
 	const [isDark, toggleTheme] = useReducer((dark: boolean, _) => {
 		const newTheme = !dark;
 		localStorage.setItem("dark", newTheme.toString());
@@ -31,64 +20,27 @@ export default function Header({ address, name }) {
 	useEffect(() => setHtmlDark(isDark), [isDark]);
 
 	return (
-		<header class="h-24 flex-shrink-0 w-full bg-white-dark dark:bg-black flex flex-row shadow-header z-20">
-			<div class="grid flex-none w-36 justify-items-center items-center">
+		<header class="header">
+			<div class="center w-36">
 				<img src={asset("/headerImage/LogoIcon.png")} class="w-11 h-12" />
 			</div>
-			<div class="flex-auto w-max flex items-center">
-				<text class="text-sm text-gray-dashed font-sans font-light ml-6">
-					ВАШ КОШЕЛЕК:
-				</text>
-				<text class="text-sm text-gray-dashed font-sans ml-3">
-					{/* 1Cs4wu6pu5qCZ35bSLNVzG.. */}
-					{address}
-				</text>
-				<img
-					class="ml-3"
-					src={asset("/headerImage/documentcopy.png")}
-					style={{ width: 24, height: 24 }}
-				>
-				</img>
-				<img
-					class="ml-3"
-					src={asset("/headerImage/QrCode.png")}
-					style={{ width: 47, height: 39 }}
-				>
-				</img>
+			<div class="flex-auto w-max flex items-center text-sm text-gray-dashed font-sans">
+				<text class="font-light ml-6">ВАШ КОШЕЛЕК:</text>
+				<text class="ml-3">{address}</text>
+				<img class="ml-3 w-6 h-6" src={asset("/headerImage/documentcopy.png")} />
+				<img class="ml-3 h-9 w-12" src={asset("/headerImage/QrCode.png")} />
 			</div>
 			<div class="flex-auto flex flex-row w-max items-center justify-end">
 				<div class="flex flex-row justify-center items-center mr-4">
-					<div class="w-[56px] h-[56px] rounded-[50px] border border-gray-bg mr-3 flex justify-center items-center">
-						<img
-							src={asset("/headerImage/EllipseImage.png")}
-							class="w-[48px] h-[48px]"
-						/>
+					<div class="w-14 h-14 rounded-full border border-gray-bg mr-3 center">
+						<img src={asset("/headerImage/EllipseImage.png")} class="w-12 h-12" />
 					</div>
 					<text class="font-medium mr-3">{name}</text>
-					<div class="mr-7 flex">
-						<img
-							src={asset("/headerImage/Account.png")}
-							style={{ width: 44, height: 44 }}
-							class="hover:opacity-70 mr-3"
-							onClick={() => openPopUp(PopUp.Settings)}
-						/>
-						<img
-							class="mr-3"
-							src={asset("/headerImage/Message.png")}
-							style={{ width: 44, height: 44 }}
-							onClick={() => openPopUp(PopUp.Notifications)}
-						/>
-						{match(currentPopUp, [
-							[PopUp.Notifications, <NotificationsPopUp />],
-							[
-								PopUp.Settings,
-								<SettingsPopUp isDark={isDark} toggleTheme={toggleTheme} />,
-							],
-							[PopUp.None, <></>],
-						])}
-						{(currentPopUp != PopUp.None) && (
-							<div onClick={() => openPopUp(PopUp.None)} class="h-[calc(100vh-93px)] w-screen bg-black absolute bottom-0 left-0 opacity-50 z-10" />
-						)}
+					<div class="mr-7 center children:(w-11 h-11 mr-3 hover:opacity-70)">
+						<img src={asset("/headerImage/Account.png")}
+							 onClick={() => popUp(<SettingsPopUp isDark={isDark} toggleTheme={toggleTheme} />)} />
+						<img src={asset("/headerImage/Message.png")}
+						     onClick={() => popUp(<NotificationsPopUp />)} />
 					</div>
 				</div>
 			</div>

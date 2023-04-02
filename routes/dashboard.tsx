@@ -6,6 +6,7 @@ import Calendar from "@/components/dashboard/Calendar.tsx";
 import MyObjects from "@/components/dashboard/MyObjects.tsx";
 import Transactions from "@/components/dashboard/Transactions.tsx";
 import Wallet from "@/components/dashboard/Wallet.tsx";
+import ModalContainer from "@/islands/ModalContainer.tsx"
 
 import { getCookies } from "https://deno.land/std@v0.171.0/http/cookie.ts";
 import { checkCookieAuth } from "#/auth.ts";
@@ -109,6 +110,7 @@ export const handler: Handlers = {
 export default function Dashboard({ data }: PageProps<any>) {
 	return screenWrapper(
 		<article class="h-full w-full flex-col" style={{ overflowY: "hidden" }}>
+			<ModalContainer />
 			<div class="flex h-[53%] w-full">
 				<div class="h-full w-[68.5%] bg-white-light">
 					<RelevantObjects objects={data.relevantObjects} />

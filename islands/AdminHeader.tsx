@@ -1,29 +1,9 @@
 import { asset } from "$fresh/runtime.ts";
-//import IconMessageUser from "@/islands/IconUser.tsx";
-import { boolState } from "#/utils.ts";
-import { useEffect, useMemo, useReducer, useState } from "preact/hooks";
-import { createPortal } from "preact/compat";
-
-function match<T, O>(target: T, options: [T, O][]): O {
-	const result = options.find((x) => target == x[0]) as [T, O];
-	if (result != undefined) {
-		return result[1];
-	} else {
-		throw new Error("non-exhaustive match");
-	}
-}
-
-export enum PopUp {
-	Notifications,
-	Settings,
-	None,
-}
+import { boolState, match } from "#/utils.ts";
+import { useEffect, useReducer } from "preact/hooks";
+import { popUp } from "#/utils.ts";
 
 export default function AdminHeader() {
-	const [currentPopUp, openPopUp] = useReducer(
-		(currentPopUp: PopUp, newPopUp: PopUp) => currentPopUp == newPopUp ? PopUp.None : newPopUp,
-		PopUp.None,
-	);
 	const [isDark, toggleTheme] = useReducer((dark: boolean, _) => {
 		const newTheme = !dark;
 		localStorage.setItem("dark", newTheme.toString());
@@ -31,57 +11,24 @@ export default function AdminHeader() {
 	}, localStorage.getItem("dark") != "false");
 	useEffect(() => setHtmlDark(isDark), [isDark]);
 
-	const [test, setTest] = useState(false);
-	/* console.log(test, "test"); */
-	const createToken = () => {
-		setTest((prev) => !prev);
-	};
-	useEffect(() => {
-		const modalRootElement = document.querySelector("#modal");
-	}, [test]);
-	const createObject = () => {
-		window.alert("object");
-	};
 	return (
-		<header class="h-24 flex-shrink-0 w-full bg-white-dark flex flex-row shadow-header z-20">
-			<div class="grid flex-none w-36 justify-items-center items-center">
+		<header class="header">
+			<div class="center w-36">
 				<img src={asset("/headerImage/LogoIcon.png")} class="w-11 h-12" />
 			</div>
-			<div class="flex-auto flex flex-row w-max items-center justify-end">
-				<div class="flex flex-row justify-center items-center mr-4">
-					<CustomButton name="Добавить токен" buttonFunction={createToken} />
-					<CustomButton name="Добавить объект" buttonFunction={createObject} />
-					<div class="w-[56px] h-[56px] rounded-[50px] border border-gray-bg mr-3 flex justify-center items-center">
-						<img
-							src={asset("/headerImage/EllipseImage.png")}
-							class="w-[48px] h-[48px]"
-						/>
+			<div class="row items-center justify-end w-max">
+				<div class="row center mr-4">
+					<Button name="Добавить токен"  onClick={() => popUp(<ModalView />)} />
+					<Button name="Добавить объект" onClick={() => popUp(<ModalView />)} />
+					<div class="center w-14 h-14 mr-3 rounded-full border border-gray-bg">
+						<img src={asset("/headerImage/EllipseImage.png")} class="w-[48px] h-[48px]"/>
 					</div>
 					<text class="font-medium mr-3">Nikita Resheteev</text>
-					<div class="mr-7 flex">
-						<img
-							src={asset("/headerImage/Account.png")}
-							style={{ width: 44, height: 44 }}
-							class="hover:opacity-70 mr-3"
-							onClick={() => openPopUp(PopUp.Settings)}
-						/>
-						<img
-							class="mr-3"
-							src={asset("/headerImage/Message.png")}
-							style={{ width: 44, height: 44 }}
-							onClick={() => openPopUp(PopUp.Notifications)}
-						/>
-						{match(currentPopUp, [
-							[PopUp.Notifications, <NotificationsPopUp />],
-							[
-								PopUp.Settings,
-								<SettingsPopUp isDark={isDark} toggleTheme={toggleTheme} />,
-							],
-							[PopUp.None, <></>],
-						])}
-						{currentPopUp != PopUp.None && (
-							<div onClick={() => openPopUp(PopUp.None)} class="h-[calc(100vh-93px)] w-screen bg-black absolute bottom-0 left-0 opacity-50 z-10" />
-						)}
+					<div class="mr-7 center children:(w-11 h-11 mr-3 hover:opacity-70)">
+						<img src={asset("/headerImage/Account.png")}
+							 onClick={() => popUp(<SettingsPopUp isDark={isDark} toggleTheme={toggleTheme} />)} />
+						<img src={asset("/headerImage/Message.png")}
+						     onClick={() => popUp(<NotificationsPopUp />)} />
 					</div>
 				</div>
 			</div>
@@ -89,8 +36,10 @@ export default function AdminHeader() {
 	);
 }
 
+// FIXME
+// literally the hell
 function SettingsPopUp({ isDark, toggleTheme }) {
-	let [displayLangMenu, toggleLangMenu] = boolState();
+	const [displayLangMenu, toggleLangMenu] = boolState();
 	return (
 		<div
 			class="bg-white-dark absolute z-20 right-4 top-24"
@@ -303,9 +252,9 @@ function setHtmlDark(dark: boolean) {
 	}
 }
 
-function CustomButton({ name, buttonFunction }: { name: string; buttonFunction: () => void }) {
+function Button({ name, onClick }: { name: string; onClick: () => void }) {
 	return (
-		<button class="bg-yellow-orange w-60 h-12 mr-5 active:bg-yellow-orange focus:bg-yellow-orange" onClick={buttonFunction}>
+		<button class="bg-yellow-orange w-60 h-12 mr-5 active:bg-yellow-orange focus:bg-yellow-orange" onClick={onClick}>
 			{name}
 		</button>
 	);
@@ -313,7 +262,7 @@ function CustomButton({ name, buttonFunction }: { name: string; buttonFunction: 
 
 const ModalView = () => {
 	return (
-		<div class="w-full h-full flex justify-center items-center absolute bg-gray-dashed">
+		<div class="w-full h-full center absolute bg-gray-dashed">
 			<div>
 				Modalka
 			</div>

@@ -2,15 +2,18 @@ import { asset } from "$fresh/runtime.ts";
 import screenWrapper from "@/lib/screenWrapper.tsx";
 import { Handlers } from "$fresh/server.ts";
 import { getObject } from "#/db.ts";
-import { getImages } from "#/utils.ts";
+import { getImages, redirectTo, eur } from "#/utils.ts";
 
 export const handler: Handlers = {
 	async GET(req, ctx) {
 		const obj = await getObject(ctx.params.id);
-		// const pics = getImages("objects", ctx.params.id);
-		return ctx.render(obj);
-	},
-};
+		if (obj == undefined)
+			return redirectTo("/no-such-object"); // Must be 404
+		const pics = getImages("objects", ctx.params.id);
+		console.log(pics);
+		return ctx.render({ pics, ...obj });
+	}
+}
 
 export default function Object({ data }) {
 	return screenWrapper(
@@ -26,10 +29,10 @@ export default function Object({ data }) {
 	);
 }
 
-function LeftSection({ description, objectPrice, investersAmount }) {
+function LeftSection(data) {
 	return (
 		<div class="w-[804px] flex flex-col gap-[32px]">
-			<img src={asset("/100.png")} alt="" />
+			<img src={asset(data.pics[0])} alt="" />
 			<div class="flex gap-[20px] mt-[-12px]">
 				<img src={asset("/slide1.png")} alt="" />
 				<img src={asset("/slide2.png")} alt="" />
@@ -37,17 +40,21 @@ function LeftSection({ description, objectPrice, investersAmount }) {
 			</div>
 			<div class="flex gap-[80px] mt-[18px] ml-[37px] font-light">
 				<div class="text-center divide-y divide-gray-bg">
-					<p class="uppercase text-[18px]">{investersAmount}</p>
-					<p class="text-[64px]">135</p>
+					<p class="uppercase text-[18px]">Инвесторы</p>
+					<p class="text-[64px]">{data.investersAmount}</p>
 				</div>
 				<div class="text-center divide-y divide-gray-bg">
 					<p class="uppercase text-[18px]">Стоимость объекта</p>
-					<p class="text-[64px]">€{objectPrice}</p>
+					<p class="text-[64px]">{eur.format(data.objectPrice)}</p>
+				</div>
+				<div class="text-center divide-y divide-gray-bg">
+					<p class="uppercase text-[18px]">Стоимость аренды</p>
+					<p class="text-[64px]">€1430</p>
 				</div>
 			</div>
 			<div class="flex flex-col gap-y-[30px] text-[18px]">
-				<p>Адрес: Tivat 85320, Montenegro</p>
-				<p>{description}</p>
+				<p>Адрес: {data.location}</p>
+				<p>{data.description}</p>
 			</div>
 			<div class="flex gap-x-[60px] mx-auto text-[18px]">
 				<div class="font-light">
@@ -96,12 +103,12 @@ function LeftSection({ description, objectPrice, investersAmount }) {
 	);
 }
 
-function RightSection({ name, id, area, buildBegins, buildEnds }) {
+function RightSection(data) {
 	return (
 		<div class="w-[510px] flex flex-col ">
 			<div class="flex flex-col">
-				<p class="font-bold font-open-sans text-[34px]">{name}</p>
-				<p class="text-gray-main uppercase">Объект №{id}</p>
+				<p class="font-bold font-open-sans text-[34px]">{data.name}</p>
+				<p class="text-gray-main uppercase">Объект №{data.id}</p>
 				<div class="flex gap-x-[4px]">
 					<img src={asset("/location.svg")} />
 					<p class="text-yellow-gold uppercase">Tivat 85320, Montenegro</p>
@@ -115,11 +122,11 @@ function RightSection({ name, id, area, buildBegins, buildEnds }) {
 					<p>Окончание строительства</p>
 				</div>
 				<div>
-					<p>{area} кв м</p>
+					<p>{data.area} кв м</p>
 					<p>апартаменты</p>
 					{/* TODO: fix the dates */}
-					<p>{buildBegins}</p>
-					<p>{buildEnds}</p>
+					<p>{data.buildBegins}</p>
+					<p>{data.buildEnds}</p>
 				</div>
 			</div>
 			<div class="flex mt-[24px] gap-x-[20px] text-[18px]">
@@ -137,11 +144,11 @@ function RightSection({ name, id, area, buildBegins, buildEnds }) {
 			<div class="flex flex-col mt-[40px] gap-y-[12px]">
 				<div>
 					<p class="uppercase text-gray-main">Цена</p>
-					<p class="font-light text-[64px] leading-[75px]">€285,14</p>
+					<p class="font-light text-[64px] leading-[75px]">{eur.format(data.objectPrice)}</p>
 				</div>
 				<div>
 					<p class="uppercase text-gray-main">ТОКЕН цена</p>
-					<p class="font-light text-orange text-[64px] leading-[75px]">€35,7</p>
+					<p class="font-light text-orange text-[64px] leading-[75px]">{data.tokenPrice}</p>
 				</div>
 			</div>
 			<button class="uppercase bg-orange mt-[24px] w-[360px] h-[64px]">
