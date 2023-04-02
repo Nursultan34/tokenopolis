@@ -1,6 +1,7 @@
 import { asset } from "$fresh/runtime.ts";
 import { useEffect, useMemo, useReducer, useState } from "preact/hooks";
 import { match } from "#/utils.ts";
+import * as R from "https://deno.land/x/ramda@v0.27.2/mod.ts";
 
 enum Filter {
 	Relevant,
@@ -12,29 +13,29 @@ export default function ObjectsTable({ objects }) {
 	const [objectsState, setObjectsState] = useState(objects);
 
 	const [filteredBy, setFilter] = useState(Filter.Relevant);
-	const filterObjects = (filter) =>
+	const filterObjects = filter =>
 		match(filter, [
-			[Filter.Relevant, objectsState],
-			[Filter.My, objectsState.filter((o) => o.isMyObject)],
-			[Filter.Favorite, objectsState.filter((o) => o.favorite)],
-		]);
+			[Filter.Relevant, R.identity],
+			[Filter.My,       R.filter(R.prop("isMyObject"))],
+			[Filter.Favorite, R.filter(R.prop("favorite"))],
+		])(objectsState);
 
 	const setLike = (id: number, favoriteState: boolean) => {
-		const newObjects = [...objectsState];
-		const targetIndex = newObjects.findIndex((obj) => obj.number === id);
-		newObjects[targetIndex].favorite = favoriteState;
-		setObjectsState(newObjects);
+		const favoriteSetter = R.set(R.lensProp("favorite"), favoriteState);
+		const object_index	 = R.findIndex(R.propEq("number", id));
+		const new_objects	 = R.adjust(object_index, favoriteSetter, objectsState);
+		setObjectsState(new_objects);
 	};
 
 	return (
 		<div id="objects-container" class="col h-screen pt-3.5 pb-10 pl-16">
 			<div class="row min-h-9 my-4 text(base gray-dark) children:(px-[40px] py-2 hover:bg-gray-cool focus:outline-none)">
-				<BtnFilter isActive={filteredBy == Filter.Relevant} text="АКТУАЛЬНЫЕ ОБЪЕКТЫ" onClick={() => setFilter(Filter.Relevant)} />
-				<BtnFilter isActive={filteredBy == Filter.My} text="МОИ ОБЪЕКТЫ" onClick={() => setFilter(Filter.My)} />
-				<BtnFilter isActive={filteredBy == Filter.Favorite} text="ИЗБРАННОЕ" onClick={() => setFilter(Filter.Favorite)} />
+				<BtnFilter isActive={filteredBy == Filter.Relevant} onClick={() => setFilter(Filter.Relevant)} text="АКТУАЛЬНЫЕ ОБЪЕКТЫ" />
+				<BtnFilter isActive={filteredBy == Filter.My}		onClick={() => setFilter(Filter.My)}       text="МОИ ОБЪЕКТЫ" />
+				<BtnFilter isActive={filteredBy == Filter.Favorite} onClick={() => setFilter(Filter.Favorite)} text="ИЗБРАННОЕ" />
 			</div>
 			<div class="row justify-start flex-wrap pl-0 ml-0 w-auto gap-5 overflow-y-scroll">
-				{filterObjects(filteredBy).map((o) => <ObjectCard {...o} setLike={setLike} />)}
+				{filterObjects(filteredBy).map(o => <ObjectCard {...o} setLike={setLike} />)}
 			</div>
 		</div>
 	);
@@ -116,26 +117,25 @@ function ObjectCard(
 interface Image {
 	images: any;
 	favorite: boolean;
-	status: string;
+	status: "sell" | "hit" | "sold";
 	number: number;
 }
 
 function Image({ images, favorite, status, setLike, number }: Image & { setLike: (number: number, favoriteState: boolean) => void }) {
 	const [currentImage, switchImage] = useReducer((currentImage, action) =>
 		match(action, [
-			["increment", currentImage == (images.length - 1) ? 0 : currentImage + 1],
-			["decrement", currentImage == 0 ? (images.length - 1) : currentImage - 1],
+			// Restarts the counter if we're at the end
+			["increment", (currentImage + 1) % images.length],
+			// Goes to the end if we're in the beginning
+			["decrement", (currentImage + images.length - 1) % images.length],
 		]), 0);
 
 	const [favoriteState, setFavorite] = useState(false);
-	const toggleFavorite = () => {
-		setLike(number, !favoriteState);
-	};
+	const toggleFavorite = () => setLike(number, !favoriteState);
 	const favoriteIcon = useMemo(() => favoriteState ? "/obj-heart-active.svg" : "/obj-heart.svg", [favoriteState]);
 
-	useEffect(() => {
-		setFavorite(favorite);
-	}, [favorite]);
+	// For reactivity with the property
+	useEffect(() => setFavorite(favorite), [favorite]);
 
 	const statusMap = {
 		sell: {
