@@ -44,10 +44,6 @@ function LeftSection({ description, objectPrice, investersAmount }) {
 					<p class="uppercase text-[18px]">Стоимость объекта</p>
 					<p class="text-[64px]">€{objectPrice}</p>
 				</div>
-				<div class="text-center divide-y divide-gray-bg">
-					<p class="uppercase text-[18px]">Стоимость аренды</p>
-					<p class="text-[64px]">€1430</p>
-				</div>
 			</div>
 			<div class="flex flex-col gap-y-[30px] text-[18px]">
 				<p>Адрес: Tivat 85320, Montenegro</p>

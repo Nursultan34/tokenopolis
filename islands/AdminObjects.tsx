@@ -135,7 +135,7 @@ function AdminObjectCard({ image, number, name, location, priceEuro, priceXLM, s
 	const [isOpen, toggleOpen] = boolState();
 	return (
 		<div onClick={toggleOpen} class={`flex-col ${isOpen ? 'max-h-60' : 'max-h-32'} transition-height`}>
-			<div class={`w-full h-32 flex bg-gray-light mt-5 relative z-50`}>
+			<div class={`w-full h-32 flex bg-gray-light mt-5 relative z-40`}>
 				<div class="w-[14%] h-full flex items-center justify-center">
 					<img src={image} class="w-24 h-24" />
 				</div>
@@ -163,10 +163,10 @@ function AdminObjectCard({ image, number, name, location, priceEuro, priceXLM, s
 					<div>{investors}</div>
 				</div>
 				<div class="w-[14%] h-full flex">
-					<button onClick={() => render(<CreateObjectModal />, document.getElementById("modal-container")!)}>
+					<button>
 						<img src={asset("/adminIcon/update.png")} class="w-10 h-10" />
 					</button>
-					<button>
+					<button onClick={(event)=> {console.log('delete'); event.stopPropagation()}}>
 						<img src={asset("/adminIcon/delete.png")} class="w-10 h-10 ml-2" />
 					</button>
 				</div>
