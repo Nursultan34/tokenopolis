@@ -11,8 +11,8 @@ export default function ModalContainer() {
 	}, [isDisplayed]);
 
 	return <div id="modal-container"
-				class={"w-screen h-screen flex justify-center items-center bg-black opacity-50 "
-					 + (isDisplayed ? "absolute" : "hidden")}
+				class={"w-screen h-screen flex justify-center items-center bg-black absolute transition-opacity "
+					 + (isDisplayed ? "opacity-50" : "opacity-0 ignore-clicks")}
 				onClick={() => removeChildren(document.getElementById("modal-container"))}>
 	</div>;
 }
