@@ -11,7 +11,7 @@ export default {
 		"row":		apply`flex flex-row`,
 		"col":		apply`flex flex-col`,
 		"center":	apply`flex justify-center items-center`,
-		"bg-none":				css({ backgroundImage: "none" }),
+		"bg-none":				css`background-image: "none"`,
 		"aspect-square":		css`aspect-ratio: 1 / 1;`,
 		"flex-basis-1/2":		css`flex-basis: calc(50% - 1.25rem);`,
 		"flex-basis-1/3":		css`flex-basis: calc(33% - 1.25rem);`,
@@ -47,7 +47,7 @@ export default {
 	theme: {
 		colors: {
 			white: {
-				light: "#FFFF",
+				light: "#FFFFFF",
 				dark: "#FCFCFC",
 			},
 			black: "#000000",

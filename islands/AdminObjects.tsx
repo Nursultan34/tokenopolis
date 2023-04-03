@@ -1,7 +1,4 @@
-import { useState } from "preact/hooks";
 import { asset } from "$fresh/runtime.ts";
-import { render } from "preact";
-import { useEffect } from "preact/hooks";
 import { boolState } from "#/utils.ts";
 /* import { ObjectDataType } from "@/components/admin/AdminObjects.tsx"; */
 

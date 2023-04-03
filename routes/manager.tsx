@@ -3,7 +3,7 @@ import screenWrapper from "@/lib/screenWrapper.tsx";
 
 export default function Manager() {
 	return screenWrapper(
-		<article class="flex gap-5 bg(gray-light) w-full h-full text-black pb-11">
+		<article class="row gap-5 bg-gray-light w-full h-full text-black pb-11">
 			<div class="col gap-5 w-[43%] h-[894px] ml-16 mt-10">
 				<FirstSection />
 				<SecondSection />

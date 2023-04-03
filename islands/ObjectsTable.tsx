@@ -155,15 +155,15 @@ function Image({ images, favorite, status, setLike, number }: Image & { setLike:
 	const statusClasses = `absolute top-3 right-3 w-[139px] h-[34px] pt-[9px] font-light text(sm center) leading-none ${statusMap[status].bg}`;
 	return (
 		<div class="relative h-full">
-			<img class="h-full aspect-square w-full object-cover" src={asset(images[currentImage])} alt="" />
+			<img class="h-full aspect-square w-full object-cover" src={asset(images[currentImage])} />
 			<button class="absolute top-4 left-4  w-[28px] h-[28px] focus:outline-none" onClick={toggleFavorite}>
-				<img class="mx-auto" src={asset(favoriteIcon)} alt="" />
+				<img class="mx-auto" src={asset(favoriteIcon)} />
 			</button>
 			<button class="absolute top-1/2 w-[28px] h-[28px] focus:outline-none" onClick={() => switchImage("decrement")}>
-				<img class="m-auto" src={asset("/obj-arr-left.svg")} alt="" />
+				<img class="m-auto" src={asset("/obj-arr-left.svg")} />
 			</button>
 			<button class="absolute top-1/2 right-2 focus:outline-none" onClick={() => switchImage("increment")}>
-				<img src={asset("/obj-arr-right.svg")} alt="" />
+				<img src={asset("/obj-arr-right.svg")} />
 			</button>
 			<div class={statusClasses}>{statusMap[status].text}</div>
 			<div class="absolute bottom-3 left-0 right-0 text(center white-light)">{currentImage + 1}/{images.length}</div>

@@ -32,11 +32,11 @@ export default function Object({ data }) {
 function LeftSection(data) {
 	return (
 		<div class="w-[804px] flex flex-col gap-[32px]">
-			<img src={asset(data.pics[0])} alt="" />
+			<img src={asset(data.pics[0])} />
 			<div class="flex gap-[20px] mt-[-12px]">
-				<img src={asset("/slide1.png")} alt="" />
-				<img src={asset("/slide2.png")} alt="" />
-				<img src={asset("/slide3.png")} alt="" />
+				<img src={asset("/slide1.png")} />
+				<img src={asset("/slide2.png")} />
+				<img src={asset("/slide3.png")} />
 			</div>
 			<div class="flex gap-[80px] mt-[18px] ml-[37px] font-light">
 				<div class="text-center divide-y divide-gray-bg">

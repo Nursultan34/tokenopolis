@@ -51,6 +51,7 @@ export default function Header({ address, name }) {
 function SettingsPopUp({ isDark, toggleTheme }) {
 	let [displayLangMenu, toggleLangMenu] = boolState();
 	return (
+		// Refactor this. Please
 		<div
 			class="bg-white-dark absolute z-20 right-4 top-24"
 			style={{ width: 320, height: 417 }}

@@ -1,4 +1,5 @@
 import { asset } from "$fresh/runtime.ts";
+import { useRef, useState, useEffect } from "preact/hooks";
 
 export interface IPersonFirstData {
 	img: string;
@@ -50,7 +51,7 @@ export default function MyProfile() {
 			<div class="relative col">
 				<span class="text-xs">О СЕБЕ</span>
 				<span class="ml-4 mt-2 pr-6 text-lg overflow-auto">{personData.about}</span>
-				<img class="absolute bottom-0 right-0 cursor-pointer" src={asset("/profile/edit.svg")} alt="icon" />
+				<img class="absolute bottom-0 right-0 cursor-pointer" src={asset("/profile/edit.svg")} />
 			</div>
 		</div>
 	);
@@ -60,8 +61,8 @@ function PersonPhoto({ img, firstName, lastName }) {
 	return (
 		<div class="row mt-5 items-center">
 			<div class="relative w-[210px]">
-				<img class="rounded-full" src={asset(img)} alt="photo" />
-				<img class="absolute bottom-3 right-0 cursor-pointer" src={asset("/profile/frame.svg")} alt="icon" />
+				<img class="rounded-full" src={asset(img)} />
+				<img class="absolute bottom-3 right-0 cursor-pointer" src={asset("/profile/frame.svg")} />
 			</div>
 			<div class="col ml-9">
 				<span class="text-4xl font-bold">{firstName}</span>
@@ -71,7 +72,6 @@ function PersonPhoto({ img, firstName, lastName }) {
 	);
 }
 
-// ???
 function PersonInfo() {
 	const labelArray: string[] = [
 		"ДАТА РОЖДЕНИЯ",
@@ -83,10 +83,16 @@ function PersonInfo() {
 		"СТРАНА",
 		"ГОРОД",
 	];
-	const countryArray: string[] = ["Россия", "Черногория", "Израиль"];
-	const cityArray: string[] = ["Москва", "Тэль-авив", "Баку"];
+	const cities = {
+		"Россия": ["Москва", "Екатеринбург", "Санкт-Петербург"],
+		"Черногория": ["Подгорица", "Будва"],
+		"Палестина": ["Газа", "Рамала"],
+	}
+
+	const [activeCountry, setActiveCountry] = useState("Россия");
 
 	return (
+		// Use TailwindCSS classes for this
 		<div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, auto))", justifyContent: "space-between", rowGap: "0.5rem" }}>
 			{labelArray.map((label, index) => {
 				if (index <= 1) {
@@ -103,18 +109,25 @@ function PersonInfo() {
 							<input class="profile-selin" type="text" />
 						</div>
 					);
-				} else if (index === 6) {
+				} else if (index == 6) {
 					return (
 						<div class="col">
 							<span class="text-xs">{label}</span>
-							<select class="profile-selin">{countryArray.map((county) => <option>{county}</option>)}</select>
+							<select onChange={ev => setActiveCountry(ev.target?.value)}
+									value={activeCountry}
+									name="country"
+									class="profile-selin">
+								{Object.keys(cities).map(county => <option>{county}</option>)}
+							</select>
 						</div>
 					);
 				} else {
 					return (
 						<div class="col">
 							<span class="text-xs">{label}</span>
-							<select class="profile-selin">{cityArray.map((city) => <option>{city}</option>)}</select>
+							<select class="profile-selin">
+								{cities[activeCountry].map(city => <option>{city}</option>)}
+							</select>
 						</div>
 					);
 				}

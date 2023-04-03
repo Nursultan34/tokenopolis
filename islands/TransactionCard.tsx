@@ -18,7 +18,7 @@ function TransactionsCard(props: TransactionsObject) {
 					<span class="text-gray-dashed text-sm">{date}</span>
 				</div>
 				<div class="flex flex-row">
-					<img class="w-[28px] h-[24px] mr-2" src={asset(`transactionsIcon/${status ? "right.png" : "left.png"}`)} />
+					<img class="w-[28px] h-[24px] mr-2" src={asset(`transactionsIcon/${status ? "right" : "left"}.png`)} />
 					<span class="text-gray-dashed">{transactions} FTД</span>
 				</div>
 			</div>

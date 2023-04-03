@@ -66,7 +66,6 @@ const objectsData = [
 		isMyObject: true,
 	},
 ];
-// statuses = [sell, hit, sold];
 
 export default function Objects() {
 	return (

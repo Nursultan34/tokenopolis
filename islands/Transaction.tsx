@@ -18,7 +18,7 @@ export default function Item({ status }: { status?: string }) {
 					</div>
 
 					<div class="flex gap-x-2">
-						<img src={asset("/./transaction-arrow.svg")} alt="" />
+						<img src={asset("/./transaction-arrow.svg")} />
 						1Cs4wu6pu5qCZ35bSLNVzGyEx5N6uzbg9t
 					</div>
 				</div>
