@@ -9,10 +9,10 @@ import Wallet from "@/components/dashboard/Wallet.tsx";
 import ModalContainer from "@/islands/ModalContainer.tsx"
 
 import { getCookies } from "https://deno.land/std@v0.171.0/http/cookie.ts";
-import { checkCookieAuth } from "#/auth.ts";
+import { assertLoggedIn } from "#/auth.ts";
 import { getObjects, getUser } from "#/db.ts";
 import * as stellar from "#/stellar.ts";
-import { const_, getFstImage, redirectTo } from "#/utils.ts";
+import { const_, getFstImage, redirectTo, mayFail } from "#/utils.ts";
 
 interface Token {
 	name: string;
@@ -73,38 +73,34 @@ const testObjectToken: ITokenObject = {
 };
 
 export const handler: Handlers = {
-	async GET(req, ctx) {
+	GET: mayFail(async (req, ctx) => {
 		const cookies = getCookies(req.headers);
-		const email = await checkCookieAuth(cookies);
-		if (email) {
-			// As we checked the JWT, non-existence of the user is impossible
-			const user = (await getUser(email))!;
-			console.log(user);
-			const name = user.name;
-			console.log(user.wallet);
-			const keypair = stellar.Keypair.fromSecret(user.wallet);
-			// Get the balances list
-			const balances = await stellar.server.loadAccount(keypair.publicKey())
-				.then(stellar.getBalances)
-				.catch(const_([]));
-			const objects = (await getObjects())
-				.map((o) => ({
-					img: asset(getFstImage("objects", o.id)),
-					tokenImg: asset(getFstImage("tokens", o.tokenName)),
-					...o,
-				}));
-			return ctx.render({
-				name,
-				valXLM: 600,
-				valEUR: 1234,
-				address: keypair.publicKey(),
-				balances: [
-					{ name: "POLISVILLA", img: "img.png", valXLM: 100, valEUR: 69 },
-				],
-				relevantObjects: objects,
-			});
-		} else return redirectTo("/login");
-	},
+		const email = await assertLoggedIn(cookies);
+		const user = (await getUser(email))!;
+		const name = user.name;
+		const keypair = stellar.Keypair.fromSecret(user.wallet);
+
+		// Get the balances list
+		const balances = await stellar.server.loadAccount(keypair.publicKey())
+			.then(stellar.getBalances)
+			.catch(const_([]));
+		const objects = (await getObjects())
+			.map(o => ({
+				img: asset(getFstImage("objects", o.id)),
+				tokenImg: asset(getFstImage("tokens", o.tokenName)),
+				...o,
+			}));
+		return ctx.render({
+			name,
+			valXLM: 600,
+			valEUR: 1234,
+			address: keypair.publicKey(),
+			balances: [
+				{ name: "POLISVILLA", img: "img.png", valXLM: 100, valEUR: 69 },
+			],
+			relevantObjects: objects,
+		});
+	}),
 };
 
 export default function Dashboard({ data }: PageProps<any>) {

@@ -80,6 +80,37 @@ export async function sendTokens(asset: string, destination: string, amount: str
 	return server.submitTransaction(transaction);
 }
 
+// Functions that fetches transactions the given account has been involved in
+export async function getTransactions(account: Account, page: number) {
+	const transactions = server.transactions()
+		.forAccount(account.accountId())
+		.call();
+	return (await applyTimes(
+		transactions,
+		async t => (await t).next(),
+		page
+	)).records;
+}
+
+function applyTimes<T>(init: T, fn: (_: T) => T, n: number) {
+	let state = init;
+	for (let i = 0; i < n; i++) {
+		state = fn(state);
+	}
+	return state;
+}
+
+export async function assimilateTransaction(operations: any) {
+	// Specify types for the destructuring in the lambda
+	return await operations.map(({from, to, asset_type, asset_code, amount}) => ({
+		from, to, amount,
+		asset: asset_type == "native" ? "XLM" : asset_code,
+	}));
+}
+
+// const transactions = await getTransactions(await server.loadAccount("GCHU3RZAECOKGM2YAJLQIIYB2ZPLMFTTGN5D3XZNX4RDOEERVLXO7HU4"), 1)
+// console.log(await assimilateTransaction(transactions[0]));
+
 //console.log(server)
 //await setTrust("PCN", stellar.Keypair.fromSecret("SDLMZOVGJNEUOXFGYW2AEQSWXSP4YVQ5XMRYUJA6VO6ZKRIQFDXXI47I"));
 //await sendTokens("PCN", "GACKI2ROZIK3H4ORY6W3J4IQ5W33JGDC4KM6PZ6JPNYRXWXF47GZFZMN", "10.0");

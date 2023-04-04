@@ -1,8 +1,10 @@
 import { asset } from "$fresh/runtime.ts";
 import { boolState } from "#/utils.ts";
 
-export default function Item({ status }: { status?: string }) {
+export default function Transaction({ from, to }) {
 	const [showDetails, toggleDetails] = boolState();
+	// TODO: deprecate
+	const status = "reject";
 
 	return (
 		<div class="relative w-full">

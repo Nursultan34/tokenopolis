@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useState, useReducer } from "preact/hooks";
 
 export default function ProgressBarComponent() {
 	const [percent, setPercent] = useState(35);
@@ -14,7 +14,7 @@ export default function ProgressBarComponent() {
 }
 
 function ProgressBar({ percent }: { percent: number }) {
-	let styleProgressBar: string = `w-[${percent}%] bg-yellow-btn rounded-r-lg `;
+	let styleProgressBar = `w-[${percent}%] bg-yellow-btn rounded-r-lg `;
 	percent === 100 ? styleProgressBar += "rounded-l-lg" : !!percent && (styleProgressBar += "border-l-1 border-gray-main");
 
 	return (

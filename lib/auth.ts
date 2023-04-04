@@ -26,9 +26,15 @@ export function genJWT(email: string): Promise<string> {
 // and is valid - returns user's e-mail adress, otherwise undefined
 export function checkCookieAuth(cookies: Record<string, string>): Promise<string | undefined> {
 	return promiseFromMaybe(cookies.auth)
-		.then((jwt) => djwt.verify(jwt, JWTKey))
+		.then(jwt => djwt.verify(jwt, JWTKey))
 		.then(assert(F.propIs("String", "email")))
-		.then((payload) => payload.email as string)
+		.then(payload => payload.email as string)
 		.catch(const_(undefined));
 	// TODO: check if the account exists (the cookie may stay after the user deleted the account)
+}
+
+export async function assertLoggedIn(cookies: Record<string, string>): Promise<string> {
+	const email = await checkCookieAuth(cookies)
+	if (email == undefined) throw new Error("Not logged in");
+	return email;
 }
