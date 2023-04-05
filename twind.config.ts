@@ -33,7 +33,7 @@ export default {
 		"header":			apply`row w-full h-24 bg-white-dark shadow-header z-20`,
 		"profile-selin":	apply`pl-4 bg-gray-back rounded-sm text-dark-midnight text-lg`,
 		"scrollbar": css`
-			&::-webkit-scrollbar { width: 10px; };
+            &::-webkit-scrollbar { width: 10px; };
 			&::-webkit-scrollbar-track { background-color: #FCFCFC; border: 1px solid #B8B8B7; border-radius: 2px; };
 			&::-webkit-scrollbar-thumb { background-color: #FFD600; border: 1px solid #B8B8B7; border-radius: 2px; }
 		`,

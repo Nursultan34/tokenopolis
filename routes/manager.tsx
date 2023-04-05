@@ -3,68 +3,84 @@ import screenWrapper from "@/lib/screenWrapper.tsx";
 
 export default function Manager() {
 	return screenWrapper(
-		<article class="row gap-5 bg-gray-light w-full h-full text-black pb-11">
-			<div class="col gap-5 w-[43%] h-[894px] ml-16 mt-10">
-				<FirstSection />
-				<SecondSection />
+		<article class="w-full h-full flex gap-4 bg-gray-light">
+			<div class="w-1/2 h-full col gap-4">
+				<div class="w-full h-2/3 bg-white-dark rounded-sm">
+					<ManagerSection />
+				</div>
+				<div class="w-full h-1/3 bg-white-dark rounded-sm">
+					<ContactSection />
+				</div>
 			</div>
-			<div class="col gap-5 mt-10 w-[42%]">
-				<ThirdSection />
-				<FourthSection />
+			<div class="w-1/2 h-full col gap-4">
+				<div class="w-full h-1/3 bg-white-dark rounded-sm">
+					<FaqSection />
+				</div>
+				<div class="w-full h-2/3 bg-white-dark rounded-sm">
+					<AboutSection />
+				</div>
 			</div>
 		</article>,
 	);
 }
 
-function FirstSection() {
+function ManagerSection() {
 	return (
-		<div class="bg(white-dark) w-[98%] h-[65%] rounded-sm shadow-lg shadow-black/15  py-10 px-14">
-			<div class="col gap-6 w-full h-full">
-				<div class="row w-[88%] h-[60%] gap-6">
-					<div class="w-72 rounded-sm">
-						<img src={asset("/manager-ava.png")} class="object-contain" />
-					</div>
-
-					<div class="col items-start mt-36">
-						<div class="col w-72 h-24 gap-3">
-							<h1 class="text-4xl font-bold">Сергей Ольховский</h1>
-							<p class="text-lg">Менеджер</p>
-						</div>
-
-						<div class="flex justify-end items-start w-48 h-14 gap-2 mt-12">
-							<div class="bg(green-btn) w-24 h-16 flex justify-center items-center rounded-lg">
-								<img src={asset("/phone.svg")} />
-							</div>
-							<div class="bg(blue-btn) w-24 h-16 flex justify-center items-center rounded-lg">
-								<img src={asset("/telegram.svg")} />
-							</div>
-						</div>
-					</div>
+		<section class="px-[3vw] py-[4vh]">
+			<div class="row mb-4 gap-[1vw]">
+				<div class="rounded-sm" style="width: calc(7vw + 7vh + 2vmin);">
+					<img src={asset("manager-ava.png")} class="object-contain" />
 				</div>
-
-				<div class="w-[84%] text-lg ">
-					<p>
-						На рынке недвижимости Черногории с 2017 года. Курирует строительство объектов недвижимости страны, сопровождает сделки купли-продажи. Даст компетентную
-						консультацию по любым вопросам инвестиций в криптовалюте.
-					</p>
+				<div class="col justify-end gap-[1.2vw]">
+					<div class="col w-40 gap-[0.2vw]">
+						<h1 class="font-bold" style="font-size:calc(1vw + 1vh + 0.5vmin);">
+							Сергей Ольховский
+						</h1>
+						<p style="font-size:calc(0.5vw + 0.5vh + 0.5vmin);">Менеджер</p>
+					</div>
+					<div class="flex justify-end items-start gap-2">
+						<img
+							src={asset("phone.svg")}
+							class="bg(green-btn) w-24 rounded-lg w-[6vw]"
+						/>
+						<img
+							src={asset("telegram.svg")}
+							class="bg(blue-btn) w-24 rounded-lg w-[6vw]"
+						/>
+					</div>
 				</div>
 			</div>
-		</div>
+
+			<div style="font-size:calc(0.6vw + 0.6vh + 0.4vmin);">
+				<p>
+					На рынке недвижимости Черногории с 2017 года. Курирует строительство объектов недвижимости страны, сопровождает сделки купли-продажи. Даст компетентную
+					консультацию по любым вопросам инвестиций в криптовалюте.
+				</p>
+			</div>
+		</section>
 	);
 }
 
-function SecondSection() {
+function ContactSection() {
 	return (
-		<div class="w-[98%] h-[34%] bg(white-dark) rounded-sm shadow-lg shadow-black/15 relative">
-			<div class="w-[65%] pt-11 pl-16">
-				<h2 class="text-2xl font-bold mb-2.5">Контакты</h2>
-				<div class="w-full row gap-3.5 uppercase text-sm leading-[160%]">
-					<div class="w-40 h-28">
+		<section class="row justify-between py-[4vh] pl-[3vw] pr-[4vw]">
+			<div className="flex flex-col justify-start items-start w-2/3 gap-[0.5vw]">
+				<h2
+					class="font-bold mb-2.5"
+					style="font-size:calc(0.7vw + 0.7vh + 0.5vmin);"
+				>
+					Контакты
+				</h2>
+				<div
+					class="w-full row gap-3.5 uppercase"
+					style="font-size:calc(0.4vw + 0.4vh + 0.5vmin);"
+				>
+					<div>
 						<p>Телефон:</p>
 						<p>Электронная почта:</p>
 						<p>Адрес:</p>
 					</div>
-					<div class="w-72 h-32">
+					<div>
 						<p>123-456-7890</p>
 						<p>info@tokenopolis.biz</p>
 						<p>Черногория,</p>
@@ -73,39 +89,45 @@ function SecondSection() {
 					</div>
 				</div>
 			</div>
-			<img
-				src={asset("/contact-vector.svg")}
-				class="w-52 h-52 absolute right-16 top-11"
-			/>
-		</div>
-	);
-}
-
-function ThirdSection() {
-	return (
-		<div class="bg(white-dark) w-full h-[33%] rounded-sm shadow-lg shadow-black/15 ">
-			<div class="col justify-center items-start gap-4 mx-9 my-12">
-				<div class="text-lg w-[94%]">
-					<p>
-						Мы собрали большинство вопросов, которые задают наши клиенты на странице FAQ.
-					</p>
-					<p>
-						Скорее всего ответ на интересующий вопрос уже подробно описан, проверьте, пожалуйста.
-					</p>
-				</div>
-				<button class="border border(yellow-orange) w-72 h-14 text-4xl flex justify-center items-center rounded-lg px-5 py-4">
-					FAQ
-				</button>
+			<div className="flex flex-col justify-center items-center">
+				<img src={asset("contact-vector.svg")} class="w-[10vw]" />
 			</div>
-		</div>
+		</section>
 	);
 }
 
-function FourthSection() {
+function FaqSection() {
 	return (
-		<div class="w-full h-[65%] bg(white-dark) rounded-sm shadow-lg shadow-black/15">
-			<div class="col gap-5 w-[88%] h-[33%] ml-9 mr-[39px] mt-[28px] mb-[11px]">
-				<h2 class="text-2xl font-bold">О компании</h2>
+		<section class="col justify-center items-start gap-[1vw] mx-[2vw] my-[4vh]">
+			<div class="w-[80%]" style="font-size:calc(0.5vw + 0.5vh + 0.5vmin);">
+				<p>
+					Мы собрали большинство вопросов, которые задают наши клиенты на странице FAQ.
+				</p>
+				<p>
+					Скорее всего ответ на интересующий вопрос уже подробно описан, проверьте, пожалуйста.
+				</p>
+			</div>
+			<button
+				class="flex justify-center items-center w-[14vw] h-[5vh] border border(yellow-orange) rounded-lg  focus:outline-none"
+				style="font-size:calc(0.8vw + 0.8vh + 0.5vmin);"
+			>
+				FAQ
+			</button>
+		</section>
+	);
+}
+
+function AboutSection() {
+	return (
+		<section class="pl-[2vw] px-[1vw] py-[2vh]">
+			<div
+				class="col gap-[0.3vw] w-[88%] h-[33%]"
+				style="font-size:calc(0.4vw + 0.4vh + 0.4vmin);"
+			>
+				<h2 class="font-bold" style="font-size:calc(0.6vw + 0.6vh + 0.5vmin);">
+					О компании
+				</h2>
+				<p>Компания активно развивается и ежегодно увеличивает прибыль.</p>
 				<p>
 					Мы стремимся обеспечить нашим клиентам выгодное и безопасное инвестирование с помощью использования современных технологий и прозрачной системы учета.
 				</p>
@@ -113,27 +135,23 @@ function FourthSection() {
 					Максимально учитываем интересы и пожелания наших инвесторов, чтобы сделать совместную работу максимально выгодной и продуктивной.
 				</p>
 			</div>
-
-			<h3 class="text-lg font-bold ml-9 mb-5">Направление деятельности</h3>
-			<div class="flex items-center justify-center">
-				<div class="w-10 h-20 flex items-center justify-center">
-					<img src={asset("/arrow-left.svg")} />
+			<h3
+				class="font-bold my-[2vh]"
+				style="font-size:calc(0.5vw + 0.5vh + 0.3vmin);"
+			>
+				Направление деятельности
+			</h3>
+			<div class="flex items-start justify-start gap-[1vw] w-[26vw] h-[26vh] border border(gray-dashed) rounded px-[1.1vw] py-[1.3vw]">
+				<div class="rounded-sm">
+					<img src={asset("rectangle.png")} class="object-contain h-[20vh]" />
 				</div>
-
-				<div class="flex w-[69%] h-72 border border-[#B8B8B7] rounded">
-					<div class="w-48 h-48 rounded mx-6 my-11">
-						<img src={asset("/rectangle.png")} class="object-contain" />
-					</div>
-					<p class="w-72 h-40 mt-11 mr-6">
-						Инфраструктурные проекты. Работы по прокладке инженерных коммуникаций и сетей (свет, водопровод, канализация, дороги), строительство и монтаж септиков,
+				<div class="w-1/2" style="font-size:calc(0.4vw + 0.4vh + 0.2vmin);">
+					<p>
+						Инфраструктурные проекты. Работы по прокладке инженерных коммуникация и сетей (свет, водопровод, канализация, дороги), строительство и монтаж септиков,
 						ливнёвок.
 					</p>
 				</div>
-
-				<div class="w-10 h-20 flex items-center justify-center">
-					<img src={asset("/arrow-right.svg")} />
-				</div>
 			</div>
-		</div>
+		</section>
 	);
 }
