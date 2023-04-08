@@ -70,7 +70,7 @@ export default function Transactions({ data: { name, address, operations } }) {
 					Всего транзакций
 				</div>
 			</div>
-			<div class="col gap-y-3 lg:pr-5 pr-0 overflow-y-scroll scrollbar">
+			<div class="col gap-y-3 lg:pr-5 pr-4 overflow-y-scroll scrollbar">
 				<TransactionsI operations={operations} />
 			</div>
 		</article>,

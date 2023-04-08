@@ -18,11 +18,7 @@ function Transaction({ target, isIncoming, amount, asset_code, created_at }) {
 				onClick={toggleDetails}
 			>
 				<div class="flex lg:gap-x-[70px] items-center lg:text-[18px] text-[10px] gap-x-4">
-					<span class="font-bold font-open-sans">{ created_at }</span>
-
-					<div class="bg-gray-white">
-						<img src={asset("/lk-logo.svg")} class="w-10 lg:w-[55px]" />
-					</div>
+					<span class="row items-center font-bold font-open-sans">{ created_at } <img src={asset("/lk-logo.svg")} class="ml-2" /></span>
 
 					<div class="flex gap-x-2">
 						<img src={asset(isIncoming ? "/incoming-arrow.svg" : "/outcoming-arrow.svg")} />

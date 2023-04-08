@@ -23,7 +23,7 @@ export function mayFail(fn: Handler): Handler {
 		// A trick to use Promise error handlers instead of try/catch
 		Promise.resolve(fn)
 			.then((fn) => fn(req, ctx))
-			.catch(e => { throw e ; new Response(e, { status: 500 }) });
+			.catch(e => new Response(e, { status: 500 }));
 }
 
 export function assertType(type_: string, val: unknown) {
