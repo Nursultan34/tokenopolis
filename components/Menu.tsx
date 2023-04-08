@@ -7,15 +7,15 @@ export default function Menu() {
 				{[
 					{ img: "/sideMenuIcon/house.png", desc: "ГЛАВНАЯ", href: "/dashboard" },
 					{ img: "/sideMenuIcon/buildings2.png", desc: "ОБЪЕКТЫ", href: "/objects" },
-					{ img: "/sideMenuIcon/emptywallet.png", desc: "КОШЕЛЕК", href: "/" },
-					{ img: "/sideMenuIcon/bitcoinconvert.png", desc: "ТРАНЗАКЦИИ", href: "/" },
-					{ img: "/sideMenuIcon/chart.png", desc: "АНАЛИТИКА", href: "/" },
-					{ img: "/sideMenuIcon/calendar.png", desc: "КАЛЕНДАРЬ", href: "/" },
+					{ img: "/sideMenuIcon/emptywallet.png", desc: "КОШЕЛЕК", href: "/wallet" },
+					{ img: "/sideMenuIcon/bitcoinconvert.png", desc: "ТРАНЗАКЦИИ", href: "/transactions" },
+					{ img: "/sideMenuIcon/chart.png", desc: "АНАЛИТИКА", href: "/analytics" },
+					{ img: "/sideMenuIcon/calendar.png", desc: "КАЛЕНДАРЬ", href: "/calendar" },
 					{ img: "/sideMenuIcon/profilecircle.png", desc: "ВАШ МЕНЕДЖЕР", href: "/manager" },
 				].map(MenuButton)}
 			</div>
 			<div class="col justify-start items-center flex-1">
-				{[{ img: "/sideMenuIcon/messagequestion.png", desc: "FAQ", href: "/faq" }, { img: "/sideMenuIcon/settings2.png", desc: "НАСТРОЙКИ", href: "/" }]
+				{[{ img: "/sideMenuIcon/messagequestion.png", desc: "FAQ", href: "/faq" }, { img: "/sideMenuIcon/settings2.png", desc: "НАСТРОЙКИ", href: "/profile" }]
 					.map(MenuButton)}
 			</div>
 		</nav>
