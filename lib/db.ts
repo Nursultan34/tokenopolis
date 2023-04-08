@@ -39,7 +39,7 @@ export const getUser = (email: string): Promise<Record<string, unknown> | undefi
 		.catch(const_(undefined));
 
 export const getObjects = () =>
-	gq(`query RelevantObjects{objects{edges{node{id name tokenName tokenPrice location investersAmount}}}}`)
+	gq(`query RelevantObjects{objects{edges{node{id name tokenName tokenPrice location investersAmount area objectPrice state}}}}`)
 		.then(extractEdges("objects"))
 		.catch(const_(undefined));
 

@@ -1,4 +1,14 @@
+import { Handlers, PageProps } from "$fresh/server.ts";
+import { asset } from "$fresh/runtime.ts";
 import ObjectsTable from "@/islands/ObjectsTable.tsx";
+
+import { getCookies } from "https://deno.land/std@v0.171.0/http/cookie.ts";
+import { assertLoggedIn } from "#/auth.ts";
+import { getObjects, getUser } from "#/db.ts";
+import * as stellar from "#/stellar.ts";
+import { const_, getFstImage, getImages, mayFail } from "#/utils.ts";
+import screenWrapper from "#/screenWrapper.tsx";
+import * as R from "https://deno.land/x/ramda@v0.27.2/mod.ts";
 
 const objectsData = [
 	{
@@ -117,10 +127,39 @@ const objectsData = [
 	},
 ];
 
-export default function Objects() {
-	return (
+export const handler: Handlers = {
+	GET: mayFail(async (req, ctx) => {
+		const cookies = getCookies(req.headers);
+		const email = await assertLoggedIn(cookies);
+		const user = (await getUser(email))!;
+		const name = user.name;
+		const keypair = stellar.Keypair.fromSecret(user.wallet);
+
+		// Get the balances list
+		const balances = await stellar.server.loadAccount(keypair.publicKey())
+			.then(stellar.getBalances)
+			.catch(const_([]));
+		const objects = (await getObjects())
+			.map(o => ({
+				images: getImages("objects", o.id),
+				tokenImg: asset(getFstImage("tokens", o.tokenName)),
+				...o,
+			}));
+		console.log(objects);
+		return ctx.render({
+			name,
+			valXLM: 600,
+			valEUR: 1234,
+			address: keypair.publicKey(),
+			objects,
+		});
+	}),
+};
+
+export default function Objects({ data: { objects } }) {
+	return screenWrapper(
 		<main>
-			<ObjectsTable objects={objectsData} />
+			<ObjectsTable objects={objects} />
 		</main>
 	);
 }

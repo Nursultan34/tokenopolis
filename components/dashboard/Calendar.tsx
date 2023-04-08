@@ -20,7 +20,7 @@ const dataMas = [
 export default function CalendarComponent() {
 	return (
 		<div class="bg-white-light w-full h-full">
-			<div class="flex justify-start items-center pl-6 mt-2" style={{ flex: 1 }}>
+			<div class="flex justify-start items-center pl-6 pt-3">
 				<span class="text-lg font-medium">Календарь событий</span>
 			</div>
 			<div class="flex justify-center" style={{ flex: 0.5 }}>

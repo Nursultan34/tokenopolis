@@ -4,7 +4,7 @@ import { asset } from "$fresh/runtime.ts";
 
 export default function MyObjects({ testObjectToken, testObjectInfo }) {
 	return (
-		<div class="bg-white-light h-full w-full pl-5 pr-5 overflow-hidden">
+		<div class="bg-white-light h-full w-full px-5 pt-6 overflow-hidden">
 			<UpCardComponent first="Мои объекты" second="ТОКЕНЫ" third="КОЛИЧЕСТВО" />
 			<div class={`mt-2 h-5/6 overflow-scroll pl-2`}>
 				{Array(6).fill(

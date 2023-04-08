@@ -72,11 +72,19 @@ export default {
 				orange: "#FFD600",
 				brown: "#A87700",
 			},
+			orange: {
+				light: "#E8C300",
+				dark: "#EBA900",
+				gradient1: "#FFD703E0",
+				gradient2: "#F59300",
+			},
 			violet: "#4e3678",
 			green: {
 				light: "#78D72E",
 				yellow: "#0AB85A",
 				dark: "#00986B",
+				gradient1: "#2DCC9CD9",
+				gradient2: "#068C75",
 			},
 			red: {
 				light: "#DC1A09",
@@ -84,6 +92,7 @@ export default {
 			},
 		},
 		screens: {
+			"md": "640px",
 			"lg": "1300px",
 			"xl": "1900px",
 		},
