@@ -1,49 +1,12 @@
 import { asset } from "$fresh/runtime.ts";
 import { boolState } from "#/utils.ts";
-import { useEffect } from "preact/hooks";
+import { useState } from 'preact/hooks';
 
 export default function Transactions({ operations }) {
 	return operations.map(Transaction);
 }
-
-function Transaction({ target, isIncoming, amount, asset_code, created_at }) {
-	const [showDetails, toggleDetails] = boolState();
-	// TODO: deprecate status
-	const status = "success";
-
-	return (
-		<div class="relative w-full">
-			<div
-				class={`flex lg:px-11 lg:py-[14px] px-3 py-4 justify-between bg-white shadow-lg shadow-black/15 hover:(cursor-pointer bg-[#F4F4F4]) ${showDetails ? "bg-[#F4F4F4]" : ""}`}
-				onClick={toggleDetails}
-			>
-				<div class="flex lg:gap-x-[70px] items-center lg:text-[18px] text-[10px] gap-x-4">
-					<span class="row items-center font-bold font-open-sans">{ created_at } <img src={asset("/lk-logo.svg")} class="ml-2" /></span>
-
-					<div class="flex gap-x-2">
-						<img src={asset(isIncoming ? "/incoming-arrow.svg" : "/outcoming-arrow.svg")} />
-						<span class="hidden lg:inline-block">{ target }</span>
-					</div>
-				</div>
-				<div class="flex lg:gap-x-[120px] gap-x-5 items-center ">
-					<span class="lg:text-[26px] text-[10px] font-bold font-open-sans">{amount} {asset_code}</span>
-				
-			<button
-						class={`flex justify-between lg:w-40 w-15 max-h-10 px-5 py-2 text-left ${
-							status === "waiting" ? "text-gray-dark bg-gray-cool" : status === "reject" ? "bg-[#CD1000] text-white-light" : "bg-green-dark text-white-light"
-						} rounded-sm`}
-					>
-						 <span class="hidden lg:inline-block"> {status === "waiting" ? "В ожидании" : status === "reject" ? "Отклонено" : "Завершено"}</span> 
-						<img
-							src={asset(
-								`./${status === "waiting" ? "btn-waiting" : status === "reject" ? "btn-reject" : "btn-ok"}.svg`,
-							)}
-						/>
-					</button> 
-				</div>
-			</div>
-
-			{showDetails && (
+const Details = () => {
+  return (
 				<div class="relative w-full lg:h-40 flex lg:px-11 px-3 lg:py-3 pt-4 pb-5 bg-[#F4F4F4] justify-between shadow-lg shadow-black/15 hover:(cursor-pointer bg-[#F4F4F4])">
 					<div class="w-[1180px] flex lg:flex-wrap flex-col  gap-y-2 lg:max-h-40">
 						<label class="flex items-center w-[180px] lg:w-[360px] justify-between lg:text-[18px] text-[10px] font-bold font-open-sans">
@@ -75,17 +38,6 @@ function Transaction({ target, isIncoming, amount, asset_code, created_at }) {
 						<img
 								class="self-center ml-3 w-7 h-7 hover:(cursor-pointer)"
 								src={asset("/./documentcopy.svg")}
-								{
-									...[] /* onMouseEnter={() => setShow("show")}
-										   onMouseLeave={() => {
-										   setShow("hide");
-										   setMake("hide");
-										   }}
-										   onClick={() => {
-										   setMake("show");
-										   setShow("hide");
-										   }} */
-								}
 							/>
 						</div>
 						<label class="flex lg:w-[475px] w-[266px] justify-between items-center lg:text-[18px] text-[10px] font-bold font-open-sans">
@@ -99,11 +51,103 @@ function Transaction({ target, isIncoming, amount, asset_code, created_at }) {
 					</div>
 					<button class="absolute top-4 right-3 lg:right-11 lg:h-[5.5rem] h-[4.5rem] lg:w-40 w-28 px-5 py-2 text-black text-center lg:text-[14px] text-[10px] bg-gray-cool rounded-sm">ПОСМОТРЕТЬ НА ЭКСПЛОРЕРЕ</button>
 				</div>
-			)}
-			{
-				/* {true && <p class="absolute top-20 right-64 text-xs text-darkGray">КОПИРОВАТЬ НОМЕР</p>}
-				{true && <p class="absolute top-20 right-64 text-xs text-green-3">НОМЕР СКОПИРОВАН</p>} */
-			}
-		</div>
-	);
+  )
 }
+function StatusButton({ status }) {
+  const buttonClass = `flex justify-between lg:w-40 w-15 max-h-10 px-5 py-2 text-left ${
+    status === "waiting"
+      ? "text-gray-dark bg-gray-cool"
+      : status === "reject"
+      ? "bg-[#CD1000] text-white-light"
+      : "bg-green-dark text-white-light"
+  } rounded-sm`;
+
+  return (
+    <button class={buttonClass}>
+      <span class="hidden lg:inline-block">
+        {status === "waiting"
+          ? "В ожидании"
+          : status === "reject"
+          ? "Отклонено"
+          : "Завершено"}
+      </span>
+      <img
+        src={asset(
+          `./${
+            status === "waiting"
+              ? "btn-waiting"
+              : status === "reject"
+              ? "btn-reject"
+              : "btn-ok"
+          }.svg`
+        )}
+      />
+    </button>
+  );
+}
+
+const Arrow = ({isIncoming, style}) => {
+  return (<img class={style} src={asset(isIncoming ? "/incoming-arrow.svg" : "/outcoming-arrow.svg")} />)
+}
+const Logo = ({style}) => {
+  return (<img class={style} src={asset("/lk-logo.svg")}/>)
+}
+const truncateString = (str, maxLength = 20) => 
+    (str.length <= maxLength) ? str : str.slice(0, maxLength) + '...';
+
+function Transaction({ target, isIncoming, amount, asset_code, created_at }) {
+	const [hideDetails, toggleDetails] = useState(true);
+	// TODO: deprecate status
+	const status = "success";
+  const componentStyle = {
+    container: `flex flex-wrap items-center justify-around w-full bg-white-light shadow-sm lg:p-2`,
+    created_at: `flex-shrink-0 sm:w-auto text-sm font-bold`,
+    logo: `w-12 h-12 sm:w-16 sm:h-16 object-cover`,
+    arrow: `w-4 h-4 sm:w-6 sm:h-6`,
+    target: `flex-shrink-0 sm:w-auto text-sm break-all flex items-center`,
+    amount_asset: `flex-shrink-0 sm:w-auto text-sm font-bold`,
+};
+	return (
+	<div class={componentStyle.container}>
+    <span class={componentStyle.created_at}>{created_at}</span>
+    <Logo style={componentStyle.logo}/>
+    <div class={componentStyle.target}>
+      <Arrow isIncoming={isIncoming} style={componentStyle.arrow}/>
+      <span>{truncateString(target)}</span>
+    </div>
+    <span class={componentStyle.amount_asset}>{amount} {asset_code}</span>
+    <StatusButton status={status}/>
+   {hideDetails ? null : <Details/>}
+    </div>
+  );
+}
+
+
+
+
+
+//  NOTE: Legacy component, clean if necessary 
+/*
+		<div class="relative w-full">
+			<button
+				class={`flex lg:px-11 lg:py-[14px] px-3 py-4 justify-between bg-white shadow-lg shadow-black/15 hover:(cursor-pointer bg-[#F4F4F4]) ${showDetails ? "bg-[#F4F4F4]" : ""}`}
+				onClick={() => toggleDetails(!showDetails)}
+			>
+				<div class="flex lg:gap-x-[70px] items-center lg:text-[18px] text-[10px] gap-x-4">
+					<span class="row items-center font-bold font-open-sans">{ created_at }
+            <Logo/>
+          </span>
+
+					<div class="flex gap-x-2">
+						<Arrow/>
+						<span class="hidden lg:inline-block">{ target }</span>
+					</div>
+				</div>
+				<div class="flex lg:gap-x-[120px] gap-x-5 items-center ">
+					<span class="lg:text-[26px] text-[10px] font-bold font-open-sans">{amount} {asset_code}</span>
+        <StatusButton status={status}/>				
+				</div>
+			</button>
+
+		</div>
+*/
