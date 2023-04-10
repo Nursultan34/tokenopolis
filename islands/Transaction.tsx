@@ -1,58 +1,59 @@
 import { asset } from "$fresh/runtime.ts";
 import { boolState } from "#/utils.ts";
-import { useState } from 'preact/hooks';
+import { useState } from "preact/hooks";
 
 export default function Transactions({ operations }) {
-	return operations.map(Transaction);
+  return operations.map(Transaction);
 }
 const Details = () => {
   return (
-				<div class="relative w-full lg:h-40 flex lg:px-11 px-3 lg:py-3 pt-4 pb-5 bg-[#F4F4F4] justify-between shadow-lg shadow-black/15 hover:(cursor-pointer bg-[#F4F4F4])">
-					<div class="w-[1180px] flex lg:flex-wrap flex-col  gap-y-2 lg:max-h-40">
-						<label class="flex items-center w-[180px] lg:w-[360px] justify-between lg:text-[18px] text-[10px] font-bold font-open-sans">
-							Статус:
-							<input
-								type="text"
-								value="Успешно"
-								class="w-36 lg:w-[280px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
-							/>
-						</label>
-						<label class="flex items-center w-[180px] lg:w-[360px] justify-between lg:text-[18px] text-[10px] font-bold font-open-sans">
-							Время:
-							<input
-								type="text"
-								value="12 дек 2018 05:37:54"
-								class="w-36 lg:w-[280px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
-							/>
-						</label>
-						<div class="flex">
-						<label class="flex w-[266px] lg:w-[700px] justify-between items-center lg:text-[18px] text-[10px] font-bold font-open-sans ">
-							Хэш транзакции:
-							<input
-								type="text"
-								value="jbfkjbj4453vvfvmbajhnm564ybjldg9rkjkj"
-								class="lg:w-[525px] w-[182px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
-							/>
-							
-						</label>
-						<img
-								class="self-center ml-3 w-7 h-7 hover:(cursor-pointer)"
-								src={asset("/./documentcopy.svg")}
-							/>
-						</div>
-						<label class="flex lg:w-[475px] w-[266px] justify-between items-center lg:text-[18px] text-[10px] font-bold font-open-sans">
-							Комиссия сети:
-							<input
-								type="text"
-								value="0.1563758234 LTC"
-								class="lg:w-[300px] w-[182px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
-							/>
-						</label>
-					</div>
-					<button class="absolute top-4 right-3 lg:right-11 lg:h-[5.5rem] h-[4.5rem] lg:w-40 w-28 px-5 py-2 text-black text-center lg:text-[14px] text-[10px] bg-gray-cool rounded-sm">ПОСМОТРЕТЬ НА ЭКСПЛОРЕРЕ</button>
-				</div>
-  )
-}
+    <div class="relative w-full lg:h-40 flex lg:px-11 px-3 lg:py-3 pt-4 pb-5 bg-[#F4F4F4] justify-between shadow-lg shadow-black/15 hover:(cursor-pointer bg-[#F4F4F4])">
+      <div class="w-[1180px] flex lg:flex-wrap flex-col  gap-y-2 lg:max-h-40">
+        <label class="flex items-center w-[180px] lg:w-[360px] justify-between lg:text-[18px] text-[10px] font-bold font-open-sans">
+          Статус:
+          <input
+            type="text"
+            value="Успешно"
+            class="w-36 lg:w-[280px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
+          />
+        </label>
+        <label class="flex items-center w-[180px] lg:w-[360px] justify-between lg:text-[18px] text-[10px] font-bold font-open-sans">
+          Время:
+          <input
+            type="text"
+            value="12 дек 2018 05:37:54"
+            class="w-36 lg:w-[280px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
+          />
+        </label>
+        <div class="flex">
+          <label class="flex w-[266px] lg:w-[700px] justify-between items-center lg:text-[18px] text-[10px] font-bold font-open-sans ">
+            Хэш транзакции:
+            <input
+              type="text"
+              value="jbfkjbj4453vvfvmbajhnm564ybjldg9rkjkj"
+              class="lg:w-[525px] w-[182px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
+            />
+          </label>
+          <img
+            class="self-center ml-3 w-7 h-7 hover:(cursor-pointer)"
+            src={asset("/./documentcopy.svg")}
+          />
+        </div>
+        <label class="flex lg:w-[475px] w-[266px] justify-between items-center lg:text-[18px] text-[10px] font-bold font-open-sans">
+          Комиссия сети:
+          <input
+            type="text"
+            value="0.1563758234 LTC"
+            class="lg:w-[300px] w-[182px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
+          />
+        </label>
+      </div>
+      <button class="absolute top-4 right-3 lg:right-11 lg:h-[5.5rem] h-[4.5rem] lg:w-40 w-28 px-5 py-2 text-black text-center lg:text-[14px] text-[10px] bg-gray-cool rounded-sm">
+        ПОСМОТРЕТЬ НА ЭКСПЛОРЕРЕ
+      </button>
+    </div>
+  );
+};
 function StatusButton({ status }) {
   const buttonClass = `flex justify-between lg:w-40 w-15 max-h-10 px-5 py-2 text-left ${
     status === "waiting"
@@ -86,19 +87,24 @@ function StatusButton({ status }) {
   );
 }
 
-const Arrow = ({isIncoming, style}) => {
-  return (<img class={style} src={asset(isIncoming ? "/incoming-arrow.svg" : "/outcoming-arrow.svg")} />)
-}
-const Logo = ({style}) => {
-  return (<img class={style} src={asset("/lk-logo.svg")}/>)
-}
-const truncateString = (str, maxLength = 20) => 
-    (str.length <= maxLength) ? str : str.slice(0, maxLength) + '...';
+const Arrow = ({ isIncoming, style }) => {
+  return (
+    <img
+      class={style}
+      src={asset(isIncoming ? "/incoming-arrow.svg" : "/outcoming-arrow.svg")}
+    />
+  );
+};
+const Logo = ({ style }) => {
+  return <img class={style} src={asset("/lk-logo.svg")} />;
+};
+const truncateString = (str, maxLength = 20) =>
+  str.length <= maxLength ? str : str.slice(0, maxLength) + "...";
 
 function Transaction({ target, isIncoming, amount, asset_code, created_at }) {
-	const [hideDetails, toggleDetails] = useState(true);
-	// TODO: deprecate status
-	const status = "success";
+  const [hideDetails, toggleDetails] = boolState();
+  // TODO: deprecate status
+  const status = "success";
   const componentStyle = {
     container: `flex flex-wrap items-center justify-around w-full bg-white-light shadow-sm lg:p-2`,
     created_at: `flex-shrink-0 sm:w-auto text-sm font-bold`,
@@ -106,27 +112,25 @@ function Transaction({ target, isIncoming, amount, asset_code, created_at }) {
     arrow: `w-4 h-4 sm:w-6 sm:h-6`,
     target: `flex-shrink-0 sm:w-auto text-sm break-all flex items-center`,
     amount_asset: `flex-shrink-0 sm:w-auto text-sm font-bold`,
-};
-	return (
-	<div class={componentStyle.container}>
-    <span class={componentStyle.created_at}>{created_at}</span>
-    <Logo style={componentStyle.logo}/>
-    <div class={componentStyle.target}>
-      <Arrow isIncoming={isIncoming} style={componentStyle.arrow}/>
-      <span>{truncateString(target)}</span>
-    </div>
-    <span class={componentStyle.amount_asset}>{amount} {asset_code}</span>
-    <StatusButton status={status}/>
-   {hideDetails ? null : <Details/>}
+  };
+  return (
+    <div class={componentStyle.container} onClick={toggleDetails}>
+      <span class={componentStyle.created_at}>{created_at}</span>
+      <Logo style={componentStyle.logo} />
+      <div class={componentStyle.target}>
+        <Arrow isIncoming={isIncoming} style={componentStyle.arrow} />
+        <span>{truncateString(target)}</span>
+      </div>
+      <span class={componentStyle.amount_asset}>
+        {amount} {asset_code}
+      </span>
+      <StatusButton status={status} />
+      {!hideDetails ? null : <Details />}
     </div>
   );
 }
 
-
-
-
-
-//  NOTE: Legacy component, clean if necessary 
+//  NOTE: Legacy component, clean if necessary
 /*
 		<div class="relative w-full">
 			<button
