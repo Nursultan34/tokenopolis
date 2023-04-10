@@ -120,6 +120,8 @@ function Section() {
 	);
 }
 
+const inputsFirstCol = ['Площадь объекта', 'Тип объекта', 'Начало строительства', 'Окончание строительства', 'Минимальные инвестиции', 'Максимальные инвестиции', 'Доходность']
+const inputsSecondCol = ['Этаж', 'Тип отопления', 'Балкон', 'Гараж', 'Энергоэффективность', 'Сдача в аренду', 'Стоимость объекта']
 function CreateObjectModal() {
 	return (
 		<div class="bg-red-light w-52 h-52 justify-center items-center">
@@ -131,7 +133,7 @@ function CreateObjectModal() {
 function AdminObjectCard({ image, number, name, location, priceEuro, priceXLM, start, finish, tokenImage, token, investors }) {
 	const [isOpen, toggleOpen] = boolState();
 	return (
-		<div onClick={toggleOpen} class={`flex-col ${isOpen ? 'max-h-60' : 'max-h-32'} transition-height`}>
+		<div onClick={toggleOpen} class={`flex-col ${isOpen ? 'max-h-screen' : 'max-h-32'} z-10 transition-height`}>
 			<div class={`w-full h-32 flex bg-gray-light mt-5 relative z-40`}>
 				<div class="w-[14%] h-full flex items-center justify-center">
 					<img src={image} class="w-24 h-24" />
@@ -168,20 +170,41 @@ function AdminObjectCard({ image, number, name, location, priceEuro, priceXLM, s
 					</button>
 				</div>
 			</div>
-			<div class={`${isOpen ? 'opacity-[0.99]': 'opacity-0'} z-0 transition-opacity`}>
-				<div>
-					<div>Площадь объекта</div>
-					<input/>
+			<div class={`${isOpen ? 'opacity-[0.99]': 'opacity-0'} z-0 transition-opacity flex justify-center items-start row h-48 w-full pb-4 bg-gray-light`} onClick={(event)=> event.stopPropagation()}>
+				<div class="w-[15%] h-full">
 				</div>
-				<div>
-					<div>Тип объекта</div>
-					<input/>
+				<div class="w-[28%] h-full flex flex-col items-start justify-start">
+					{inputsFirstCol.map((input) => <div class="text-sm font-light flex justify-start items-center mt-1">{input}</div>)}
 				</div>
-				<div>
-					<div>Начало строительства</div>
-					<input/>
+				<div class="w-[27%] h-full flex flex-col items-center justify-start pl-2 pr-2 ">
+					{inputsFirstCol.map((input) => <input class={'lk-input mt-1'}/>)}
+				</div>
+				<div class="w-[20%] h-full">
+					{inputsSecondCol.map((input, index)=> (index < 2 || index > 3) ? <div class="text-sm font-light flex justify-start items-center mt-1 ">{input}</div> : <BalconyAmountInput title={input} controller index={index}/>)}
+				</div>
+				<div class="w-[20%] h-full pl-2 pr-2">
+					{inputsSecondCol.map((input, index) => (index < 2 || index > 3) ? <input class={'lk-input mt-1 h-[17px]'} /> : <BalconyAmountInput title={input} />)}
+				</div>
+				<div class="w-[20%] h-full flex justify-center items-end pb-2 pr-2">
+					<button class={'bg-yellow-dark w-[100%] h-[25%] font-light rounded'}>СОХРАНИТЬ</button>
 				</div>
 			</div>
 		</div>
 	);
+}
+
+function BalconyAmountInput ({title, controller, index}: {title: string, controller?: boolean, index?: number}) {
+	return(
+		<div class="row w-full">
+			<div class="w-[40px]">
+				<text class="font-light text-sm">{title}</text>
+			</div>
+			<div class="flex justify-start w-[40px]">
+				<div class="checkBoxUnActive ml-5"/>
+			</div>
+			{controller && index === 2 &&<div class="flex justify-start w-[60px] ml-3">
+				<input class="w-[60px] h-[20px] border border-gray-cool placeholder::(font-light text-sm flex text-center)" placeholder="кол-во"/>
+			</div>}
+		</div>
+	)
 }

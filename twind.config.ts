@@ -29,9 +29,11 @@ export default {
 		"login-form":	apply`col lg:h-full px-9 lg:(pl-72 pr-16) justify-center lg:w-1/2`,
 		"login-submit": apply`bg-yellow py-3 w-full lg:w-3/4 my-5 rounded-md text-xl`,
 		// Dashboard types
-		"lk-input":			apply`p-5 bg-white dark:bg-slate-2 rounded-sm placeholder::text-gray-600`,
+		"lk-input":			apply`w-full h-5 bg-white dark:bg-slate-2 border border-gray-cool rounded-sm placeholder::text-gray-600`,
 		"header":			apply`row w-full h-24 bg-white-dark shadow-header z-20`,
 		"profile-selin":	apply`pl-4 bg-gray-back rounded-sm text-dark-midnight text-lg`,
+		"checkBoxUnActive": apply`border border-1 border-solid border-gray-cool w-[20px] h-[20px] bg-white-light] rounded bg-white-light`,
+		"checkBoxActive": apply``,
 		"scrollbar": css`
             &::-webkit-scrollbar { width: 10px; };
 			&::-webkit-scrollbar-track { background-color: #FCFCFC; border: 1px solid #B8B8B7; border-radius: 2px; };

@@ -11,10 +11,14 @@ export default function ModalContainer() {
 	}, [isDisplayed]);
 
 	return (
-		<div id="modal-container"
-			class={"w-screen h-screen overflow-hidden flex justify-center items-center bg-black fixed transition-opacity " +
-				(isDisplayed ? "opacity-50" : "opacity-0 ignore-clicks")}
+		<div
+			class={"w-full h-full left-0 top-0 z-40 flex justify-center items-center absolute transition-opacity " +
+				(isDisplayed ? "opacity-100" : "opacity-0 ignore-clicks")}
 			onClick={() => removeChildren(document.getElementById("modal-container"))}>
+				<div class="center">
+					<div class="bg-gray-dark w-screen h-screen opacity-60 absolute top-0 left-0 z-40"/>
+					<div id="modal-container" class="z-50"></div>
+				</div>
 		</div>
 	);
 }
