@@ -53,6 +53,6 @@ export const getObject = (id) =>
 // User exists, password is incorrect => false
 // User doesn't exist => undefined
 export async function verifyPassword(email: string, password: string): Promise<boolean | undefined> {
-	const password_hash = (await gq(`query GetUser{users(condition:{email:"${email}"}){edges{node{password}}}}`).then(extractEdges))[0]?.password;
+	const password_hash = (await gq(`query GetUser{users(condition:{email:"${email}"}){edges{node{password}}}}`).then(extractEdges("users")))[0]?.password;
 	return (password_hash == undefined) ? undefined : bcrypt.compare(password, password_hash);
 }
