@@ -29,7 +29,6 @@ function Transaction({
   amount,
   asset_code,
   created_at,
-  status = "success",
 }) {
   const [isDetailsActive, toggleDetails] = boolState();
   return (
@@ -43,7 +42,7 @@ function Transaction({
       <span class={styles.amount_asset}>
         {amount} {asset_code}
       </span>
-      <StatusButton status={status} />
+      <StatusButton />
       {isDetailsActive ? <Details /> : null}
     </div>
   );
@@ -59,13 +58,8 @@ const Arrow = ({ isIncoming }) => {
 
 const Logo = () => <img class={styles.logo} src={asset("/lk-logo.svg")} />;
 
-function StatusButton({ status }) {
-  const [localStyle, text, image] =
-    status === "waiting"
-      ? [styles.buttonStatusWaiting, "В ожидании", "btn-waiting"]
-      : status === "reject"
-      ? [styles.buttonStatusRejected, "Отклонено", "btn-reject"]
-      : [styles.buttonStatusSuccess, "Завершено", "btn-ok"];
+function StatusButton() {
+  const [localStyle, text, image] = [styles.buttonStatusSuccess, "Завершено", "btn-ok"];
   return (
     <button class={`${styles.buttonStatus} ${localStyle}`}>
       <span class="hidden lg:inline-block">{text}</span>
