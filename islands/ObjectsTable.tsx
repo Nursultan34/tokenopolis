@@ -29,7 +29,7 @@ export default function ObjectsTable({ objects }) {
 
 	return (
 		<div id="objects-wrapper">
-			<div id="objects-container-desktop" class="hidden lg:block col h-screen pt-3.5 pb-10 overflow-hidden">
+			<div id="objects-container-desktop" class="hidden objects-bp:block col h-screen pt-3.5 pb-10 overflow-hidden">
 				<div class="row min-h-9 my-4 text(base gray-dark) children:(px-[40px] py-2 hover:bg-gray-cool focus:outline-none)">
 					<BtnFilter isActive={filteredBy == Filter.Relevant} text="АКТУАЛЬНЫЕ ОБЪЕКТЫ" onClick={() => setFilter(Filter.Relevant)} />
 					<BtnFilter isActive={filteredBy == Filter.My} text="МОИ ОБЪЕКТЫ" onClick={() => setFilter(Filter.My)} />
@@ -41,7 +41,7 @@ export default function ObjectsTable({ objects }) {
 					</div>
 				</div>
 			</div>
-			<div id="objects-container-mobile" class="lg:hidden col h-screen">
+			<div id="objects-container-mobile" class="objects-bp:hidden col h-screen">
 				<div class="row flex-shrink-0 overflow-x-scroll text(base gray-dark) children:(flex-grow px-6 py-2 focus:outline-none whitespace-nowrap text-xs dark:bg-dark-midnight)">
 					<BtnFilter isActive={filteredBy == Filter.Relevant} text="Актуальные объекты" onClick={() => setFilter(Filter.Relevant)} />
 					<BtnFilter isActive={filteredBy == Filter.My} text="Мои объекты" onClick={() => setFilter(Filter.My)} />
@@ -59,48 +59,55 @@ function BtnFilter({ isActive, text, onClick }: { isActive: boolean; text: strin
 }
 
 function ObjectCard({ name, id, objectPrice, tokenPrice, investersAmount, area, date, profitability, images, favorite, invested, reqInvestments, state, setLike }) {
-	const textxs = "text-gray-dark text-xs dark:text-gray-dashed";
+	const textxs = "text-gray-dark dark:text-gray-dashed";
+	const textStyles = {
+		'12': 'font-size: 12px',
+		'14': 'font-size: calc(12px + 2 * (100vw / 1920)',
+		'16': 'font-size: calc(12px + 4 * (100vw / 1920)',
+		'26': 'font-size: calc(20px + 6 * (100vw / 1920)',
+		'34': 'font-size: calc(14px + 20 * (100vw / 1920)',
+	};
 
 	return (
-		<div class="row justify-between bg-white-light p-12 text-xs md:text-sm text-black gap-5 shadow-lg w-[90vw] lg:(flex-basis-1/2 w-full) xl:flex-basis-1/3 dark:(bg-dark-midnight text-gray-light)">
+		<div class="row max-w-[calc(50%-1.25rem)] min-w-[590px] shrink justify-between bg-white-light p-12 text-black gap-5 shadow-lg dark:(bg-dark-midnight text-gray-light)">
 			<Image images={images} favorite={favorite} status={state.toLowerCase()} setLike={setLike} number={id} />
 			<div class="col justify-between w-1/2">
 				<div>
-					<h1 class="font-bold text-2xl leading-6 ">{name}</h1>
-					<p class="text(sm gray-dark) mt-1 dark:text-gray-dashed">ОБЪЕКТ №{id}</p>
-					<div class="row justify-between flex-wrap">
-						<div class="col justify-end flex-shrink-0 gap-1 text(base gray-dark) dark:text-gray-dashed">
+					<h1 class="font-bold leading-6 " style={textStyles['26']}>{name}</h1>
+					<p class="text(sm gray-dark) mt-1 dark:text-gray-dashed" style={textStyles['12']}>ОБЪЕКТ №{id}</p>
+					<div class="row justify-between flex-nowrap">
+						<div class="col justify-center flex-shrink-0 gap-1 text(base gray-dark) dark:text-gray-dashed">
 							<div class="row gap-1">
 								<div>
 									<img class="" src={asset("/obj-square-icon.svg")} />
 								</div>
-								<p class="self-center">{area} кв м</p>
+								<p class="self-center" style={textStyles['16']}>{area} кв м</p>
 							</div>
 							<div class="row gap-1">
 								<div>
 									<img class="" src={asset("/obj-date-icon.svg")} />
 								</div>
-								<p class="self-center">{date}</p>
+								<p class="self-center" style={textStyles['16']}>{date}</p>
 							</div>
 							<div class="row gap-1">
 								<div>
 									<img class="" src={asset("/obj-profit-icon.svg")} />
 								</div>
-								<p class="self-center">{profitability} %/год</p>
+								<p class="self-center" style={textStyles['16']}>{profitability} %/год</p>
 							</div>
 						</div>
 						<div class="text-right">
-							<p class={textxs}>ЦЕНА</p>
-							<p class="mb-1 font-bold text-2xl leading-8 pb-1 xl:text-4xl">€{objectPrice}</p>
-							<p class={textxs}>ТОКЕН ЦЕНА</p>
-							<p class="font-bold text(2xl yellow-dark) xl:text-4xl">{tokenPrice}</p>
+							<p class={textxs} style={textStyles['12']}>ЦЕНА</p>
+							<p class="mb-1 font-bold leading-8 pb-1" style={textStyles['34']}>€{objectPrice}</p>
+							<p class={textxs} style={textStyles['12']}>ЦЕНА ТОКЕНА</p>
+							<p class="font-bold text-yellow-dark" style={textStyles['34']}>{tokenPrice}</p>
 						</div>
 					</div>
 				</div>
 				<div class="children:rounded-sm">
-					<p class="mb-2 font-bold text(sm green-dark right)">{investersAmount} УЖЕ ПРОИНВЕСТИРОВАЛИ</p>
-					<a href={"/object/" + id} class="block w-full text-base h-12 border(1 gray-cool) mb-1 dark:border-none hover:text-yellow-orange focus:outline-none">подробнее</a>
-					<button class="w-full h-12 bg-yellow-orange text-base dark:text-black hover:bg-yellow-dark focus:outline-none">ИНВЕСТИРОВАТЬ</button>
+					<p class="mb-2 font-bold text(green-dark right)" style={textStyles['14']}>{investersAmount} УЖЕ ПРОИНВЕСТИРОВАЛИ</p>
+					<button class="w-full text-base h-12 border(1 gray-cool) mb-1 dark:border-none hover:text-yellow-orange focus:outline-none" style={textStyles['16']}>подробнее</button>
+					<button class="w-full h-12 bg-yellow-orange text-base dark:text-black hover:bg-yellow-dark focus:outline-none" style={textStyles['16']}>ИНВЕСТИРОВАТЬ</button>
 				</div>
 			</div>
 		</div>
@@ -147,8 +154,8 @@ function Image({ images, favorite, status = 'sell', setLike, number }: Image & {
 
 	const statusClasses = `absolute top-3 right-3 w-[139px] h-[34px] pt-[9px] font-light text(sm center) leading-none ${statusMap[status].bg}`;
 	return (
-		<div class="relative h-full">
-			<img class="h-full aspect-square w-full object-cover" src={asset(images[currentImage ?? 0])} />
+		<div class="relative max-w-[55%]">
+			<img class="aspect-square h-full w-full object-cover" src={asset(images[currentImage])} alt="" />
 			<button class="absolute top-4 left-4 w-[28px] h-[28px] focus:outline-none" onClick={toggleFavorite}>
 				<img class="mx-auto" src={asset(favoriteIcon)} />
 			</button>

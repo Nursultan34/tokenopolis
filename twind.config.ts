@@ -97,6 +97,7 @@ export default {
 			"md": "640px",
 			"lg": "1300px",
 			"xl": "1900px",
+			"objects-bp": "1400px",
 		},
 		fontFamily: {
 			sans: "Roboto, sans-serif",
