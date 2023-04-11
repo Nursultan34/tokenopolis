@@ -1,157 +1,146 @@
 import { asset } from "$fresh/runtime.ts";
 import { boolState } from "#/utils.ts";
-import { useState } from "preact/hooks";
 
-export default function Transactions({ operations }) {
-  return operations.map(Transaction);
-}
-const Details = () => {
+const styles = {
+  container: `flex flex-wrap items-center justify-around w-full bg-white-light shadow-sm lg:p-2`,
+  created_at: `flex-shrink-0 sm:w-auto text-sm font-bold`,
+  logo: `w-12 h-12 sm:w-16 sm:h-16 object-cover`,
+  arrow: `w-4 h-4 sm:w-6 sm:h-6`,
+  target: `flex-shrink-0 sm:w-auto text-sm break-all flex items-center`,
+  amount_asset: `flex-shrink-0 sm:w-auto text-sm font-bold`,
+  buttonStatus: `flex justify-between lg:w-40 w-15 max-h-10 px-5 py-2 text-left rounded-sm`,
+  buttonStatusWaiting: `text-gray-dark bg-gray-cool`,
+  buttonStatusRejected: `bg-red-500 text-white-light`,
+  buttonStatusSuccess: `bg-green-dark text-white-light`,
+  containerDetails: `flex grid grid-cols-3 gap-4 items-center justify-around w-full lg:p-2`,
+  column: `flex flex-col`,
+  bigButton: `row-span-2 self-center bg-gray-dark w-full h-3/4 items-center text-white-light justify-center`,
+  input: `m-0.5 p-0.5 shadow-md placeholder-gray-500 w-full`,
+  label: `font-bold m-0.5 p-0.5`,
+};
+const truncateString = (str: string, maxLength = 20) =>
+  str.length <= maxLength ? str : str.slice(0, maxLength) + "...";
+
+export default ({ operations }) => operations.map(Transaction);
+
+function Transaction({
+  target,
+  isIncoming,
+  amount,
+  asset_code,
+  created_at,
+  status = "success",
+}) {
+  const [isDetailsActive, toggleDetails] = boolState();
   return (
-    <div class="relative w-full lg:h-40 flex lg:px-11 px-3 lg:py-3 pt-4 pb-5 bg-[#F4F4F4] justify-between shadow-lg shadow-black/15 hover:(cursor-pointer bg-[#F4F4F4])">
-      <div class="w-[1180px] flex lg:flex-wrap flex-col  gap-y-2 lg:max-h-40">
-        <label class="flex items-center w-[180px] lg:w-[360px] justify-between lg:text-[18px] text-[10px] font-bold font-open-sans">
-          Статус:
-          <input
-            type="text"
-            value="Успешно"
-            class="w-36 lg:w-[280px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
-          />
-        </label>
-        <label class="flex items-center w-[180px] lg:w-[360px] justify-between lg:text-[18px] text-[10px] font-bold font-open-sans">
-          Время:
-          <input
-            type="text"
-            value="12 дек 2018 05:37:54"
-            class="w-36 lg:w-[280px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
-          />
-        </label>
-        <div class="flex">
-          <label class="flex w-[266px] lg:w-[700px] justify-between items-center lg:text-[18px] text-[10px] font-bold font-open-sans ">
-            Хэш транзакции:
-            <input
-              type="text"
-              value="jbfkjbj4453vvfvmbajhnm564ybjldg9rkjkj"
-              class="lg:w-[525px] w-[182px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
-            />
-          </label>
-          <img
-            class="self-center ml-3 w-7 h-7 hover:(cursor-pointer)"
-            src={asset("/./documentcopy.svg")}
-          />
-        </div>
-        <label class="flex lg:w-[475px] w-[266px] justify-between items-center lg:text-[18px] text-[10px] font-bold font-open-sans">
-          Комиссия сети:
-          <input
-            type="text"
-            value="0.1563758234 LTC"
-            class="lg:w-[300px] w-[182px] lg:px-6 lg:py-2.5 px-2.5 py-2 lg:text-[18px] text-[10px] bg-white border border-gray-cool rounded-sm"
-          />
-        </label>
+    <div class={styles.container} onClick={toggleDetails}>
+      <span class={styles.created_at}>{created_at}</span>
+      <Logo />
+      <div class={styles.target}>
+        <Arrow isIncoming={isIncoming} />
+        <span>{truncateString(target)}</span>
       </div>
-      <button class="absolute top-4 right-3 lg:right-11 lg:h-[5.5rem] h-[4.5rem] lg:w-40 w-28 px-5 py-2 text-black text-center lg:text-[14px] text-[10px] bg-gray-cool rounded-sm">
-        ПОСМОТРЕТЬ НА ЭКСПЛОРЕРЕ
-      </button>
+      <span class={styles.amount_asset}>
+        {amount} {asset_code}
+      </span>
+      <StatusButton status={status} />
+      {isDetailsActive ? <Details /> : null}
     </div>
   );
-};
-function StatusButton({ status }) {
-  const buttonClass = `flex justify-between lg:w-40 w-15 max-h-10 px-5 py-2 text-left ${
-    status === "waiting"
-      ? "text-gray-dark bg-gray-cool"
-      : status === "reject"
-      ? "bg-[#CD1000] text-white-light"
-      : "bg-green-dark text-white-light"
-  } rounded-sm`;
-
-  return (
-    <button class={buttonClass}>
-      <span class="hidden lg:inline-block">
-        {status === "waiting"
-          ? "В ожидании"
-          : status === "reject"
-          ? "Отклонено"
-          : "Завершено"}
-      </span>
-      <img
-        src={asset(
-          `./${
-            status === "waiting"
-              ? "btn-waiting"
-              : status === "reject"
-              ? "btn-reject"
-              : "btn-ok"
-          }.svg`
-        )}
-      />
-    </button>
-  );
 }
-
-const Arrow = ({ isIncoming, style }) => {
+const Arrow = ({ isIncoming }) => {
   return (
     <img
-      class={style}
+      class={styles.arrow}
       src={asset(isIncoming ? "/incoming-arrow.svg" : "/outcoming-arrow.svg")}
     />
   );
 };
-const Logo = ({ style }) => {
-  return <img class={style} src={asset("/lk-logo.svg")} />;
-};
-const truncateString = (str, maxLength = 20) =>
-  str.length <= maxLength ? str : str.slice(0, maxLength) + "...";
 
-function Transaction({ target, isIncoming, amount, asset_code, created_at }) {
-  const [hideDetails, toggleDetails] = boolState();
-  // TODO: deprecate status
-  const status = "success";
-  const componentStyle = {
-    container: `flex flex-wrap items-center justify-around w-full bg-white-light shadow-sm lg:p-2`,
-    created_at: `flex-shrink-0 sm:w-auto text-sm font-bold`,
-    logo: `w-12 h-12 sm:w-16 sm:h-16 object-cover`,
-    arrow: `w-4 h-4 sm:w-6 sm:h-6`,
-    target: `flex-shrink-0 sm:w-auto text-sm break-all flex items-center`,
-    amount_asset: `flex-shrink-0 sm:w-auto text-sm font-bold`,
-  };
+const Logo = () => <img class={styles.logo} src={asset("/lk-logo.svg")} />;
+
+function StatusButton({ status }) {
+  const [localStyle, text, image] =
+    status === "waiting"
+      ? [styles.buttonStatusWaiting, "В ожидании", "btn-waiting"]
+      : status === "reject"
+      ? [styles.buttonStatusRejected, "Отклонено", "btn-reject"]
+      : [styles.buttonStatusSuccess, "Завершено", "btn-ok"];
   return (
-    <div class={componentStyle.container} onClick={toggleDetails}>
-      <span class={componentStyle.created_at}>{created_at}</span>
-      <Logo style={componentStyle.logo} />
-      <div class={componentStyle.target}>
-        <Arrow isIncoming={isIncoming} style={componentStyle.arrow} />
-        <span>{truncateString(target)}</span>
+    <button class={`${styles.buttonStatus} ${localStyle}`}>
+      <span class="hidden lg:inline-block">{text}</span>
+      <img src={asset(`./${image}.svg`)} />
+    </button>
+  );
+}
+function Details() {
+  return (
+    <div className={styles.containerDetails}>
+      <div className={styles.column}>
+        <StatusInput />
+        <TimeInput />
       </div>
-      <span class={componentStyle.amount_asset}>
-        {amount} {asset_code}
-      </span>
-      <StatusButton status={status} />
-      {!hideDetails ? null : <Details />}
+      <div className={styles.column}>
+        <TransactionHashInput />
+        <NetworkFeeInput />
+      </div>
+      <ViewOnExplorer />
     </div>
   );
 }
-
-//  NOTE: Legacy component, clean if necessary
-/*
-		<div class="relative w-full">
-			<button
-				class={`flex lg:px-11 lg:py-[14px] px-3 py-4 justify-between bg-white shadow-lg shadow-black/15 hover:(cursor-pointer bg-[#F4F4F4]) ${showDetails ? "bg-[#F4F4F4]" : ""}`}
-				onClick={() => toggleDetails(!showDetails)}
-			>
-				<div class="flex lg:gap-x-[70px] items-center lg:text-[18px] text-[10px] gap-x-4">
-					<span class="row items-center font-bold font-open-sans">{ created_at }
-            <Logo/>
-          </span>
-
-					<div class="flex gap-x-2">
-						<Arrow/>
-						<span class="hidden lg:inline-block">{ target }</span>
-					</div>
-				</div>
-				<div class="flex lg:gap-x-[120px] gap-x-5 items-center ">
-					<span class="lg:text-[26px] text-[10px] font-bold font-open-sans">{amount} {asset_code}</span>
-        <StatusButton status={status}/>				
-				</div>
-			</button>
-
-		</div>
-*/
+function StatusInput() {
+  return (
+    <label class={styles.label} htmlFor="Статус">
+      Статус:
+      <input
+        class={styles.input}
+        type="text"
+        id="Статус"
+        placeholder="Успешно"
+      />
+    </label>
+  );
+}
+function TimeInput() {
+  return (
+    <label class={styles.label} htmlFor="Время">
+      Время:
+      <input
+        class={styles.input}
+        type="text"
+        id="Время"
+        placeholder="12 дек 2018 05:37:54"
+      />
+    </label>
+  );
+}
+function TransactionHashInput() {
+  return (
+    //
+    <label class={styles.label} htmlFor="Хэш_транзакции">
+      Хэш транзакции:
+      <input
+        class={styles.input}
+        type="text"
+        id="Хэш_транзакции"
+        placeholder="jbfkjbj4453vvfvmbajhnm564ybjldg9rkjkj"
+      />
+    </label>
+  );
+}
+function NetworkFeeInput() {
+  return (
+    <label class={styles.label} htmlFor="Комиссия_сети">
+      Комиссия сети:
+      <input
+        class={styles.input}
+        type="text"
+        id="Комиссия_сети"
+        placeholder="0.1563758234 LTC"
+      />
+    </label>
+  );
+}
+const ViewOnExplorer = () => (
+  <button class={styles.bigButton}>ПОСМОТРЕТЬ НА ЭКСПЛОРЕРЕ</button>
+);
